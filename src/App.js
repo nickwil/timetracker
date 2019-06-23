@@ -15,7 +15,7 @@ import CustomLink from "./CustomLink.jsx"
 import {date} from "./util/quick.js"
 
 import Input from "./Input.jsx"
-
+import ItemList from "./ItemList.jsx"
 function Tag(name, value){
   this.name = name
   this.value = value
@@ -70,14 +70,10 @@ const App = observer(function App({store, dayFromUrl}) {
       <h4>Remaining</h4>        
 
           {store.unCompletedTodos.map((obj) => 
-            <div className={styles.container}>
-              <ItemTime id={obj.id} changeIfCounting={changeIfCounting} time={obj.tilCompletion}/>
-              <Input styles={styles.input} text={obj.text} id={obj.id} 
-              onTaskChange={(text) => store.items[store.index(obj.id)].updateText(text)}/>
-              <Tags 
-              onChange={(tag) => store.items[store.index(obj.id)].updateTag(tag)} 
-              defaultTagId={obj.tagId} tags={tags}/>
-            </div>)}
+            <ItemList
+            obj={obj}
+            store={store}
+            tags={tags}/>)}
  
       </section>
       
