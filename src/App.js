@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Timer from "./Timer.jsx"
 import Calendar from "./Calendar.jsx"
@@ -17,7 +16,6 @@ function Tag(name, value){
 }
 
 const App = observer(function App({store, dayFromUrl}) {
-  const [currentWork, updateCurrentWork] = useState(null)
   const [currentDay, changeDay] = useState(Number(dayFromUrl))
   const [tags, updateTag] = useState([new Tag("Other", "Other"), new Tag("School", "School")])
 
@@ -26,10 +24,7 @@ const App = observer(function App({store, dayFromUrl}) {
   store.updateDate(dayFromUrl)
 
   const sendTime = (count) => {
-    if(currentWork){
-      // subtract from time worked on
-      console.log("subtract from time worked")
-    }
+    
     if(currentIdCountingFrom){
       store.items[store.index(currentIdCountingFrom)].updateTimeTilCompletion(count)
       changeCurrentIdCountingFrom(null)
