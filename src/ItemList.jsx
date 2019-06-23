@@ -2,6 +2,8 @@ import React from "react"
 import Tags from "./Tags.jsx"
 import Input from "./Input.jsx"
 import ItemTime from "./ItemTime.jsx"
+
+import styles from "./ItemList.module.css"
 function ItemList({store, item, changeIfCounting, tags}){
 	return <div className={styles.container}>
 			  <ItemTime id={item.id} changeIfCounting={changeIfCounting} time={item.tilCompletion}/>
