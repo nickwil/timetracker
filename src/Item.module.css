@@ -1,0 +1,16 @@
+.container {
+	margin-top: 1em;
+	background-color: #FFF8EC;
+	padding: 2em;
+	display: flex;
+	justify-content: space-around;
+	align-items:center;
+}
+.input {
+		background-color: #FFF8EC;
+		border: none;
+		font-size: 1em;
+		font-family: 'Roboto Slab', serif;
+		font-weight: 300;
+
+}

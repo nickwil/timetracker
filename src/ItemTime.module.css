@@ -1,0 +1,13 @@
+.time {
+	border: none;
+	font-size: 1em;
+	background-color: transparent;
+	
+	outline: none;	
+}
+.time:hover {
+	border: 1px solid black;
+}
+.time:focus {
+	border: 1px solid black;
+}
