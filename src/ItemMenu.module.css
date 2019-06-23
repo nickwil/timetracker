@@ -1,0 +1,14 @@
+.container {
+	display: none;
+}
+.modalContainer {
+	display: inline-block;
+}
+@media (min-device-width: 650px) {
+	.modalContainer {
+		display: none;
+	}
+	.container {
+		display: inline-block;
+	}
+}

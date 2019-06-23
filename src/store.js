@@ -33,8 +33,11 @@ const Item = types
         updateTag(tag){
             self.tagId = tag
         },
-        // need a way to update that refrence
-    //
+
+        updateLengthOfTask(newLength){
+          self.length = newLength
+          self.tilCompletion = newLength 
+        }
 
     }))
 
@@ -71,6 +74,10 @@ const ItemStore = types
               // temp id creation
               id: Date.now(),
             })
+        },
+        deleteItem(id){
+          self.items = self.items.filter(item => item != item.id)
+
         },
         updateDate(date){
             self.currentDay = date
