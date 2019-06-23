@@ -6,7 +6,6 @@ import Timer from "./Timer.jsx"
 import Tags from "./Tags.jsx"
 import Calendar from "./Calendar.jsx"
 import ItemTime from "./ItemTime.jsx"
-import styles from "./Item.module.css"
 import AddItemModal from "./AddItemModal.jsx"
 
 import { observer } from 'mobx-react-lite'
@@ -71,7 +70,7 @@ const App = observer(function App({store, dayFromUrl}) {
 
           {store.unCompletedTodos.map((obj) => 
             <ItemList
-            obj={obj}
+            item={obj}
             store={store}
             tags={tags}/>)}
  
@@ -80,16 +79,10 @@ const App = observer(function App({store, dayFromUrl}) {
       <section>
       <h4>Completed </h4>
           {store.completedTodos.map((obj) => 
-            <div className={styles.container}>
-              {/* right now itemtime will error out due to it not being given the function changeIfCounting
-              but this isn't needed there*/}
-               <ItemTime id={obj.id} changeIfCounting={changeIfCounting} time={obj.tilCompletion}/>
-              <Input styles={styles.input} text={obj.text} id={obj.id} 
-              onTaskChange={(text) => store.items[store.index(obj.id)].updateText(text)}/>
-              <Tags 
-              onChange={(tag) => store.items[store.index(obj.id)].updateTag(tag)} 
-              defaultTagId={obj.tagId} tags={tags}/>
-            </div>)}
+            <ItemList
+            item={obj}
+            store={store}
+            tags={tags}/>)}
       </section>
       <AddItemModal addTask={store.addItem}/>
      
