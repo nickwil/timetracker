@@ -16,7 +16,6 @@ function Tag(name, value){
 }
 
 const App = observer(function App({store, dayFromUrl}) {
-  const [currentDay, changeDay] = useState(Number(dayFromUrl))
   const [tags, updateTag] = useState([new Tag("Other", "Other"), new Tag("School", "School")])
 
   // always have value in store to day from url
@@ -27,7 +26,7 @@ const App = observer(function App({store, dayFromUrl}) {
       
         <p id="currentDate">
           
-           <CustomLink to="/calendar"> {date(new Date(currentDay))}</CustomLink>
+           <CustomLink to="/calendar"> {date(new Date(dayFromUrl))}</CustomLink>
           
         </p>
         <Timer/>
