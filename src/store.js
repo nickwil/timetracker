@@ -1,4 +1,5 @@
 import { types, onSnapshot } from "mobx-state-tree"
+import {date} from "./util/quick.js"
 
 const Item = types
     .model("Item", {
@@ -18,21 +19,48 @@ const Item = types
         toggle() {
             self.completed = !self.completed
         },
+         updateText(text) {
+            self.text = text
+      },
 
-
+      updateTimeTilCompletion (timeSpent) {
+        self.tilCompletion = self.tilCompletion - timeSpent
+        if(self.tilCompletion < 0){
+          self.completed = true
+          self.tilCompletion = self.length
+        }
+        },
+        updateTag(tag){
+            self.tagId = tag
+        },
+        // need a way to update that refrence
+    //
 
     }))
 
 const ItemStore = types
     .model("ItemStore", {
         items: types.array(Item),
-        selectedItem: types.reference(Item)
+        selectedItem: types.maybe(types.reference(Item)),
+        currentDay: types.integer,
     })
-    .actions(self => {
-        const instantiationTime = Date.now()
+    .views(self => ({
+      
+            get completedTodos() {
+                return self.items.filter(obj=> obj.day == date(new Date(self.currentDay)) && obj.completed == true)
+            },
+            get unCompletedTodos(){
+                return self.items.filter(obj=> obj.day == date(new Date(self.currentDay)) && obj.completed == false)
+            },
+            index(id){
+                return self.items.findIndex(obj => obj.id == id)
+            },
+        
+    }))
+    .actions(self => ({
 
-        function addTodo(text, length, tag, title='', completed = false) {
-            self.todos.push({
+        addItem(text, length, tag='Other', title='', completed = false) {
+            self.items.push({
               created: Date.now(),
               tilCompletion: length,
               length: length,
@@ -44,14 +72,17 @@ const ItemStore = types
               // temp id creation
               id: Date.now(),
             })
+        },
+        updateDate(date){
+            self.currentDay = date
         }
 
-        return { addTodo }
-    })
+    }))
+
 
 // create an instance from a snapshot
-const store = Store.create({
-    allItems: [
+const store = ItemStore.create({
+    items: [
        {
       created: Date.now(),
       tilCompletion: 13,
@@ -63,9 +94,10 @@ const store = Store.create({
       // temp id creation
       id: Date.now(),
     }
-    ]
+    ],
+    currentDay: new Date().getTime(),
 })
-
+export default store
 // listen to new snapshots
 onSnapshot(store, snapshot => {
     console.dir(snapshot)

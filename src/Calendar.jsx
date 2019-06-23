@@ -1,5 +1,8 @@
 import React, {useState} from 'react';
 import "./Calendar.css"
+import styles from "./Calendar.module.css"
+import CustomLink from "./CustomLink.jsx"
+
 const moment = require("moment")
 function Calendar(props){
 	const [month, changeMonth] = React.useState(moment().startOf('month').format("YYYY-MM"))
@@ -37,6 +40,7 @@ function Calendar(props){
 				weekNumber += 1
 			}
 			week.push(<Day 
+				year={calDay.format('YYYY')}
 				month={month}
 				currentDay={props.currentDay} changeDay={props.changeDay}
 				dayOfWeek={calDay.format('dddd')} 
@@ -49,18 +53,18 @@ function Calendar(props){
 	}
 	
 	
-	return (<div>
+	return (<div className={styles.container}>
 			<button onClick={() => previousMonth()}>Go back</button>
 			<button onClick={() => nextMonth()}>Go to next</button>
 			<h4>Month: {moment(month).format("MMMM YYYY")}</h4>
-			<div className="week">
-			<span className="dayOfWeek">Sun</span>
-			<span className="dayOfWeek">Mon</span>
-			<span className="dayOfWeek">Tues</span>
-			<span className="dayOfWeek">Wed</span>
-			<span className="dayOfWeek">Thurs</span>
-			<span className="dayOfWeek">Fri</span>
-			<span className="dayOfWeek">Sat</span>
+			<div className={styles.week}>
+			<span className={styles.dayOfWeek}>Sun</span>
+			<span className={styles.dayOfWeek}>Mon</span>
+			<span className={styles.dayOfWeek}>Tues</span>
+			<span className={styles.dayOfWeek}>Wed</span>
+			<span className={styles.dayOfWeek}>Thurs</span>
+			<span className={styles.dayOfWeek}>Fri</span>
+			<span className={styles.dayOfWeek}>Sat</span>
 			</div>
 				{
 					createCalendar()
@@ -76,9 +80,9 @@ function Week(props){
 		}
 	}
 	if(props.weekNumber != 1){
-		return <div className="week">{props.days}{extraDays}</div>
+		return <div className={styles.week}>{props.days}{extraDays}</div>
 	} else {
-		return <div className="week">{extraDays}{props.days}</div>
+		return <div className={styles.week}>{extraDays}{props.days}</div>
 	}
 	
 }
@@ -89,13 +93,15 @@ function EmptyDay(props){
 	return <span></span>
 }
 function Day(props){
+	
+	var day = moment(`${props.month}-${props.number}`, "YYYY-MM-DD").format("YYYY/MM/DD")
+	console.log(day)
 	return (
-		<span class="day">
-		<button	onClick={
-				() => props.changeDay(Number(moment(`${props.month}-${props.number}`, "YYYY-MM-DD").format("x")))
-			}>
+		<span className={styles.day}>
+		<CustomLink	className={styles.dayButton} to={`/${day}`}>
 			{props.number}
-			</button>
+			</CustomLink>
+			
 	</span>)
 }
 
