@@ -8,7 +8,7 @@ import { observer } from 'mobx-react-lite'
 import CustomLink from "./CustomLink.jsx"
 
 import {date} from "./util/quick.js"
-
+import {timeStore} from "./store.js"
 import ItemList from "./ItemList.jsx"
 function Tag(name, value){
   this.name = name

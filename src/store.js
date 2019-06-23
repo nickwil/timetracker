@@ -41,7 +41,6 @@ const Item = types
 const ItemStore = types
     .model("ItemStore", {
         items: types.array(Item),
-        selectedItem: types.maybe(types.reference(Item)),
         currentDay: types.integer,
     })
     .views(self => ({
@@ -80,6 +79,7 @@ const ItemStore = types
     }))
 
 
+
 // create an instance from a snapshot
 const store = ItemStore.create({
     items: [
@@ -97,8 +97,42 @@ const store = ItemStore.create({
     ],
     currentDay: new Date().getTime(),
 })
-export default store
-// listen to new snapshots
-onSnapshot(store, snapshot => {
-    console.dir(snapshot)
+
+const Time = types
+.model("Time", {
+  // its date cuz id is date
+  selectedItem: types.maybe(types.Date),
+  isCounting: types.boolean,
+  count: types.integer,
 })
+.actions( self => ({
+  reverseCounting(id=undefined){
+    self.selectedItem = id
+    self.isCounting = !self.isCounting
+  },
+  resetCount(){
+    self.count = 0
+  },
+  setTimeToItem(){
+
+    if(self.selectedItem){
+      store.items[store.index(self.selectedItem)].updateTimeTilCompletion(self.count)
+      console.log('updating item with time')
+      console.log(store.items[store.index(self.selectedItem)].toJSON())
+      self.selectedItem = undefined
+    } else {
+      store.addItem('', self.count, "Other", '', true)
+    }
+  },
+  incrementCount(){
+    self.count += 1
+  }
+}))
+const timeStore = Time.create({
+  selectedItem: undefined,
+  isCounting: false,
+  count: 0,
+})  
+
+export  {timeStore}
+export default store

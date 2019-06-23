@@ -1,6 +1,10 @@
 import React, {useState} from 'react';
+import {timeStore} from "./store.js"
+
 import useInterval from "./useInterval.js"
 import styles from "./Timer.module.css"
+import { observer } from 'mobx-react-lite'
+
 function toHour(time) {
     var sec_num = parseInt(time, 10); // don't forget the second param
     var hours   = Math.floor(sec_num / 3600);
@@ -13,29 +17,34 @@ function toHour(time) {
     //return hours+':'+minutes+':'+seconds;
     return minutes+':'+seconds;
 }
-function Timer({sendTime, isCounting, changeIfCounting}){
-	const [count, updateCounting] = useState(0)
+const Timer = observer(function Timer({sendTime, isCounting, changeIfCounting}){
+	//const [count, updateCounting] = useState(0)
 	useInterval(() => {
 	    // Your custom logic here
-	    if(isCounting){
-	    	updateCounting(count + 1);
+	    if(timeStore.isCounting){
+	    	//updateCounting(count + 1);
+	    	timeStore.incrementCount()
 	    }
 	    
 	  }, 1000);
 	const handleOnClick = () => {
-		changeIfCounting(!isCounting)
-		// if just finished counting then you'll send the count
-		if(isCounting){
-			console.log("send count")
-			sendTime(count)
+		if(timeStore.isCounting){
+			//console.log("send count")
+			//sendTime(count)
+			timeStore.setTimeToItem()
 		}
-		updateCounting(0)
+		timeStore.reverseCounting()
+		//changeIfCounting(!isCounting)
+		// if just finished counting then you'll send the count
+		
+		//updateCounting(0)
+		timeStore.resetCount()
 	}
 	return (<div className={styles.container}>
-				<span className={styles.timer}>{toHour(count)}</span>
+				<span className={styles.timer}>{toHour(timeStore.count)}</span>
 				<button className={styles.startButton} onClick={() => handleOnClick()}>
 					{
-						count == 0 ?
+						timeStore.count == 0 ?
 					<svg width="40%" height="43%" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M19.4952 11.4272L0.788868 22.7579L0.701819 0.241405L19.4952 11.4272Z" fill="white"/>
 					</svg>
@@ -49,6 +58,6 @@ function Timer({sendTime, isCounting, changeIfCounting}){
 
 				</button> 
 			</div>)
-}
+})
 
 export default Timer
