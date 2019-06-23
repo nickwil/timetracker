@@ -19,13 +19,8 @@ const App = observer(function App({store, dayFromUrl}) {
   const [currentDay, changeDay] = useState(Number(dayFromUrl))
   const [tags, updateTag] = useState([new Tag("Other", "Other"), new Tag("School", "School")])
 
-
   // always have value in store to day from url
   store.updateDate(dayFromUrl)
-  
-
-  const [val, updateText] = useState("")
-  const [time, updateTime] = useState("")
   return (
     <div className="App">    
       <header className="App-header">
