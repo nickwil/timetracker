@@ -22,28 +22,10 @@ const App = observer(function App({store, dayFromUrl}) {
 
   // always have value in store to day from url
   store.updateDate(dayFromUrl)
-
-  const sendTime = (count) => {
-    
-    if(currentIdCountingFrom){
-      store.items[store.index(currentIdCountingFrom)].updateTimeTilCompletion(count)
-      changeCurrentIdCountingFrom(null)
-    } else {
-      store.addItem('', count, "Other", '', true)
-    }  
-  }
   
 
   const [val, updateText] = useState("")
   const [time, updateTime] = useState("")
-  const [isCounting, changeCountingBool] = useState(false)
-
-  const [currentIdCountingFrom, changeCurrentIdCountingFrom] = useState(null)
-  const changeIfCounting = (change, id=null) => {
-    changeCurrentIdCountingFrom(id)
-    changeCountingBool(change)
-  }
-  console.log(store.unCompletedTodos)
   return (
     <div className="App">    
       <header className="App-header">
@@ -53,7 +35,7 @@ const App = observer(function App({store, dayFromUrl}) {
            <CustomLink to="/calendar"> {date(new Date(currentDay))}</CustomLink>
           
         </p>
-        <Timer isCounting={isCounting} changeIfCounting={changeIfCounting} sendTime={(count) => sendTime(count)}/>
+        <Timer/>
       </header>
 
       <section>
