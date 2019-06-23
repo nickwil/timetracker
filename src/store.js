@@ -76,8 +76,9 @@ const ItemStore = types
             })
         },
         deleteItem(id){
-          self.items = self.items.filter(item => item != item.id)
-
+          console.log('deletion', id)
+          self.items = self.items.filter(item => item.id != id)
+          console.log(self.items.toJSON())
         },
         updateDate(date){
             self.currentDay = date
