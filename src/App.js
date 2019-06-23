@@ -2,9 +2,7 @@ import React, {useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Timer from "./Timer.jsx"
-import Tags from "./Tags.jsx"
 import Calendar from "./Calendar.jsx"
-import ItemTime from "./ItemTime.jsx"
 import AddItemModal from "./AddItemModal.jsx"
 
 import { observer } from 'mobx-react-lite'
@@ -12,7 +10,6 @@ import CustomLink from "./CustomLink.jsx"
 
 import {date} from "./util/quick.js"
 
-import Input from "./Input.jsx"
 import ItemList from "./ItemList.jsx"
 function Tag(name, value){
   this.name = name
