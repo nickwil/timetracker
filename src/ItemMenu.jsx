@@ -16,9 +16,11 @@ function ItemMenuContainer({store, id}){
 }
 
 function ItemMenu({store, id}){
-			const storeItem = store.items[store.index(id)]
-
-	return <span>
+	const storeItem = store.items[store.index(id)]
+	const [time, updateTime] = React.useState('10:00')
+	
+	return <span>	
+	 
 						<button onClick={() => store.deleteItem(id)}>Delete</button>
 						<input value={storeItem.tilCompletion} onChange={(e) =>storeItem.updateLengthOfTask(Number(e.target.value)) }placeholder="change time for task"/>
 				</span>	

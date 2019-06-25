@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
+import TimePicker from 'react-time-picker'
 
 const customStyles = {
   content : {
@@ -15,7 +16,10 @@ const customStyles = {
 
 // Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement('#root')
-
+function hmsToSeconds(s) {
+  var b = s.split(':');
+  return b[0]*3600 + b[1]*60;
+}
 class AddItemModal extends React.Component {
   constructor() {
     super();
@@ -24,6 +28,8 @@ class AddItemModal extends React.Component {
       modalIsOpen: false,
       val: "",
       time: "",
+      fromTime: "10:00",
+      untilTime: "10:01"
     };
 
     this.openModal = this.openModal.bind(this);
@@ -50,8 +56,11 @@ class AddItemModal extends React.Component {
   updateTime(text){
     this.setState({time: text})
   }
+  onFromTimePickerChange = time => this.setState({ fromTime: time, time: hmsToSeconds(this.state.untilTime) - hmsToSeconds(this.state.fromTime) })
+  onUntilTimePickerChange = time => this.setState({ untilTime: time, time: hmsToSeconds(this.state.untilTime) - hmsToSeconds(this.state.fromTime) })
 
   render() {
+
     return (
       <div>
         <button onClick={this.openModal}>Add task</button>
@@ -62,8 +71,25 @@ class AddItemModal extends React.Component {
           style={customStyles}
           contentLabel="Example Modal"
         >
-        <input placeholder="task..." val={this.state.val} onChange={(e) => this.updateText(e.target.value)} />
-        <input placeholder="time.." val={this.state.time} onChange={(e) => this.updateTime(e.target.value)} />
+        <input placeholder="task..." value={this.state.val} onChange={(e) => this.updateText(e.target.value)} />
+        <input placeholder="time.." value={this.state.time} onChange={(e) => this.updateTime(e.target.value)} />
+        <section>
+          <h6> Optional: </h6>
+          <div>From: <TimePicker
+          disableClock={true}
+            onChange={this.onFromTimePickerChange}
+            value={this.state.fromTime}
+          /></div>
+
+        <div>
+          Until:<TimePicker
+          disableClock={true}
+            onChange={this.onUntilTimePickerChange}
+            value={this.state.untilTime}
+          />
+        </div>
+        </section>
+
        <button onClick={() => this.props.addTask(this.state.val, Number(this.state.time))}>Submit</button>
           
                     <button onClick={this.closeModal}>close</button>
