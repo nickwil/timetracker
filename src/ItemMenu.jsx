@@ -1,7 +1,7 @@
 import React from "react"
 import Modal from 'react-modal';
 import styles from "./ItemMenu.module.css"
-function ItemMenu({store, id}){
+function ItemMenuContainer({store, id}){
 	// if small view then have 3 dots and use modal if not then just display it there
 	// if small view then show 3 dots, and use modal
 
@@ -9,14 +9,20 @@ function ItemMenu({store, id}){
 		const storeItem = store.items[store.index(id)]
 
 	return (<React.Fragment>
-					<span className={styles.container}>
-						<button onClick={() => store.deleteItem(id)}>Delete</button>
-						<input value={storeItem.tilCompletion} onChange={(e) =>storeItem.updateLengthOfTask(Number(e.target.value)) }placeholder="change time for task"/>
-					</span>
-					<ItemMenuModal className={styles.modalContainer} store={store} id={id} storeItem={storeItem}/>
+					<span className={styles.container}><ItemMenu store={store} id={id}/></span>
+					<ItemMenuModal children={<ItemMenu store={store} id={id}/>}
+					className={styles.modalContainer}  storeItem={storeItem}/>
 			</React.Fragment>)
 }
 
+function ItemMenu({store, id}){
+			const storeItem = store.items[store.index(id)]
+
+	return <span>
+						<button onClick={() => store.deleteItem(id)}>Delete</button>
+						<input value={storeItem.tilCompletion} onChange={(e) =>storeItem.updateLengthOfTask(Number(e.target.value)) }placeholder="change time for task"/>
+				</span>	
+}
 
 const customStyles = {
   content : {
@@ -78,10 +84,7 @@ class ItemMenuModal extends React.Component {
           style={customStyles}
           contentLabel="Example Modal"
         >
-         <button onClick={() => this.props.store.deleteItem(this.props.id)}>Delete</button>
-			<input value={this.props.storeItem.tilCompletion} 
-			onChange={(e) =>this.props.storeItem.updateLengthOfTask(Number(e.target.value)) }
-			placeholder="change time for task"/>
+         {this.props.children}
 			 <button onClick={this.closeModal}>close</button>
 
         </Modal>
@@ -89,4 +92,4 @@ class ItemMenuModal extends React.Component {
     );
   }
 }
-export default ItemMenu
+export default ItemMenuContainer

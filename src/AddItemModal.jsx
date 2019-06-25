@@ -62,9 +62,9 @@ class AddItemModal extends React.Component {
           style={customStyles}
           contentLabel="Example Modal"
         >
-         <input placeholder="task..." val={this.state.val} onChange={(e) => this.updateText(e.target.value)} />
+        <input placeholder="task..." val={this.state.val} onChange={(e) => this.updateText(e.target.value)} />
         <input placeholder="time.." val={this.state.time} onChange={(e) => this.updateTime(e.target.value)} />
-        <button onClick={() => this.props.addTask(this.state.val, Number(this.state.time))}>Submit</button>
+       <button onClick={() => this.props.addTask(this.state.val, Number(this.state.time))}>Submit</button>
           
                     <button onClick={this.closeModal}>close</button>
 
