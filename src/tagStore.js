@@ -5,6 +5,7 @@ const Tag = types
 .model("Tag", {
   name: types.string,
   id: types.string,
+  canDelete: types.boolean,
 })
 
 const TagStore = types
@@ -13,15 +14,21 @@ const TagStore = types
     })
     .actions(self => ({ 
     	addTag(name){
-    		self.tags.push({name, iid: uuidv1()})
+    		self.tags.push({name:name, id: uuidv1(), canDelete: true})
     	},
     	deleteTag(id){
-    		self.tags..filter(obj=> obj.id != id)
+        console.log(id)
+    		self.tags = self.tags.filter(obj=> obj.id != id)
+        
     	}
     }))
 
 const tagStore = TagStore.create({
-  tags: []
+  tags: [{
+  	name: "Other",
+  	id: "Other",
+    canDelete: false,
+  }]
 })  
 
 export default tagStore
