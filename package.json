@@ -8,6 +8,7 @@
     "chai": "^4.2.0",
     "history": "^4.9.0",
     "mobx": "^5.10.1",
+    "mobx-react-lite": "^1.4.0",
     "mobx-state-tree": "^3.14.0",
     "mocha": "^6.1.4",
     "moment": "^2.24.0",
@@ -15,7 +16,9 @@
     "react-dom": "^16.8.6",
     "react-modal": "^3.8.1",
     "react-scripts": "3.0.1",
-    "react-spring": "^8.0.23"
+    "react-spring": "^8.0.23",
+    "react-time-picker": "^3.5.2",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "start": "react-scripts start",

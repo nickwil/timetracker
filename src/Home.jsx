@@ -4,9 +4,18 @@ import App from "./App.js"
 import Calendar from "./Calendar.jsx"
 import store from "./store.js"
 import {date} from "./util/quick.js"
+import Settings from "./Settings.jsx"
 
 function Home(props){
 	return (
+		<section>
+			<header>
+				Nav: 
+				Home
+				Calendar
+				Settings
+				<Settings/>
+			</header>
 			  <Router>
 			  	<App store={store} dayFromUrl={new Date().getTime()} path="/"/>
 			  	<DateApp store={store} path="/:year/:month/:day"/>
@@ -15,6 +24,7 @@ function Home(props){
 			  {/* show entire year in one page*/}
 			  	<Calendar path="calendar/:year"/>
 			  </Router>
+		</section>
 		)
 }
 
