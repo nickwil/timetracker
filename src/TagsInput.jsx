@@ -38,7 +38,7 @@ function TagForm({updateTags}){
 	const [value, onChange] = React.useState("")
 
 	const onEnter = (e) => {
-		if (e.key === 'Enter') {
+		if (e.key === 'Enter' && value != '') {
 		      tagStore.addTag(value)
 		      onChange("")
 

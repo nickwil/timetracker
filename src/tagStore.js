@@ -19,7 +19,7 @@ const TagStore = types
     	deleteTag(id){
         console.log(id)
     		self.tags = self.tags.filter(obj=> obj.id != id)
-        
+        // set everything with that id to other
     	}
     }))
 
