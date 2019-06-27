@@ -13,11 +13,11 @@ const Tags = observer(function Tags({tags, onChange, defaultTagId}){
 })
 
 const Tag = observer(function Tag({tag, defaultTagId}){
-	if(defaultTagId == tag.value){
-		return <option selected="selected" value={tag.value}>{tag.name}</option>
+	if(defaultTagId == tag.id){
+		return <option selected="selected" value={tag.id}>{tag.name}</option>
 	} else {
 
-		return <option value={tag.value}>{tag.name}</option>
+		return <option value={tag.id}>{tag.name}</option>
 	}
 })
 export default Tags

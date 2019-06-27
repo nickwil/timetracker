@@ -82,6 +82,14 @@ const ItemStore = types
         },
         updateDate(date){
             self.currentDay = date
+        },
+        setEmptyTagIdToDefault(id){
+          for(var itemNumber = 0; itemNumber < self.items.length; itemNumber++){
+            const item = self.items[itemNumber]
+            if(item.tagId == id){
+              item.tagId ="Other"
+            }
+          }
         }
 
     }))
@@ -98,7 +106,7 @@ const store = ItemStore.create({
       length: 13,
       day: date(),
       text: "Study for accounting",
-      tagId: "Other",
+      tagId: "Home",
       // temp id creation
       id: Date.now(),
     }

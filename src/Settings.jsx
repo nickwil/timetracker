@@ -1,6 +1,7 @@
 import React from "react"
 import TagsInput from "./TagsInput.jsx"
 function Settings(props){
+	
 	return (
 			<div>
 				<h4>Settings</h4>

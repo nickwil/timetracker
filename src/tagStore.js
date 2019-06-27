@@ -1,4 +1,5 @@
 import { types } from "mobx-state-tree"
+import store from "./store.js"
 const uuidv1 = require('uuid/v1');
 
 const Tag = types
@@ -22,7 +23,9 @@ const TagStore = types
     	},
     	deleteTag(id){
         console.log(id)
+        store.setEmptyTagIdToDefault(id)
     		self.tags = self.tags.filter(obj=> obj.id != id)
+
         // TODO: set everything with that id to other
     	},
       updateTag(id, text){
@@ -36,6 +39,11 @@ const tagStore = TagStore.create({
   	name: "Other",
   	id: "Other",
     canDelete: false,
+  },
+  {
+    name: "Home",
+    id: "Home",
+    canDelete: true,
   }]
 })  
 
