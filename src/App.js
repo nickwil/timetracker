@@ -12,6 +12,7 @@ import {timeStore} from "./store.js"
 import ItemList from "./ItemList.jsx"
 import tagStore from "./tagStore.js"
 
+import PieChart from "./PieChart.jsx"
 
 const App = observer(function App({store, dayFromUrl}) {
 
