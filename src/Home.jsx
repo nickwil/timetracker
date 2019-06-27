@@ -7,7 +7,7 @@ import {date} from "./util/quick.js"
 import Settings from "./Settings.jsx"
 import Navigation from "./Navigation.jsx"
 import shortTimeFormatting from "./util/shortTimeFormatting.js"
-console.log(shortTimeFormatting(3600))
+console.log(shortTimeFormatting(70))
 function Home(props){
 	return (
 		<section>

@@ -11,9 +11,9 @@ function shortTimeFormatting(time){
 		return time + seconds
 	} 
 	else if (time < 3600) {
-		return Math.round(time / 60) + minutes
+		return Math.round((time / 60) * 10) / 10 + minutes
 	} else if (time >= 3600){
-		return Math.round(time / 3600) + hours
+		return Math.round((time / 3600) * 10) / 10 + hours
 	} else {
 		return newTime = time + seconds
 	}
