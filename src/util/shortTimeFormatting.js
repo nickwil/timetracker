@@ -3,17 +3,22 @@ function shortTimeFormatting(time){
 	const seconds = "s"
 	const minutes = "m"
 	const hours = "h"
-	switch(time){
-		case time<=60:
-			return time + seconds
-			break;
-		case time<3600:
-			return Math.round(time / 60) + minutes
-			break;
-		case time >= 3600:
-			return Math.round(time / 3600) + hours
-			break;
-	}	
+
+	var newTime = time
+	console.log("seconds")
+	
+	if(time <= 60){
+		return time + seconds
+	} 
+	else if (time < 3600) {
+		return Math.round(time / 60) + minutes
+	} else if (time >= 3600){
+		return Math.round(time / 3600) + hours
+	} else {
+		return newTime = time + seconds
+	}
+
+	return newTime
 	
 	
 }

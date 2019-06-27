@@ -6,7 +6,8 @@ import store from "./store.js"
 import {date} from "./util/quick.js"
 import Settings from "./Settings.jsx"
 import Navigation from "./Navigation.jsx"
-
+import shortTimeFormatting from "./util/shortTimeFormatting.js"
+console.log(shortTimeFormatting(3600))
 function Home(props){
 	return (
 		<section>
