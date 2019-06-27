@@ -21,9 +21,6 @@ function Home(props){
 
 
 			  	<Calendar path="calendar/"/>
-			  	<Calendar path="calendar/:year/:month/:day"/>
-			  {/* show entire year in one page*/}
-			  	<Calendar path="calendar/:year"/>
 			  </Router>
 		</section>
 		)
