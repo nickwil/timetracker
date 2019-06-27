@@ -18,12 +18,12 @@ const TagsInput = observer(function TagsInput(props){
 				<TagForm/>
 			</div>)
 })
-// TODO: modal should appear to confirm deletion DONE
 const Tag = observer(function Tag({name, updateTag, canDelete, deleteTag}){
 
 
 	return (
 			<span>
+			
 				<ContentEditable
               html={name} // innerHTML of the editable div
               disabled={false}       // use true to disable editing
