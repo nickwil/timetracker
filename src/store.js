@@ -1,5 +1,7 @@
 import { types, onSnapshot } from "mobx-state-tree"
 import {date} from "./util/quick.js"
+const moment = require("moment")
+
 const uuidv1 = require('uuid/v1');
 
 const Item = types
@@ -90,6 +92,15 @@ const ItemStore = types
               item.tagId ="Other"
             }
           }
+        },
+        getTimeToSpendForDay(day = moment(self.currentDay).format("YYYY/MM/DD")){
+          console.log(moment(self.currentDay).format("YYYY/MM/DD"))
+          const dailyItems = self.items.filter(item => { 
+              return item.day == day
+            })
+          var time = 0
+          dailyItems.map(item => time+= item.tilCompletion)
+          return time
         }
 
     }))

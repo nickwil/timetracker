@@ -23,10 +23,11 @@ const App = observer(function App({store, dayFromUrl}) {
       
         <p id="currentDate">
           
-           <CustomLink to="/calendar"> {date(new Date(dayFromUrl))}</CustomLink>
+           <CustomLink to="/calendar"> {date(new Date(dayFromUrl))}</CustomLink> - Work: {store.getTimeToSpendForDay()}s
           
         </p>
         <Timer/>
+
       </header>
 
       <section>

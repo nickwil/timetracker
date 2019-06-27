@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import "./Calendar.css"
 import styles from "./Calendar.module.css"
 import CustomLink from "./CustomLink.jsx"
-
+import store from "./store.js"
 const moment = require("moment")
 function Calendar(props){
 	const [month, changeMonth] = React.useState(moment().startOf('month').format("YYYY-MM"))
@@ -95,14 +95,20 @@ function EmptyDay(props){
 function Day(props){
 	
 	var day = moment(`${props.month}-${props.number}`, "YYYY-MM-DD").format("YYYY/MM/DD")
-	console.log(day)
 	return (
 		<span className={styles.day}>
-		<CustomLink	className={styles.dayButton} to={`/${day}`}>
-			{props.number}
+			<CustomLink	className={styles.dayButton} to={`/${day}`}>
+				{props.number}
 			</CustomLink>
+			{
+				// if there is time to spend for this day give it a red dot
+				store.getTimeToSpendForDay(day) > 0 ?
+				<span>reddot</span>
+				:
+				null
+			}
 			
-	</span>)
+		</span>)
 }
 
 export default Calendar
