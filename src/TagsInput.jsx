@@ -1,5 +1,6 @@
 import React from "react"
 import tagStore from "./tagStore.js"
+import CustomModal from "./CustomModal.jsx"
 import { observer } from 'mobx-react-lite'
 
 const TagsInput = observer(function TagsInput(props){
@@ -15,23 +16,30 @@ const TagsInput = observer(function TagsInput(props){
 				<TagForm/>
 			</div>)
 })
-// modal should appear to confirm deletion
-// what if the tag I'm using no longer exists?
-// Other cannot be deleted
+// TODO: modal should appear to confirm deletion DONE
 const Tag = observer(function Tag({name, canDelete, deleteTag}){
+
+
 	return (
 			<span>
 				{name} 
 				{
 					canDelete ?
-
-					<button 
-					onClick={()=> deleteTag()}>
-					X
-					</button> 
+					<CustomModal modalText="X" contentLabel="Delete tag">
+						<span>
+						Are you sure you want to delete the tag? Everything related to it will be set to Other.
+							<button 
+						onClick={()=> deleteTag()}>
+						Delete tag
+						</button> 
+					</span>
+					</CustomModal>
 					:
 					null
 				}
+				
+					
+					
 			</span>)
 })
 function TagForm({updateTags}){
