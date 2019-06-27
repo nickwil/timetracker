@@ -60,6 +60,27 @@ const ItemStore = types
             index(id){
                 return self.items.findIndex(obj => obj.id == id)
             },
+
+            getTimeFromEachTag(tags){
+              const items = self.completedTodos
+              console.log(items)
+              var tagsTime = []
+              tags.map((tag) => tagsTime.push({
+                title: tag.name,
+                id: tag.id,
+                color: '#'+Math.floor(Math.random()*16777215).toString(16),
+                value: 0
+              }))
+
+              for(var itemNo = 0; itemNo < items.length; itemNo++){
+                const item = items[itemNo]
+                const tagIndex = tagsTime.findIndex(obj => obj.id == item.tagId)
+                var tag = tagsTime[tagIndex]
+                tag.value += item.length
+                console.log(item.length)
+              }
+              return tagsTime
+            }
         
     }))
     .actions(self => ({
@@ -93,6 +114,7 @@ const ItemStore = types
             }
           }
         },
+        // need to move to views
         getTimeToSpendForDay(day = moment(self.currentDay).format("YYYY/MM/DD")){
           console.log(moment(self.currentDay).format("YYYY/MM/DD"))
           const dailyItems = self.items.filter(item => { 
@@ -132,9 +154,9 @@ const store = ItemStore.create({
     },
     {
       created: Date.now(),
-      tilCompletion: 13,
+      tilCompletion: 10,
       completed: true,
-      length: 13,
+      length: 10,
       day: date(),
       text: "Work",
       tagId: "Other",
