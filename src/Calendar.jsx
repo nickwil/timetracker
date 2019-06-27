@@ -102,7 +102,7 @@ function Day(props){
 			{
 				// if there is time to spend for this day give it a red dot
 				store.getTimeToSpendForDay(day) > 0 ?
-				<span>reddot</span>
+				<span className={styles.redDot}>•</span>
 				:
 				null
 			}
