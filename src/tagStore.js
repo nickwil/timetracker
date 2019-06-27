@@ -7,7 +7,11 @@ const Tag = types
   id: types.string,
   canDelete: types.boolean,
 })
-
+.actions(self => ({
+  updateTag(text){
+    self.name = text
+  }
+}))
 const TagStore = types
     .model("ItemStore", {
         tags: types.array(Tag),
@@ -20,7 +24,11 @@ const TagStore = types
         console.log(id)
     		self.tags = self.tags.filter(obj=> obj.id != id)
         // TODO: set everything with that id to other
-    	}
+    	},
+      updateTag(id, text){
+       const index = self.tags.findIndex(obj => obj.id == id)
+       self.tags[index].updateTag(text)
+      }
     }))
 
 const tagStore = TagStore.create({
