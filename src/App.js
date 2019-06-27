@@ -23,7 +23,7 @@ const App = observer(function App({store, dayFromUrl}) {
       
         <p id="currentDate">
           
-           <CustomLink to="/calendar"> {date(new Date(dayFromUrl))}</CustomLink> - Work: {store.getTimeToSpendForDay()}s
+           <CustomLink to="/calendar"> {date(new Date(dayFromUrl))}</CustomLink>
           
         </p>
         <Timer/>
