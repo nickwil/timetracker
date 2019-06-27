@@ -2,6 +2,7 @@ import React from "react"
 import { Router } from "@reach/router"
 import App from "./App.js"
 import Calendar from "./Calendar.jsx"
+import Stats from "./Stats.jsx"
 import store from "./store.js"
 import {date} from "./util/quick.js"
 import Settings from "./Settings.jsx"
@@ -17,7 +18,7 @@ function Home(props){
 			  	<DateApp store={store} path="/:year/:month/:day"/>
 
 			  	<Settings path="settings/"/>
-
+			  	<Stats path="statistics/"/>
 
 			  	<Calendar path="calendar/"/>
 			  </Router>
