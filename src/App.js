@@ -10,13 +10,10 @@ import CustomLink from "./CustomLink.jsx"
 import {date} from "./util/quick.js"
 import {timeStore} from "./store.js"
 import ItemList from "./ItemList.jsx"
-function Tag(name, value){
-  this.name = name
-  this.value = value
-}
+import tagStore from "./tagStore.js"
+
 
 const App = observer(function App({store, dayFromUrl}) {
-  const [tags, updateTag] = useState([new Tag("Other", "Other"), new Tag("School", "School")])
 
   // always have value in store to day from url
   store.updateDate(dayFromUrl)
@@ -39,7 +36,7 @@ const App = observer(function App({store, dayFromUrl}) {
             <ItemList
             item={obj}
             store={store}
-            tags={tags}/>)}
+            tags={tagStore.tags}/>)}
  
       </section>
       
@@ -49,7 +46,7 @@ const App = observer(function App({store, dayFromUrl}) {
             <ItemList
             item={obj}
             store={store}
-            tags={tags}/>)}
+            tags={tagStore.tags}/>)}
       </section>
       <AddItemModal addTask={store.addItem}/>
      

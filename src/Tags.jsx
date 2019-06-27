@@ -1,5 +1,7 @@
 import React from "react"
-function Tags({tags, onChange, defaultTagId}){
+import { observer } from 'mobx-react-lite'
+
+const Tags = observer(function Tags({tags, onChange, defaultTagId}){
 	return (
 				<select onChange={(e) => onChange(e.target.value)}>
 				{
@@ -8,13 +10,14 @@ function Tags({tags, onChange, defaultTagId}){
 				  
 				 </select>
 		)
-}
-function Tag({tag, defaultTagId}){
+})
+
+const Tag = observer(function Tag({tag, defaultTagId}){
 	if(defaultTagId == tag.value){
 		return <option selected="selected" value={tag.value}>{tag.name}</option>
 	} else {
 
 		return <option value={tag.value}>{tag.name}</option>
 	}
-}
+})
 export default Tags
