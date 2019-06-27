@@ -1,5 +1,6 @@
 import { types, onSnapshot } from "mobx-state-tree"
 import {date} from "./util/quick.js"
+const uuidv1 = require('uuid/v1');
 
 const Item = types
     .model("Item", {
@@ -12,7 +13,7 @@ const Item = types
       text: types.string,
       tagId: types.string,
       // temp id creation
-      id: types.Date /*shoukd be a string*/,
+      id: types.string /*shoukd be a string*/,
     
     })
     .actions(self => ({
@@ -71,8 +72,7 @@ const ItemStore = types
               text: text,
               title: title, 
               completed: completed,
-              // temp id creation
-              id: Date.now(),
+              id: uuidv1(),
             })
         },
         deleteItem(id){
@@ -107,8 +107,7 @@ const store = ItemStore.create({
       day: date(),
       text: "Study for accounting",
       tagId: "Home",
-      // temp id creation
-      id: Date.now(),
+      id: uuidv1(),
     }
     ],
     currentDay: new Date().getTime(),
@@ -117,7 +116,7 @@ const store = ItemStore.create({
 const Time = types
 .model("Time", {
   // its date cuz id is date
-  selectedItem: types.maybe(types.Date),
+  selectedItem: types.maybe(types.string),
   isCounting: types.boolean,
   count: types.integer,
 })
