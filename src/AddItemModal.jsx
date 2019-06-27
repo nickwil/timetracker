@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
-import TimePicker from 'react-time-picker'
-
+import TimePicker from './TimePicker.jsx'
+const moment = require("moment")
 const customStyles = {
   content : {
     top                   : '50%',
@@ -16,9 +16,24 @@ const customStyles = {
 
 // Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement('#root')
-function hmsToSeconds(s) {
-  var b = s.split(':');
-  return b[0]*3600 + b[1]*60;
+function hmsToSeconds(fromTime, untilTime) {
+  var start = getHourAndSeconds(fromTime)
+  var end = getHourAndSeconds(untilTime)
+  console.log(end.minutes, start.minutes)
+  var hoursInSeconds = (end.hours - start.hours) * 60 * 60
+  var minutesInSeconds = (end.minutes - start.minutes) * 60
+
+  return hoursInSeconds + minutesInSeconds
+
+
+}
+
+function getHourAndSeconds(time){
+  var timeArr = time.split(":")
+  return {
+    hours: Number(timeArr[0]),
+    minutes: Number(timeArr[1])
+  }
 }
 class AddItemModal extends React.Component {
   constructor() {
@@ -28,8 +43,8 @@ class AddItemModal extends React.Component {
       modalIsOpen: false,
       val: "",
       time: "",
-      fromTime: "10:00",
-      untilTime: "10:01"
+      fromTime: "",
+      untilTime: ""
     };
 
     this.openModal = this.openModal.bind(this);
@@ -56,8 +71,8 @@ class AddItemModal extends React.Component {
   updateTime(text){
     this.setState({time: text})
   }
-  onFromTimePickerChange = time => this.setState({ fromTime: time, time: hmsToSeconds(this.state.untilTime) - hmsToSeconds(this.state.fromTime) })
-  onUntilTimePickerChange = time => this.setState({ untilTime: time, time: hmsToSeconds(this.state.untilTime) - hmsToSeconds(this.state.fromTime) })
+  onFromTimePickerChange = time => this.setState({ fromTime: time, time: hmsToSeconds(time,this.state.untilTime ) })
+  onUntilTimePickerChange = time => this.setState({ untilTime: time, time: hmsToSeconds(this.state.fromTime, time) })
 
   render() {
 
@@ -75,17 +90,12 @@ class AddItemModal extends React.Component {
         <input placeholder="time.." value={this.state.time} onChange={(e) => this.updateTime(e.target.value)} />
         <section>
           <h6> Optional: </h6>
-          <div>From: <TimePicker
-          disableClock={true}
-            onChange={this.onFromTimePickerChange}
-            value={this.state.fromTime}
-          /></div>
+          <div>From: <TimePicker onChange={this.onFromTimePickerChange}/>  
+          </div>
 
         <div>
           Until:<TimePicker
-          disableClock={true}
             onChange={this.onUntilTimePickerChange}
-            value={this.state.untilTime}
           />
         </div>
         </section>

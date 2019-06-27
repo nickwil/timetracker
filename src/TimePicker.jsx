@@ -1,10 +1,9 @@
 import React from "react"
 
-function TimePicker({onChange}){
-	
-	const [hours, updateHours] = React.useState("")
-	const [seconds, updateSeconds] = React.useState("")
-	const [isMorning, updateTimeOfDay] = React.useState('AM')
+function TimePicker({onChange, value}){
+	const [hours, updateHours] = React.useState('')
+	const [seconds, updateSeconds] = React.useState('')
+	const [timeOfDay, updateTimeOfDay] = React.useState('AM')
 	// if more than two make red 
 
 	var hoursStyle = null
@@ -20,14 +19,11 @@ function TimePicker({onChange}){
 			secondStyle={backgroundColor : `red`}
 		} 
 	}
-	const handleChange = (time, callback) => {
-
-		callback(time)
-		console.log(time)
-		if(isMorning == 'AM'){
+	const handleChange = (hours, seconds, timeOfDay) => {
+		if(timeOfDay == 'AM'){
 			onChange(hours+":"+seconds)
 		} else {
-			onChange((Number(hours)+12)+":"+seconds)
+			onChange((Number(hours) + 12) +":" + seconds)
 		}
 	}
 
@@ -35,22 +31,30 @@ function TimePicker({onChange}){
 	return (<span>
 				<input 
 				style={hoursStyle}
-				onChange={(e) => handleChange(e.target.value, updateHours)}
+				onChange={(e) => {
+					updateHours(e.target.value)
+					handleChange(e.target.value, seconds, timeOfDay)
+				}}
 				autocomplete="off"  max="12" min="1" 
 				placeholder="--" 
 				type="number" value={hours}/>
 				:
 				<input 
 				style={secondStyle}
-				onChange={(e) => handleChange(e.target.value, updateSeconds)}
+				onChange={(e) => {
+						updateSeconds(e.target.value)
+						handleChange(hours, e.target.value, timeOfDay)
+					}}
 				autocomplete="off"  max="59" min="0" 
 				placeholder="--" 
 				type="number" value={seconds}/>
-				<select onChange={(e) => handleChange(e.target.value, updateTimeOfDay)}>
-				
+				<select onChange={(e) => {
+					updateTimeOfDay(e.target.value)
+					handleChange(hours, seconds, e.target.value)
+				}}>
+					
 						<option>AM</option>
 						<option>PM</option>
-					
 					
 					
 				</select>
