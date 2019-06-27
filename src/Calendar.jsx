@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import "./Calendar.css"
 import styles from "./Calendar.module.css"
 import CustomLink from "./CustomLink.jsx"
 import store from "./store.js"
