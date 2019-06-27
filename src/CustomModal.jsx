@@ -38,7 +38,7 @@ class CustomModal extends React.Component {
   render() {
 
     return (
-      <div>
+      <span>
         <button onClick={this.openModal}>{this.props.modalText}</button>
         <Modal
           isOpen={this.state.modalIsOpen}
@@ -52,7 +52,7 @@ class CustomModal extends React.Component {
         <button onClick={this.closeModal}>Close</button>
       </div>
         </Modal>
-      </div>
+      </span>
     );
   }
 }
