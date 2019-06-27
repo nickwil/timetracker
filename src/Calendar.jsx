@@ -94,6 +94,7 @@ function EmptyDay(props){
 function Day(props){
 	
 	var day = moment(`${props.month}-${props.number}`, "YYYY-MM-DD").format("YYYY/MM/DD")
+	const timeForDay = store.getTimeToSpendForDay(day)
 	return (
 		<span className={styles.day}>
 			<CustomLink	className={styles.dayButton} to={`/${day}`}>
@@ -101,13 +102,23 @@ function Day(props){
 			</CustomLink>
 			{
 				// if there is time to spend for this day give it a red dot
-				store.getTimeToSpendForDay(day) > 0 ?
-				<span className={styles.redDot}>•</span>
+				timeForDay > 0 ?
+				<span style={colorsForDays(timeForDay)}>•</span>
 				:
 				null
 			}
 			
 		</span>)
+}
+
+function colorsForDays(time){
+	console.log(time >= 3600 && time < 7000)
+	if(time > 3600){
+		return {color: `red`}
+	} else {
+		return {color: `green`}
+	}
+
 }
 
 export default Calendar
