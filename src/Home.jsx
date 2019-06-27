@@ -14,6 +14,7 @@ function Home(props){
 				Home
 				Calendar
 				Settings
+				Stats
 				<Settings/>
 			</header>
 			  <Router>

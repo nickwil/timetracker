@@ -19,7 +19,8 @@ const App = observer(function App({store, dayFromUrl}) {
   // always have value in store to day from url
   store.updateDate(dayFromUrl)
   return (
-    <div className="App">    
+    <div className="App">  
+    <PieChart/>  
       <header className="App-header">
       
         <p id="currentDate">
