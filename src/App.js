@@ -19,7 +19,7 @@ const App = observer(function App({store, dayFromUrl}) {
   store.updateDate(dayFromUrl)
   return (
     <div className="App">
-    <TimePicker/>  
+    <TimePicker onChange={(time) => console.log(time)}/>  
       <header className="App-header">
       
         <p id="currentDate">
