@@ -18,7 +18,7 @@ function Home(props){
 			  	<DateApp store={store} path="/:year/:month/:day"/>
 
 			  	<Settings path="settings/"/>
-			  	<Stats path="statistics/"/>
+			  	<Stats path="stats/"/>
 
 			  	<Calendar path="calendar/"/>
 			  </Router>
