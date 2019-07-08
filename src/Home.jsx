@@ -19,7 +19,7 @@ function Home(props){
 
 			  	<Settings path="settings/"/>
 			  	<Stats path="stats/"/>
-
+			  	<Stats path="stats/:year/:month"/>
 			  	<Calendar path="calendar/"/>
 			  </Router>
 		</section>
