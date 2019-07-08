@@ -7,6 +7,7 @@ import store from "./store.js"
 import {date} from "./util/quick.js"
 import Settings from "./Settings.jsx"
 import Navigation from "./Navigation.jsx"
+import tagStore from "./tagStore.js"
 function Home(props){
 	return (
 		<section>
@@ -18,8 +19,8 @@ function Home(props){
 			  	<DateApp store={store} path="/:year/:month/:day"/>
 
 			  	<Settings path="settings/"/>
-			  	<Stats path="stats/"/>
-			  	<Stats path="stats/:year/:month"/>
+			  	<Stats data={store.getTimeFromEachTag(tagStore.tags)} path="stats/"/>
+			  	<Stats data={store.getTimeFromEachTag(tagStore.tags)} path="stats/:year/:month"/>
 			  	<Calendar path="calendar/"/>
 			  </Router>
 		</section>

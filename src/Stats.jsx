@@ -1,12 +1,10 @@
 import React from "react"
 import PieChart from 'react-minimal-pie-chart';
-import store from "./store.js"
-import tagStore from "./tagStore.js"
+
 import shortTimeFormatting from "./util/shortTimeFormatting.js"
 
 const colors = ["#E38627", '#C13C37', '#6A2135']
-function Stats(props){
-	const data = store.getTimeFromEachTag(tagStore.tags)
+function Stats({data}){
 	return (<div>
 		<h4>Time Spent Working</h4>
 		<PieChart 
