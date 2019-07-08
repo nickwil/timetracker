@@ -64,6 +64,9 @@ const ItemStore = types
              completedTodosFromMonth(year, month){
               return self.items.filter(obj=> obj.day.includes(`${year}/${month}`) && obj.completed == true)
             },
+            completedTodosFromYear(year){
+              return self.items.filter(obj=> obj.day.includes(`${year}`) && obj.completed == true)
+            },
             index(id){
                 return self.items.findIndex(obj => obj.id == id)
             },
