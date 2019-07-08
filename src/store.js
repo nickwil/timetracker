@@ -60,7 +60,12 @@ const ItemStore = types
             get unCompletedTodos(){
                 return self.items.filter(obj=> obj.day == date(new Date(self.currentDay)) && obj.completed == false)
             },
-
+             completedTodosFromWeek(year, month, weekNo){
+              const completedTodos = self.items
+              .filter(obj=> obj.day.includes(`${year}/${month}`) && obj.completed == true)
+              // check if day is in a week
+              completedTodos.filter(obj => moment(obj.day, "YYYY/MM/DD").week() == weekNo )
+            },
              completedTodosFromMonth(year, month){
               return self.items.filter(obj=> obj.day.includes(`${year}/${month}`) && obj.completed == true)
             },
