@@ -57,12 +57,16 @@ const ItemStore = types
             get unCompletedTodos(){
                 return self.items.filter(obj=> obj.day == date(new Date(self.currentDay)) && obj.completed == false)
             },
+
+             completedTodosFromMonth(year, month){
+              return self.items.filter(obj=> obj.day.includes(`${year}\${month}`) && obj.completed == true)
+            },
             index(id){
                 return self.items.findIndex(obj => obj.id == id)
             },
 
-            getTimeFromEachTag(tags){
-              const items = self.completedTodos
+            getTimeFromEachTag(tags, completedTodos = self.completedTodos){
+              const items = completedTodos
               console.log(items)
               var tagsTime = []
               tags.map((tag) => tagsTime.push({
