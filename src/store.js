@@ -50,9 +50,12 @@ const ItemStore = types
         currentDay: types.integer,
     })
     .views(self => ({
-      
+            // completed todos from the current day
             get completedTodos() {
                 return self.items.filter(obj=> obj.day == date(new Date(self.currentDay)) && obj.completed == true)
+            },
+            get allCompletedTodos() {
+                return self.items.filter(obj=>obj.completed == true)
             },
             get unCompletedTodos(){
                 return self.items.filter(obj=> obj.day == date(new Date(self.currentDay)) && obj.completed == false)
@@ -65,7 +68,7 @@ const ItemStore = types
                 return self.items.findIndex(obj => obj.id == id)
             },
 
-            getTimeFromEachTag(tags, completedTodos = self.completedTodos){
+            getTimeFromEachTag(tags, completedTodos = self.allCompletedTodos){
               const items = completedTodos
               console.log(items)
               var tagsTime = []
@@ -94,7 +97,7 @@ const ItemStore = types
               created: Date.now(),
               tilCompletion: length,
               length: length,
-              day: date(),
+              day: date(new Date(self.currentDay)),
               tagId: tag,
               text: text,
               title: title, 
@@ -136,6 +139,16 @@ const ItemStore = types
 // create an instance from a snapshot
 const store = ItemStore.create({
     items: [
+    {
+      created: Date.now(),
+      tilCompletion: 10,
+      completed: true,
+      length: 10,
+      day: "2019/07/06",
+      text: "Study for accounting",
+      tagId: "Home",
+      id: uuidv1(),
+    },
        {
       created: Date.now(),
       tilCompletion: 13,
