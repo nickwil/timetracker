@@ -64,7 +64,7 @@ const ItemStore = types
               const completedTodos = self.items
               .filter(obj=> obj.day.includes(`${year}/${month}`) && obj.completed == true)
               // check if day is in a week
-              completedTodos.filter(obj => moment(obj.day, "YYYY/MM/DD").week() == weekNo )
+              return completedTodos.filter(obj => Math.ceil(moment(obj.day, "YYYY/MM/DD").date() / 7) == weekNo )
             },
              completedTodosFromMonth(year, month){
               return self.items.filter(obj=> obj.day.includes(`${year}/${month}`) && obj.completed == true)

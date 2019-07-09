@@ -10,6 +10,7 @@ import Navigation from "./Navigation.jsx"
 import tagStore from "./tagStore.js"
 import MonthStats from "./MonthStats.jsx"
 import YearStats from "./YearStats.jsx"
+import WeekStats from "./WeekStats.jsx"
 function Home(props){
 	return (
 		<section>
@@ -22,6 +23,7 @@ function Home(props){
 
 			  	<Settings path="settings/"/>
 			  	<Stats data={store.getTimeFromEachTag(tagStore.tags)} path="stats/"/>
+			  	<WeekStats path="stats/:year/:month/:week"/>
 			  	<MonthStats path="stats/:year/:month"/>
 			  	<YearStats path="stats/:year"/>
 			  	<Calendar path="calendar/"/>
