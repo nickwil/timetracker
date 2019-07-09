@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import TimePicker from './TimePicker.jsx'
+import Tags from "./Tags.jsx"
+import tagStore from "./tagStore.js"
 const moment = require("moment")
 const customStyles = {
   content : {
@@ -44,7 +46,8 @@ class AddItemModal extends React.Component {
       val: "",
       time: "",
       fromTime: "",
-      untilTime: ""
+      untilTime: "",
+      tag: "Other",
     };
 
     this.openModal = this.openModal.bind(this);
@@ -90,6 +93,7 @@ class AddItemModal extends React.Component {
         <input placeholder="time.." value={this.state.time} onChange={(e) => this.updateTime(e.target.value)} />
         <section>
           <h6> Optional: </h6>
+          <Tags tags={tagStore.tags} onChange={(tag) => this.setState({tag: tag})}/>
           <div>From: <TimePicker onChange={this.onFromTimePickerChange}/>  
           </div>
 
@@ -100,7 +104,7 @@ class AddItemModal extends React.Component {
         </div>
         </section>
 
-       <button onClick={() => this.props.addTask(this.state.val, Number(this.state.time))}>Submit</button>
+       <button onClick={() => this.props.addTask(this.state.val, Number(this.state.time), this.state.tag)}>Submit</button>
           
                     <button onClick={this.closeModal}>close</button>
 
