@@ -4,6 +4,7 @@ import store from "./store.js"
 import shortTimeFormatting from "./util/shortTimeFormatting.js"
 import { observer } from 'mobx-react-lite'
 import CustomLink from "./CustomLink.jsx"
+const moment = require("moment")
 
 const colors = ["#E38627", '#C13C37', '#6A2135']
 const Stats = observer(function Stats({data}){
@@ -43,14 +44,16 @@ const Stats = observer(function Stats({data}){
   <div>
     <h4>Months</h4>
   {
-    store.months.map((month) => <div><CustomLink to={"/stats/" + month}>{month}</CustomLink></div>)
+    store.months.map((month) => <div><CustomLink to={"/stats/" + month}>{moment(month, "YYYY/MM").format('MMMM, YYYY')}</CustomLink></div>)
   }
   </div>
 
   <div>
   <h4>Weeks</h4>
   {
-    store.weeks.map((week) => <div><CustomLink to={"/stats/" + week}>{week}</CustomLink></div>)
+    store.weeks.map((week) => 
+       <div><CustomLink to={"/stats/" + week}>{moment(week, "YYYY/MM").format('MMMM, YYYY') + "; Week #:" + week.split("/")[2]}</CustomLink></div>
+  )
   }
   </div>
 </section>
