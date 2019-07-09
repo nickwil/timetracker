@@ -57,6 +57,44 @@ const ItemStore = types
             get allCompletedTodos() {
                 return self.items.filter(obj=>obj.completed == true)
             },
+            get years(){
+              var years = []
+              self.items.map(function(item) {
+
+                  const year = item.day.split("/")[0]
+                  if (!years.includes(year)){
+                    years.push(year)
+                  }
+                })
+              return years
+
+            },
+            get months(){
+              var months = []
+              self.items.map(function(item) {
+                  const day = item.day.split("/")
+                  const month = day[0] + "/" + day[1]
+                  console.log(month)
+                  if (!months.includes(month)){
+                    months.push(month)
+                  }
+                })
+              return months
+
+            },
+             get weeks(){
+              var weeks = []
+              self.items.map(function(item) {
+                  const day = item.day.split("/")
+                  const week = day[0] + "/" + day[1] + "/" + Math.ceil(moment(item.day, "YYYY/MM/DD").date() / 7)
+
+                  if (!weeks.includes(week)){
+                    weeks.push(week)
+                  }
+                })
+              return weeks
+
+            },
             get unCompletedTodos(){
                 return self.items.filter(obj=> obj.day == date(new Date(self.currentDay)) && obj.completed == false)
             },
