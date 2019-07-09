@@ -2,9 +2,10 @@ import React from "react"
 import PieChart from 'react-minimal-pie-chart';
 
 import shortTimeFormatting from "./util/shortTimeFormatting.js"
+import { observer } from 'mobx-react-lite'
 
 const colors = ["#E38627", '#C13C37', '#6A2135']
-function Stats({data}){
+const Stats = observer(function Stats({data}){
 	return (<div>
 		<h4>Time Spent Working</h4>
 		<PieChart 
@@ -29,5 +30,5 @@ function Stats({data}){
 	}
 </section>
 </div>)
-}
+})
 export default Stats

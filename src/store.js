@@ -83,7 +83,7 @@ const ItemStore = types
               tags.map((tag) => tagsTime.push({
                 title: tag.name,
                 id: tag.id,
-                color: '#'+Math.floor(Math.random()*16777215).toString(16),
+                color: tag.color,
                 value: 0
               }))
 

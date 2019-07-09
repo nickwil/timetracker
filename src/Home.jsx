@@ -11,7 +11,9 @@ import tagStore from "./tagStore.js"
 import MonthStats from "./MonthStats.jsx"
 import YearStats from "./YearStats.jsx"
 import WeekStats from "./WeekStats.jsx"
-function Home(props){
+import { observer } from 'mobx-react-lite'
+
+const Home = observer(function Home(props){
 	return (
 		<section>
 			<header>
@@ -30,7 +32,7 @@ function Home(props){
 			  </Router>
 		</section>
 		)
-}
+})
 
 function DateApp({store, year, month, day}){
 	console.log(new Date(year+"/"+month+"/"+day).getTime())
