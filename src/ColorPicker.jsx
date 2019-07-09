@@ -1,10 +1,11 @@
 import React from "react"
 
-function ColorPicker({setColor}){
-	const [colorVal, update] = React.useState("#e66465")
+function ColorPicker({setColor, color}){
+	const [colorVal, update] = React.useState(color)
 
 	const onChange = (color) => {
 		update(color)
+		setColor(color)
 	}
 	return <input 
 		   onChange={(e) => onChange(e.target.value)}

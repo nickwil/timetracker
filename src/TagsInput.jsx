@@ -8,7 +8,9 @@ const TagsInput = observer(function TagsInput(props){
 	return(<div>
 				{
 					tagStore.tags.map((tag) => 
-						<React.Fragment><ColorPicker/><Tag name={tag.name}
+						<React.Fragment><ColorPicker 
+						setColor={(color) => tagStore.updateColor(tag.id, color)}
+						color={tag.color}/><Tag name={tag.name}
 						updateTag={(text) => tagStore.updateTag(tag.id, text)}
 						canDelete={tag.canDelete} 
 						deleteTag={() => 
