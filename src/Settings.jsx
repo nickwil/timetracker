@@ -1,5 +1,6 @@
 import React from "react"
 import TagsInput from "./TagsInput.jsx"
+import ColorPicker from "./ColorPicker.jsx"
 function Settings(props){
 	
 	return (

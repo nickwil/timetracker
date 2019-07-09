@@ -11,3 +11,5 @@ function ColorPicker({setColor}){
 		   type="color" 
            value={colorVal}/>
 }
+
+export default ColorPicker

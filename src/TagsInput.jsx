@@ -3,16 +3,16 @@ import tagStore from "./tagStore.js"
 import CustomModal from "./CustomModal.jsx"
 import { observer } from 'mobx-react-lite'
 import ContentEditable from 'react-contenteditable'
-
+import ColorPicker from "./ColorPicker.jsx"
 const TagsInput = observer(function TagsInput(props){
 	return(<div>
 				{
 					tagStore.tags.map((tag) => 
-						<Tag name={tag.name}
+						<React.Fragment><ColorPicker/><Tag name={tag.name}
 						updateTag={(text) => tagStore.updateTag(tag.id, text)}
 						canDelete={tag.canDelete} 
 						deleteTag={() => 
-						tagStore.deleteTag(tag.id)}/>)
+						tagStore.deleteTag(tag.id)}/></React.Fragment>)
 				}
 				
 				<TagForm/>
