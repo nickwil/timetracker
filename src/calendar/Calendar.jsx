@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./Calendar.module.css";
-import CustomLink from "../general/CustomLink.jsx";
+import Week from "./Week.jsx"
+import Day from "./Day.jsx"
 import store from "../stores/store.js";
 const moment = require("moment");
 function Calendar(props) {
@@ -79,57 +80,7 @@ function Calendar(props) {
     </div>
   );
 }
-function Week(props) {
-  // if week isn't full add empty days
-  var extraDays = [];
-  if (props.days.length < 7) {
-    while (props.days.length + extraDays.length < 7) {
-      extraDays.push(<EmptyDay dayOfWeek="" />);
-    }
-  }
-  if (props.weekNumber != 1) {
-    return (
-      <div className={styles.week}>
-        {props.days}
-        {extraDays}
-      </div>
-    );
-  } else {
-    return (
-      <div className={styles.week}>
-        {extraDays}
-        {props.days}
-      </div>
-    );
-  }
-}
 
-function EmptyDay(props) {
-  return <span></span>;
-}
-function Day(props) {
-  var day = moment(`${props.month}-${props.number}`, "YYYY-MM-DD").format(
-    "YYYY/MM/DD"
-  );
-  const timeForDay = store.getTimeToSpendForDay(day);
-  return (
-    <span className={styles.day}>
-      <CustomLink className={styles.dayButton} to={`/${day}`}>
-        {props.number}
-      </CustomLink>
-      {// if there is time to spend for this day give it a red dot
-      timeForDay > 0 ? <span style={colorsForDays(timeForDay)}>•</span> : null}
-    </span>
-  );
-}
 
-function colorsForDays(time) {
-  console.log(time >= 3600 && time < 7000);
-  if (time > 3600) {
-    return { color: `red` };
-  } else {
-    return { color: `green` };
-  }
-}
 
 export default Calendar;
