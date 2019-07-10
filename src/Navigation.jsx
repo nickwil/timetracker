@@ -10,9 +10,9 @@ function Navigation(props) {
       <CustomLink to="/">
         Home - {shortTimeFormatting(store.getTimeToSpendForDay())}
       </CustomLink>
-      <CustomLink to="calendar/">Calendar</CustomLink>
-      <CustomLink to="settings/">Settings</CustomLink>
-      <CustomLink to="stats/">Stats</CustomLink>
+      <CustomLink to="/calendar/">Calendar</CustomLink>
+      <CustomLink to="/settings/">Settings</CustomLink>
+      <CustomLink to="/stats/">Stats</CustomLink>
     </nav>
   );
 }
