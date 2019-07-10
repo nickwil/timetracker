@@ -10,7 +10,7 @@ import CustomLink from "../general/CustomLink.jsx";
 import { date } from "../util/quick.js";
 import { timeStore } from "../stores/store.js";
 import tagStore from "../stores/tagStore.js";
-import ItemList from "./ItemList.jsx";
+import ItemList from "./item/ItemList.jsx";
 
 const Home = observer(function Home({ store, dayFromUrl }) {
   // always have value in store to day from url
