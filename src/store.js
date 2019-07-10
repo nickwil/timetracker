@@ -98,6 +98,23 @@ const ItemStore = types
             get unCompletedTodos(){
                 return self.items.filter(obj=> obj.day == date(new Date(self.currentDay)) && obj.completed == false)
             },
+            get exportItemsData(){
+              var data = ""
+              self.items.map((obj, index) =>{ 
+                data += 
+                `#${index + 1} 
+• Text: ${obj.text} 
+• Created: ${obj.created} 
+• UntilCompletion: ${obj.tilCompletion} 
+• Day: ${obj.day} 
+• Completed: ${obj.completed} 
+• Length: ${obj.length} 
+• Tag: ${obj.tagId} 
+• ID: ${obj.id}
+` 
+              })
+              return data
+            },
              completedTodosFromWeek(year, month, weekNo){
               const completedTodos = self.items
               .filter(obj=> obj.day.includes(`${year}/${month}`) && obj.completed == true)
