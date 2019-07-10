@@ -51,6 +51,19 @@ class AddItemModal extends React.Component {
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleSubmit(){
+    if(this.state.time > 0){
+      this.props.addTask(
+                  this.state.val,
+                  Number(this.state.time),
+                  this.state.tag
+      )
+      this.closeModal()
+    }
+
+
   }
 
   openModal() {
@@ -121,13 +134,7 @@ class AddItemModal extends React.Component {
           </section>
 
           <button
-            onClick={() =>
-              this.props.addTask(
-                this.state.val,
-                Number(this.state.time),
-                this.state.tag
-              )
-            }
+            onClick={this.handleSubmit}
           >
             Submit
           </button>
