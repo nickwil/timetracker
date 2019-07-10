@@ -12,7 +12,7 @@ import { timeStore } from "../stores/store.js";
 import tagStore from "../stores/tagStore.js";
 import ItemList from "./ItemList.jsx";
 
-const App = observer(function App({ store, dayFromUrl }) {
+const Home = observer(function Home({ store, dayFromUrl }) {
   // always have value in store to day from url
   store.updateDate(dayFromUrl);
   return (
@@ -43,4 +43,4 @@ const App = observer(function App({ store, dayFromUrl }) {
   );
 });
 
-export default App;
+export default Home;

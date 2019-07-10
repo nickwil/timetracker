@@ -1,6 +1,6 @@
 import React from "react";
 import { Router } from "@reach/router";
-import App from "./main/App.js";
+import Home from "./main/Home.jsx";
 import Calendar from "./calendar/Calendar.jsx";
 import Stats from "./stats/Stats.jsx";
 import store from "./stores/store.js";
@@ -13,14 +13,14 @@ import YearStats from "./stats/YearStats.jsx";
 import WeekStats from "./stats/WeekStats.jsx";
 import { observer } from "mobx-react-lite";
 
-const Home = observer(function Home(props) {
+const App = observer(function App(props) {
   return (
     <section>
       <header>
         <Navigation />
       </header>
       <Router>
-        <App store={store} dayFromUrl={new Date().getTime()} path="/" />
+        <Home store={store} dayFromUrl={new Date().getTime()} path="/" />
         <DateApp store={store} path="/:year/:month/:day" />
 
         <Settings path="settings/" />
@@ -43,4 +43,4 @@ function DateApp({ store, year, month, day }) {
     />
   );
 }
-export default Home;
+export default App;
