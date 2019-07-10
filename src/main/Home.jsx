@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./App.css";
+import "./Home.css";
 import Timer from "./Timer.jsx";
 import Calendar from "../calendar/Calendar.jsx";
 import AddItemModal from "./AddItemModal.jsx";
