@@ -37,7 +37,7 @@ const App = observer(function App(props) {
 function DateApp({ store, year, month, day }) {
   console.log(new Date(year + "/" + month + "/" + day).getTime());
   return (
-    <App
+    <Home
       dayFromUrl={new Date(year + "/" + month + "/" + day).getTime()}
       store={store}
     />
