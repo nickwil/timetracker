@@ -225,7 +225,10 @@ const ItemStore = types
       console.log(self.items.toJSON());
     },
     updateDate(date) {
-      self.currentDay = date;
+      if(!isNaN(new Date(date).getTime())){
+        self.currentDay = date;
+      }
+      
     },
     setEmptyTagIdToDefault(id) {
       for (var itemNumber = 0; itemNumber < self.items.length; itemNumber++) {
