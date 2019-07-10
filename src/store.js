@@ -103,17 +103,53 @@ const ItemStore = types
               self.items.map((obj, index) =>{ 
                 data += 
                 `#${index + 1} 
-• Text: ${obj.text} 
-• Created: ${obj.created} 
-• UntilCompletion: ${obj.tilCompletion} 
-• Day: ${obj.day} 
-• Completed: ${obj.completed} 
-• Length: ${obj.length} 
-• Tag: ${obj.tagId} 
-• ID: ${obj.id}
+• text: ${obj.text} 
+• created: ${obj.created.getTime()} 
+• tilCompletion: ${obj.tilCompletion} 
+• day: ${obj.day} 
+• completed: ${obj.completed} 
+• length: ${obj.length} 
+• tagId: ${obj.tagId} 
+• id: ${obj.id}
 ` 
               })
               return data
+            },
+            importItemsData(data){
+              var dataSplit = data.split("#")
+              var items = []
+              var finalItems = []
+              dataSplit.map((obj, index) => items.push({number:index ,item: obj.split("•")}))
+              for(var i = 0; i < items.length; i++){
+                // for property in items str.replace(/\s/g, '') remove whitespace
+                var item = {}
+                for(var property in items[i].item){
+                  var text = items[i].item[property].trim()
+
+                  const splitText = text.split(":")
+                  if(splitText.length > 1){
+                    item[splitText[0]] = splitText[1].trim()
+                  }
+                  
+                  
+                }
+                if(item.created && item.length && item.tilCompletion && item.completed){
+                  // set types correctly
+                  
+                }
+                console.log(item)
+                if(item.created){
+                  // set types correctly
+                  item.created = new Date(Number(item.created))
+                  item.length = Number(item.length)
+                  item.tilCompletion = Number(item.tilCompletion)
+                  item.completed = item.completed == 'true' ? true : false
+                  finalItems.push(item)
+                }
+                
+              }
+              console.log(finalItems)
+              return finalItems
             },
              completedTodosFromWeek(year, month, weekNo){
               const completedTodos = self.items
@@ -193,6 +229,9 @@ const ItemStore = types
           var time = 0
           dailyItems.map(item => time+= item.tilCompletion)
           return time
+        },
+        setItems(items){
+          self.items = items
         }
 
     }))
