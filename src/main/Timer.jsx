@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { timeStore } from "./store.js";
+import { timeStore } from "../stores/store.js";
 
 import useInterval from "./useInterval.js";
 import styles from "./Timer.module.css";

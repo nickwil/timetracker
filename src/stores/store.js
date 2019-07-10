@@ -1,5 +1,5 @@
 import { types, onSnapshot } from "mobx-state-tree";
-import { date } from "./util/quick.js";
+import { date } from "../util/quick.js";
 const moment = require("moment");
 
 const uuidv1 = require("uuid/v1");

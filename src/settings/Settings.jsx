@@ -2,8 +2,8 @@ import React from "react";
 import TagsInput from "./TagsInput.jsx";
 import ColorPicker from "./ColorPicker.jsx";
 import PortingData from "./PortingData.jsx";
-import store from "./store.js";
-import tagStore from "./tagStore";
+import store from "../stores/store.js";
+import tagStore from "../stores/tagStore";
 function Settings(props) {
   return (
     <div>

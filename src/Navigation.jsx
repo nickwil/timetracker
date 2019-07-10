@@ -1,7 +1,7 @@
 import React from "react";
-import CustomLink from "./CustomLink.jsx";
+import CustomLink from "./general/CustomLink.jsx";
 import styles from "./Navigation.module.css";
-import store from "./store.js";
+import store from "./stores/store.js";
 import shortTimeFormatting from "./util/shortTimeFormatting.js";
 
 function Navigation(props) {

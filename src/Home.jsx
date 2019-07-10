@@ -1,16 +1,16 @@
 import React from "react";
 import { Router } from "@reach/router";
-import App from "./App.js";
-import Calendar from "./Calendar.jsx";
-import Stats from "./Stats.jsx";
-import store from "./store.js";
+import App from "./main/App.js";
+import Calendar from "./calendar/Calendar.jsx";
+import Stats from "./stats/Stats.jsx";
+import store from "./stores/store.js";
 import { date } from "./util/quick.js";
-import Settings from "./Settings.jsx";
+import Settings from "./settings/Settings.jsx";
 import Navigation from "./Navigation.jsx";
-import tagStore from "./tagStore.js";
-import MonthStats from "./MonthStats.jsx";
-import YearStats from "./YearStats.jsx";
-import WeekStats from "./WeekStats.jsx";
+import tagStore from "./stores/tagStore.js";
+import MonthStats from "./stats/MonthStats.jsx";
+import YearStats from "./stats/YearStats.jsx";
+import WeekStats from "./stats/WeekStats.jsx";
 import { observer } from "mobx-react-lite";
 
 const Home = observer(function Home(props) {

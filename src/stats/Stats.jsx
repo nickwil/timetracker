@@ -1,9 +1,9 @@
 import React from "react";
 import PieChart from "react-minimal-pie-chart";
-import store from "./store.js";
-import shortTimeFormatting from "./util/shortTimeFormatting.js";
+import store from "../stores/store.js";
+import shortTimeFormatting from "../util/shortTimeFormatting.js";
 import { observer } from "mobx-react-lite";
-import CustomLink from "./CustomLink.jsx";
+import CustomLink from "../general/CustomLink.jsx";
 const moment = require("moment");
 
 const colors = ["#E38627", "#C13C37", "#6A2135"];

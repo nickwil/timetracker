@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./Calendar.module.css";
-import CustomLink from "./CustomLink.jsx";
-import store from "./store.js";
+import CustomLink from "../general/CustomLink.jsx";
+import store from "../stores/store.js";
 const moment = require("moment");
 function Calendar(props) {
   const [month, changeMonth] = React.useState(

@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import Modal from "react-modal";
 import TimePicker from "./TimePicker.jsx";
 import Tags from "./Tags.jsx";
-import tagStore from "./tagStore.js";
+import tagStore from "../stores/tagStore.js";
 const moment = require("moment");
 const customStyles = {
   content: {

@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import "./App.css";
 import Timer from "./Timer.jsx";
-import Calendar from "./Calendar.jsx";
+import Calendar from "../calendar/Calendar.jsx";
 import AddItemModal from "./AddItemModal.jsx";
 
 import { observer } from "mobx-react-lite";
-import CustomLink from "./CustomLink.jsx";
+import CustomLink from "../general/CustomLink.jsx";
 
-import { date } from "./util/quick.js";
-import { timeStore } from "./store.js";
+import { date } from "../util/quick.js";
+import { timeStore } from "../stores/store.js";
+import tagStore from "../stores/tagStore.js";
 import ItemList from "./ItemList.jsx";
-import tagStore from "./tagStore.js";
 
 const App = observer(function App({ store, dayFromUrl }) {
   // always have value in store to day from url

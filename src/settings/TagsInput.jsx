@@ -1,6 +1,6 @@
 import React from "react";
-import tagStore from "./tagStore.js";
-import CustomModal from "./CustomModal.jsx";
+import tagStore from "../stores/tagStore.js";
+import CustomModal from "../general/CustomModal.jsx";
 import { observer } from "mobx-react-lite";
 import ContentEditable from "react-contenteditable";
 import ColorPicker from "./ColorPicker.jsx";

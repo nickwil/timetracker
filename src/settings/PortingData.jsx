@@ -1,5 +1,5 @@
 import React from "react";
-import store from "./store.js";
+import store from "../stores/store.js";
 function PortingData(props) {
   const [value, update] = React.useState("");
   return (

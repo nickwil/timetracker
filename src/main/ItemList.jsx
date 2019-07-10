@@ -1,10 +1,10 @@
 import React from "react";
 import Tags from "./Tags.jsx";
-import Input from "./Input.jsx";
+import Input from "../general/Input.jsx";
 import ItemTime from "./ItemTime.jsx";
 import ItemMenuContainer from "./ItemMenu.jsx";
 import { observer } from "mobx-react-lite";
-import tagStore from "./tagStore.js";
+import tagStore from "../stores/tagStore.js";
 
 import styles from "./ItemList.module.css";
 

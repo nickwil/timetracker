@@ -1,8 +1,8 @@
 import React from "react";
 import Stats from "./Stats.jsx";
 
-import store from "./store.js";
-import tagStore from "./tagStore.js";
+import store from "../stores/store.js";
+import tagStore from "../stores/tagStore.js";
 import { observer } from "mobx-react-lite";
 
 const WeekStats = observer(function WeekStats({ year, month, week }) {
