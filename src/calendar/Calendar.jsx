@@ -4,6 +4,7 @@ import styles from "./Calendar.module.css";
 import Week from "./Week.jsx"
 import Day from "./Day.jsx"
 import store from "../stores/store.js";
+import CheckDateOops from "../general/CheckDateOops.jsx"
 const moment = require("moment");
 function Calendar({year, monthNo}) {
   var momentObject = moment()
@@ -79,6 +80,7 @@ function Calendar({year, monthNo}) {
   };
 
   return (
+    <CheckDateOops date={`${year}-${monthNo}`}>
     <div className={styles.container}>
       <CustomLink to={"/calendar/" + moment(month).subtract(1, "month").format("YYYY/MM")}>Go back a month</CustomLink>
       <CustomLink to={"/calendar/" + moment(month).add(1, "month").format("YYYY/MM")}>Go to next month</CustomLink>
@@ -94,6 +96,7 @@ function Calendar({year, monthNo}) {
       </div>
       {createCalendar()}
     </div>
+    </CheckDateOops>
   );
 }
 
