@@ -1,14 +1,32 @@
 import React, { useState } from "react";
+import CustomLink from "../general/CustomLink.jsx"
 import styles from "./Calendar.module.css";
 import Week from "./Week.jsx"
 import Day from "./Day.jsx"
 import store from "../stores/store.js";
 const moment = require("moment");
-function Calendar(props) {
-  const [month, changeMonth] = React.useState(
-    moment()
+function Calendar({year, monthNo}) {
+  var momentObject = moment()
+      .startOf("month")
+      .format("YYYY-MM");
+  if(year && monthNo){
+    momentObject = moment(`${year}-${monthNo}`, "YYYY-MM")
       .startOf("month")
       .format("YYYY-MM")
+  }
+  React.useEffect(() => {
+     var momentObject = moment()
+      .startOf("month")
+      .format("YYYY-MM");
+  if(year && monthNo){
+    momentObject = moment(`${year}-${monthNo}`, "YYYY-MM")
+      .startOf("month")
+      .format("YYYY-MM")
+  }
+  changeMonth(momentObject)
+  })
+  const [month, changeMonth] = React.useState(
+    momentObject
   );
 
   var calDay = moment(month).startOf("month");
@@ -62,8 +80,8 @@ function Calendar(props) {
 
   return (
     <div className={styles.container}>
-      <button onClick={() => previousMonth()}>Go back</button>
-      <button onClick={() => nextMonth()}>Go to next</button>
+      <CustomLink to={"/calendar/" + moment(month).subtract(1, "month").format("YYYY/MM")}>Go back a month</CustomLink>
+      <CustomLink to={"/calendar/" + moment(month).add(1, "month").format("YYYY/MM")}>Go to next month</CustomLink>
       <h4>Month: {moment(month).format("MMMM YYYY")}</h4>
       <div className={styles.week}>
         <span className={styles.dayOfWeek}>Sun</span>
