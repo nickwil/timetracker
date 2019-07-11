@@ -6,6 +6,9 @@
 	justify-content: space-around;
 	align-items:center;
 }
+.outline {
+		border: 1px black solid;
+}
 .input {
 		background-color: #FFF8EC;
 		border: none;
