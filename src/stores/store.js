@@ -25,9 +25,13 @@ const Item = types
 
     updateTimeTilCompletion(timeSpent) {
       self.tilCompletion = self.tilCompletion - timeSpent;
-      if (self.tilCompletion < 0) {
+      console.log(self.tilCompletion)
+      if (self.tilCompletion <= 0) {
         self.completed = true;
-        self.tilCompletion = self.length;
+        // add any extra time to the time the task took
+        const newTime = self.length  - self.tilCompletion
+        self.tilCompletion = newTime
+        self.length = newTime
       }
     },
     updateTag(tag) {
@@ -268,9 +272,9 @@ const store = ItemStore.create({
     },
     {
       created: Date.now(),
-      tilCompletion: 13,
+      tilCompletion: 5,
       completed: false,
-      length: 13,
+      length: 5,
       day: date(),
       text: "Study for accounting",
       tagId: "Home",
@@ -316,6 +320,7 @@ const Time = types
       self.count = 0;
     },
     setTimeToItem() {
+      console.log("set time to item")
       if (self.selectedItem) {
         store.items[store.index(self.selectedItem)].updateTimeTilCompletion(
           self.count
