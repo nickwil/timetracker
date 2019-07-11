@@ -1,5 +1,6 @@
 import React from "react"
 import styles from "./Calendar.module.css";
+import Day from "./Day.jsx"
 const moment = require("moment");
 
 function Week({weekNumber, days, month}) {
@@ -19,12 +20,13 @@ function Week({weekNumber, days, month}) {
       console.log(newMonth)
     } else {
       newMonth
+      .add(2, "month")
       .startOf("month")
       // if it's not the first week then this can only run in the last week
     }
     while (days.length + extraDays.length < 7) {
       console.log(newMonth.day())
-      extraDays.push(<EmptyDay dayOfWeek={newMonth.date()} />);
+      extraDays.push(<Day month={newMonth.format("YYYY-MM")} number={newMonth.date()} />);
       newMonth.add(1, "day")
     }
   }
