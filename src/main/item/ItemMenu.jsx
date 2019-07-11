@@ -30,6 +30,7 @@ function ItemMenu({ store, id }) {
     <span>
       <button onClick={() => store.deleteItem(id)}>Delete</button>
       <input
+        type="number"
         value={storeItem.tilCompletion}
         onChange={e => storeItem.updateLengthOfTask(Number(e.target.value))}
         placeholder="change time for task"
