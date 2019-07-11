@@ -49,8 +49,6 @@ function Calendar(props) {
         <Day
           year={calDay.format("YYYY")}
           month={month}
-          currentDay={props.currentDay}
-          changeDay={props.changeDay}
           dayOfWeek={calDay.format("dddd")}
           number={calDay.get("date")}
         />
