@@ -1,12 +1,31 @@
 import React from "react"
 import styles from "./Calendar.module.css";
+const moment = require("moment");
 
-function Week({weekNumber, days}) {
+function Week({weekNumber, days, month}) {
   // if week isn't full add empty days
   var extraDays = [];
   if (days.length < 7) {
+    var newMonth = moment(month)
+      .subtract(1, "month")
+
+      
+    if(weekNumber == 1){
+      // if it's the first week
+
+      newMonth
+      .endOf("month")
+      .subtract(6 -  days.length, "day")
+      console.log(newMonth)
+    } else {
+      newMonth
+      .startOf("month")
+      // if it's not the first week then this can only run in the last week
+    }
     while (days.length + extraDays.length < 7) {
-      extraDays.push(<EmptyDay dayOfWeek="" />);
+      console.log(newMonth.day())
+      extraDays.push(<EmptyDay dayOfWeek={newMonth.date()} />);
+      newMonth.add(1, "day")
     }
   }
   if (weekNumber != 1) {
@@ -25,8 +44,8 @@ function Week({weekNumber, days}) {
     );
   }
 }
-function EmptyDay(props) {
-  return <span></span>;
+function EmptyDay({dayOfWeek}) {
+  return <span className={styles.day}>{dayOfWeek}</span>;
 }
 
 export default Week

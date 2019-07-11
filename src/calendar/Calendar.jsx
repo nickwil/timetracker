@@ -41,7 +41,7 @@ function Calendar(props) {
     var weekNumber = 1;
     for (var i = 0; i < numberOfDaysInMonth; i++) {
       if (calDay.format("dddd") == "Sunday") {
-        dates.push(<Week weekNumber={weekNumber} days={week} />);
+        dates.push(<Week month={month} weekNumber={weekNumber} days={week} />);
         week = [];
         weekNumber += 1;
       }
@@ -58,7 +58,7 @@ function Calendar(props) {
       calDay.add(1, "days").calendar();
     }
     // last week if doesn't end in a sunday
-    dates.push(<Week days={week} />);
+    dates.push(<Week month={month} days={week} />);
     return dates;
   };
 
