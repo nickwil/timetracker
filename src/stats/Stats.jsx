@@ -8,33 +8,49 @@ const moment = require("moment");
 
 const colors = ["#E38627", "#C13C37", "#6A2135"];
 const Stats = observer(function Stats({ data }) {
-  console.log(store.years);
+  const [isData, update] = React.useState(false)
+  
+  React.useEffect(() => {
+    if((data.filter(obj => obj.value >= 1).length) >= 1 ){
+      update(true) 
+    }
+  }, [data]);
+  
+
   return (
+  
     <div>
       <h4>Time Spent Working</h4>
-      <PieChart
-        style={{ height: "400px" }}
-        lineWidth={15}
-        data={data}
-        paddingAngle={18}
-        rounded
-        label={({ data, dataIndex }) =>
-          shortTimeFormatting(data[dataIndex].value)
-        }
-        labelStyle={{
-          fontSize: "5px",
-          fontFamily: "sans-serif"
-        }}
-        labelPosition={60}
-      />
-      <section>
-        <h4>Legend Tags</h4>
-        {data.map(obj => (
-          <div>
-            {obj.title} - <span style={{ color: obj.color }}>•</span>
-          </div>
-        ))}
-      </section>
+      {
+        isData ? 
+        <React.Fragment>
+          <PieChart
+          style={{ height: "400px" }}
+          lineWidth={15}
+          data={data}
+          paddingAngle={18}
+          rounded
+          label={({ data, dataIndex }) =>
+            shortTimeFormatting(data[dataIndex].value)
+          }
+          labelStyle={{
+            fontSize: "5px",
+            fontFamily: "sans-serif"
+          }}
+          labelPosition={60}
+        />
+        <section>
+          <h4>Legend Tags</h4>
+          {data.map(obj => (
+            <div>
+              {obj.title} - <span style={{ color: obj.color }}>•</span>
+            </div>
+          ))}
+        </section>
+      </React.Fragment>
+      :
+      <h4>There is no data for this time period</h4>
+    }
 
       <section>
         <h3>See stats throughout your history</h3>
@@ -70,15 +86,8 @@ const Stats = observer(function Stats({ data }) {
           ))}
         </div>
       </section>
-      {/*have a bunch of links to:
-    - months
-    - weeks
-    - years
-
-    get all the years in an array
-    get all the month year pairings in an array
-    get all the monhth year week pairings in an array*/}
     </div>
+
   );
 });
 export default Stats;
