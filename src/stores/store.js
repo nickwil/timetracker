@@ -278,7 +278,7 @@ const store = ItemStore.create({
       day: date(),
       text: "Study for accounting",
       tagId: "Home",
-      id: uuidv1()
+      id: "1"
     },
     {
       created: Date.now(),
@@ -331,16 +331,34 @@ const Time = types
       } else {
         store.addItem("", self.count, "Other", "", true);
       }
+      localStorage.removeItem("timer")
     },
     incrementCount() {
       self.count += 1;
+      const infoToContinue = {
+        selectedItem: self.selectedItem,
+        count: self.count,
+        oldTime: new Date().getTime()
+      }
+      localStorage.setItem("timer", JSON.stringify(infoToContinue))
     }
   }));
-const timeStore = Time.create({
+var timeStore;
+console.log(localStorage.getItem("timer") == null)
+if(localStorage.getItem("timer") == null){
+ timeStore = Time.create({
   selectedItem: undefined,
   isCounting: false,
   count: 0
 });
-
+}
+else {
+  const data = JSON.parse(localStorage.getItem("timer"))
+  timeStore = Time.create({
+    selectedItem: data.selectedItem,
+    isCounting: true,
+    count: data.count + Math.round(((new Date().getTime() - data.oldTime) /1000))
+  });
+}
 export { timeStore };
 export default store;
