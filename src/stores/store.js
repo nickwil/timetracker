@@ -75,7 +75,6 @@ const ItemStore = types
       self.items.map(function(item) {
         const day = item.day.split("/");
         const month = day[0] + "/" + day[1];
-        console.log(month);
         if (!months.includes(month)) {
           months.push(month);
         }
@@ -150,7 +149,6 @@ const ItemStore = types
         ) {
           // set types correctly
         }
-        console.log(item);
         if (item.created) {
           // set types correctly
           item.created = new Date(Number(item.created));
@@ -160,7 +158,6 @@ const ItemStore = types
           finalItems.push(item);
         }
       }
-      console.log(finalItems);
       return finalItems;
     },
     completedTodosFromWeek(year, month, weekNo) {
@@ -188,7 +185,6 @@ const ItemStore = types
 
     getTimeFromEachTag(tags, completedTodos = self.allCompletedTodos) {
       const items = completedTodos;
-      console.log(items);
       var tagsTime = [];
       tags.map(tag =>
         tagsTime.push({
@@ -204,7 +200,6 @@ const ItemStore = types
         const tagIndex = tagsTime.findIndex(obj => obj.id == item.tagId);
         var tag = tagsTime[tagIndex];
         tag.value += item.length;
-        console.log(item.length);
       }
       return tagsTime;
     }
@@ -344,7 +339,6 @@ const Time = types
     }
   }));
 var timeStore;
-console.log(localStorage.getItem("timer") == null)
 if(localStorage.getItem("timer") == null){
  timeStore = Time.create({
   selectedItem: undefined,
