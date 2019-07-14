@@ -413,6 +413,101 @@ describe("ItemStore", () => {
     expect(timesFromTagsWithCompletedItems[0].value).toBe(20)
     expect(store.getTimeFromEachTag(tags)[0].value).toBe(30)
 
+  }),
+  it("deletes item with id", ()=>{
+        const store = ItemStore.create({items:[{
+      created: Date.now(),
+      tilCompletion: 20,
+      completed: true,
+      length: 20,
+      day: "2019/08/01",
+      text: "Study",
+      tagId: "School",
+      id: "apple"
+    },
+    {
+      created: Date.now(),
+      tilCompletion: 10,
+      completed: false,
+      length: 10,
+      day: "2019/08/02",
+      text: "Clean",
+      tagId: "Home",
+      id: "pear"
+    }], currentDay: new Date().getTime()})
+    expect(store.items.length).toBe(2)
+    store.deleteItem("pear")
+    expect(store.items.length).toBe(1)
+
+  }),
+  it("updates current day of store", () => {
+    const day = new Date("2019/07/07").getTime()
+    const badDay = new Date("2019/07/32").getTime()
+
+    const store = ItemStore.create({items: [], currentDay: new Date().getTime()})
+
+    store.updateDate(day)
+    expect(store.currentDay).toBe(day)
+    // doesn't update a day that is impossible
+    store.updateDate(badDay)
+    expect(store.currentDay).toBe(day)
+  })
+  it("sets empty tag ids to 'Other'", ()=>{
+        const store = ItemStore.create({items:[{
+      created: Date.now(),
+      tilCompletion: 20,
+      completed: true,
+      length: 20,
+      day: "2019/08/01",
+      text: "Work",
+      tagId: "Cafe",
+      id: "apple"
+    },
+    {
+      created: Date.now(),
+      tilCompletion: 10,
+      completed: false,
+      length: 10,
+      day: "2019/08/02",
+      text: "Clean",
+      tagId: "Home",
+      id: "pear"
+    }], currentDay: new Date().getTime()})
+
+    expect(store.items[0].tagId).toBe("Cafe")
+    store.setEmptyTagIdToDefault("Cafe")
+    expect(store.items[0].tagId).toBe("Other")
+
+    expect(store.items[1].tagId).toBe("Home")
+    store.setEmptyTagIdToDefault("Home")
+    expect(store.items[1].tagId).toBe("Other")
+
+  }),
+  it("get time to spend on items", ()=>{
+    const day = moment().format("YYYY/MM/DD")
+        const store = ItemStore.create({items:[{
+      created: Date.now(),
+      tilCompletion: 20,
+      completed: true,
+      length: 20,
+      day: day,
+      text: "Work",
+      tagId: "Cafe",
+      id: "apple"
+    },
+    {
+      created: Date.now(),
+      tilCompletion: 10,
+      completed: false,
+      length: 10,
+      day: day,
+      text: "Clean",
+      tagId: "Home",
+      id: "pear"
+    }], currentDay: new Date().getTime()})
+
+    expect(store.getTimeToSpendForDay()).toBe(30)
+    expect(store.getTimeToSpendForDay("2019/01/01")).toBe(0)
   })
 })
   

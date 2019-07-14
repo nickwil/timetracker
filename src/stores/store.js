@@ -219,9 +219,7 @@ const ItemStore = types
       });
     },
     deleteItem(id) {
-      console.log("deletion", id);
       self.items = self.items.filter(item => item.id != id);
-      console.log(self.items.toJSON());
     },
     updateDate(date) {
       if(!isNaN(new Date(date).getTime())){
@@ -239,7 +237,6 @@ const ItemStore = types
     },
     // need to move to views
     getTimeToSpendForDay(day = moment(self.currentDay).format("YYYY/MM/DD")) {
-      console.log(moment(self.currentDay).format("YYYY/MM/DD"));
       const dailyItems = self.items.filter(item => {
         return item.day == day;
       });
