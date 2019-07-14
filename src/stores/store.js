@@ -25,7 +25,6 @@ const Item = types
 
     updateTimeTilCompletion(timeSpent) {
       self.tilCompletion = self.tilCompletion - timeSpent;
-      console.log(self.tilCompletion)
       if (self.tilCompletion <= 0) {
         self.completed = true;
         // add any extra time to the time the task took
@@ -311,17 +310,15 @@ const Time = types
     resetCount() {
       self.count = 0;
     },
-    setTimeToItem() {
-      console.log("set time to item")
+    setTimeToItem(itemStore = store) {
+
       if (self.selectedItem) {
-        store.items[store.index(self.selectedItem)].updateTimeTilCompletion(
+        itemStore.items[itemStore.index(self.selectedItem)].updateTimeTilCompletion(
           self.count
         );
-        console.log("updating item with time");
-        console.log(store.items[store.index(self.selectedItem)].toJSON());
         self.selectedItem = undefined;
       } else {
-        store.addItem("", self.count, "Other", "", true);
+        itemStore.addItem("", self.count, "Other", "", true);
       }
       localStorage.removeItem("timer")
     },
@@ -351,5 +348,5 @@ else {
     count: data.count + Math.round(((new Date().getTime() - data.oldTime) /1000))
   });
 }
-export { timeStore, ItemStore };
+export { timeStore, ItemStore, Time };
 export default store;

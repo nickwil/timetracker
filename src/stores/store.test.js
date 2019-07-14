@@ -1,5 +1,61 @@
-import { ItemStore } from "./store.js"
+import { ItemStore, Time } from "./store.js"
 const moment = require("moment")
+
+describe("TimeStore", () => {
+  it("reset count", () => {
+    const timeStore = Time.create({
+      selectedItem: undefined,
+      isCounting: false,
+      count: 10
+    })
+
+    timeStore.resetCount()
+    expect(timeStore.count).toBe(0)
+  }),
+  it("increment count", () => {
+    const timeStore = Time.create({
+      selectedItem: undefined,
+      isCounting: false,
+      count: 10
+    })
+    timeStore.incrementCount()
+    expect(timeStore.count).toBe(11)
+  }),
+  it("reverse the current isCounting state", () => {
+    const timeStore = Time.create({
+      selectedItem: undefined,
+      isCounting: false,
+      count: 0
+    })
+    timeStore.reverseCounting("pear")
+    expect(timeStore.isCounting).toBe(true)
+    expect(timeStore.selectedItem).toBe("pear")
+    timeStore.reverseCounting()
+    expect(timeStore.isCounting).toBe(false)
+    expect(timeStore.selectedItem).toBe(undefined)
+  }),
+  it("set time to an item", () => {
+    const timeStore = Time.create({
+      selectedItem: "2",
+      isCounting: false,
+      count: 10
+    })
+    const store = ItemStore.create({items: [{created: Date.now(),
+      tilCompletion: 20,
+      completed: false,
+      length: 20,
+      day: "2019/01/10",
+      text: "Study",
+      tagId: "School",
+      id: "2"}], currentDay: new Date().getTime()})
+
+    timeStore.setTimeToItem(store)
+    expect(store.items[0].tilCompletion).toBe(10)
+
+    timeStore.setTimeToItem(store)
+    expect(store.items.length).toBe(2)
+  })
+})
 describe("ItemStore", () => {
   it("gets completed items from today", () => {
   	const day = moment().format("YYYY/MM/DD")
