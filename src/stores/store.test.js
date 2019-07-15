@@ -1,4 +1,4 @@
-import { ItemStore, Time, Item } from "./store.js"
+import { ItemStore, Time, Item, setTimeBasedOnLocalStorage } from "./store.js"
 const moment = require("moment")
 describe("Item", () => {
   it("toggle completion", () => {
@@ -122,6 +122,38 @@ describe("TimeStore", () => {
 
     timeStore.setTimeToItem(store)
     expect(store.items.length).toBe(2)
+  }),
+  it("time with localStorage saved", () => {
+    class LocalStorageMock {
+      constructor() {
+        this.store = {};
+      }
+
+      clear() {
+        this.store = {};
+      }
+
+      getItem(key) {
+        return this.store[key] || null;
+      }
+
+      setItem(key, value) {
+        this.store[key] = value.toString();
+      }
+
+      removeItem(key) {
+        delete this.store[key];
+      }
+    };
+
+    global.localStorage = new LocalStorageMock;
+    localStorage.setItem("timer",JSON.stringify({
+        selectedItem: undefined,
+        count: 10,
+        oldTime: new Date().getTime()
+      }))
+    const timeStore = setTimeBasedOnLocalStorage()
+    expect(timeStore.count).toBe(10)
   })
 })
 describe("ItemStore", () => {

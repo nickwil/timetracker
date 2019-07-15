@@ -353,5 +353,5 @@ else {
 var timeStore = setTimeBasedOnLocalStorage()
 
 
-export { timeStore, ItemStore, Time, Item };
+export { timeStore, ItemStore, Time, Item, setTimeBasedOnLocalStorage };
 export default store;
