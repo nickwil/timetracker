@@ -35,12 +35,9 @@ const TagStore = types
         color: "#e66465"
       });
     },
-    deleteTag(id) {
-      console.log(id);
-      store.setEmptyTagIdToDefault(id);
+    deleteTag(id, itemStore = store) {
+      itemStore.setEmptyTagIdToDefault(id);
       self.tags = self.tags.filter(obj => obj.id != id);
-
-      // TODO: set everything with that id to other
     },
     updateTag(id, text) {
       const index = self.tags.findIndex(obj => obj.id == id);
@@ -67,5 +64,5 @@ const tagStore = TagStore.create({
     }
   ]
 });
-
+export {TagStore}
 export default tagStore;
