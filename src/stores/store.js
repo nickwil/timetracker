@@ -332,9 +332,10 @@ const Time = types
       localStorage.setItem("timer", JSON.stringify(infoToContinue))
     }
   }));
-var timeStore;
-if(localStorage.getItem("timer") == null){
- timeStore = Time.create({
+
+function setTimeBasedOnLocalStorage(){
+  if(localStorage.getItem("timer") == null){
+  return Time.create({
   selectedItem: undefined,
   isCounting: false,
   count: 0
@@ -342,11 +343,15 @@ if(localStorage.getItem("timer") == null){
 }
 else {
   const data = JSON.parse(localStorage.getItem("timer"))
-  timeStore = Time.create({
+   return Time.create({
     selectedItem: data.selectedItem,
     isCounting: true,
     count: data.count + Math.round(((new Date().getTime() - data.oldTime) /1000))
   });
 }
+}
+var timeStore = setTimeBasedOnLocalStorage()
+
+
 export { timeStore, ItemStore, Time, Item };
 export default store;

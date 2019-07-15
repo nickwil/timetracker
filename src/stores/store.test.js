@@ -632,6 +632,42 @@ describe("ItemStore", () => {
 
     expect(store.getTimeToSpendForDay()).toBe(30)
     expect(store.getTimeToSpendForDay("2019/01/01")).toBe(0)
+  }),
+  it("set items", () => {
+    const store = ItemStore.create({items:[{
+      created: Date.now(),
+      tilCompletion: 20,
+      completed: true,
+      length: 20,
+      day: "2017/01/01",
+      text: "Work",
+      tagId: "Cafe",
+      id: "apple"
+    },
+    {
+      created: Date.now(),
+      tilCompletion: 10,
+      completed: false,
+      length: 10,
+      day: "2017/01/01",
+      text: "Clean",
+      tagId: "Home",
+      id: "pear"
+    }], currentDay: new Date().getTime()})
+
+    expect(store.items.length).toBe(2)
+    store.setItems([{
+      created: Date.now(),
+      tilCompletion: 10,
+      completed: false,
+      length: 10,
+      day: "2017/01/01",
+      text: "Clean",
+      tagId: "Home",
+      id: "pear"
+    }])
+    expect(store.items.length).toBe(1)
+
   })
 })
   
