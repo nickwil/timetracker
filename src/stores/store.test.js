@@ -1,6 +1,74 @@
-import { ItemStore, Time } from "./store.js"
+import { ItemStore, Time, Item } from "./store.js"
 const moment = require("moment")
+describe("Item", () => {
+  it("toggle completion", () => {
+    const item = Item.create({ created: Date.now(),
+      tilCompletion: 20,
+      completed: false,
+      length: 20,
+      day: "2018/04/01",
+      text: "Study",
+      tagId: "School",
+      id: "2"})
+    expect(item.completed).toBe(false)
+    item.toggle()
+    expect(item.completed).toBe(true)
+  }),
+  it("update text", () => {
+    const item = Item.create({ created: Date.now(),
+      tilCompletion: 20,
+      completed: false,
+      length: 20,
+      day: "2018/04/01",
+      text: "Study",
+      tagId: "School",
+      id: "2"})
+    expect(item.text).toBe("Study")
+    item.updateText("Work")
+    expect(item.text).toBe("Work")
+  }),
+  it("update time until completion", () => {
+    const item = Item.create({ created: Date.now(),
+      tilCompletion: 20,
+      completed: false,
+      length: 20,
+      day: "2018/04/01",
+      text: "Study",
+      tagId: "School",
+      id: "2"})
+    item.updateTimeTilCompletion(5)
+    expect(item.tilCompletion).toBe(15)
+    item.updateTimeTilCompletion(20)
+    expect(item.tilCompletion).toBe(25)
+  }),
+  it("update tag id", () => {
+    const item = Item.create({ created: Date.now(),
+      tilCompletion: 20,
+      completed: false,
+      length: 20,
+      day: "2018/04/01",
+      text: "Study",
+      tagId: "School",
+      id: "2"})
+    item.updateTag("Home")
+    expect(item.tagId).toBe("Home")
+  }),
+  it("update length of item", () => {
+    const item = Item.create({ created: Date.now(),
+      tilCompletion: 20,
+      completed: false,
+      length: 20,
+      day: "2018/04/01",
+      text: "Study",
+      tagId: "School",
+      id: "2"})
+    item.updateLengthOfTask(30)
+    expect(item.length).toBe(30)
+    expect(item.tilCompletion).toBe(30)
+  })
 
+
+})
 describe("TimeStore", () => {
   it("reset count", () => {
     const timeStore = Time.create({

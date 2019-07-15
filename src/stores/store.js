@@ -348,5 +348,5 @@ else {
     count: data.count + Math.round(((new Date().getTime() - data.oldTime) /1000))
   });
 }
-export { timeStore, ItemStore, Time };
+export { timeStore, ItemStore, Time, Item };
 export default store;
