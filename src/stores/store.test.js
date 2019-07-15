@@ -267,6 +267,16 @@ describe("ItemStore", () => {
       day: "2019/01/01",
       text: "Clean",
       tagId: "Home",
+      id: "14"
+    },
+    {
+      created: Date.now(),
+      tilCompletion: 10,
+      completed: false,
+      length: 10,
+      day: "2019/01/01",
+      text: "Clean",
+      tagId: "Home",
       id: "1"
     }], currentDay: new Date().getTime()})
     expect(store.years.length).toBe(2)
@@ -311,6 +321,15 @@ describe("ItemStore", () => {
   it("get all weeks that items exist in", () => {
 
     const store = ItemStore.create({items:[{
+      created: Date.now(),
+      tilCompletion: 10,
+      completed: true,
+      length: 20,
+      day: "2018/04/01",
+      text: "Study",
+      tagId: "School",
+      id: "2"
+    },{
       created: Date.now(),
       tilCompletion: 20,
       completed: true,
@@ -374,7 +393,7 @@ describe("ItemStore", () => {
     `.replace(/ /g, ''))
 
   }),
-  it("gets item export", () => {
+  it("gets item import", () => {
     const items = [{
       created: new Date(1563139533485),
       tilCompletion: 5,

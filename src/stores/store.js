@@ -310,6 +310,7 @@ const Time = types
     resetCount() {
       self.count = 0;
     },
+    
     setTimeToItem(itemStore = store) {
 
       if (self.selectedItem) {
