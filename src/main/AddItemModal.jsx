@@ -17,7 +17,7 @@ const customStyles = {
 };
 
 // Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
-Modal.setAppElement("#root");
+if (process.env.NODE_ENV !== 'test') Modal.setAppElement('#root');
 function hmsToSeconds(fromTime, untilTime) {
   var start = getHourAndSeconds(fromTime);
   var end = getHourAndSeconds(untilTime);
