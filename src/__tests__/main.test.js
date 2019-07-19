@@ -1,6 +1,6 @@
 import React from 'react'
-import {ItemStore} from "../stores/store.js"
-import {render, fireEvent, cleanup} from '@testing-library/react'
+import {ItemStore, Time} from "../stores/store.js"
+import {render, fireEvent, cleanup, wait} from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import { observer } from "mobx-react-lite";
 
@@ -11,18 +11,31 @@ describe('Home', () => {
   test('it renders without crashing', () => {
     // Arrange
     const store = ItemStore.create({items:[], currentDay: new Date().getTime()})
+    const timeStore = Time.create({
+		  selectedItem: undefined,
+		  isCounting: false,
+		  count: 0
+	});
     const props = {
       store,
-      dayFromUrl: new Date().getTime()
+      dayFromUrl: new Date().getTime(),
+      timeStore: timeStore
     }
+
     const node = render(<Home {...props} />)
   }),
   test('adding a item', () => {
 
     const store = ItemStore.create({items:[], currentDay: new Date().getTime()})
+    const timeStore = Time.create({
+		  selectedItem: undefined,
+		  isCounting: false,
+		  count: 0
+	});
     const props = {
       store,
-      dayFromUrl: new Date().getTime()
+      dayFromUrl: new Date().getTime(),
+      timeStore
     }
     const { getByText, getByLabelText, getByPlaceholderText, queryByTestId } = render(<Home {...props} />)
     // The user arrives to a page that has nothing in the remaining
@@ -52,12 +65,17 @@ describe('Home', () => {
   }),
   test("edit an item description", () => {
     const store = todayItemStore()
+    const timeStore = Time.create({
+		  selectedItem: undefined,
+		  isCounting: false,
+		  count: 0
+	});
     const { 
     	getByDisplayValue, 
     	getByText, 
     	getByLabelText, 
     	getByPlaceholderText, 
-    	queryByTestId } = render(<Home store={store} dayFromUrl={new Date().getTime()} />)
+    	queryByTestId } = render(<Home timeStore={timeStore} store={store} dayFromUrl={new Date().getTime()} />)
 	// The user already has an item and they want to edit it. To do so they go to the description and write something
 	// new in the input 
 	const description = getByDisplayValue("Something")
@@ -68,12 +86,17 @@ describe('Home', () => {
   }),
   test("change tag", () => {
 	const store = todayItemStore()
+	const timeStore = Time.create({
+		  selectedItem: undefined,
+		  isCounting: false,
+		  count: 0
+	});
     const { 
     	getByDisplayValue, 
     	getByText, 
     	getByLabelText, 
     	getByPlaceholderText, 
-    	queryByTestId } = render(<Home store={store} dayFromUrl={new Date().getTime()} />)
+    	queryByTestId } = render(<Home timeStore={timeStore} store={store} dayFromUrl={new Date().getTime()} />)
 	// The user decides to change the tag of their task from Home to Other
 	const select = queryByTestId("tags-selection")
 	
@@ -106,7 +129,12 @@ describe('Home', () => {
       tagId: "Home",
       id: "1"
     },], currentDay: new Date().getTime()})
-    const { queryAllByText, getByLabelText } = render(<Home store={store} dayFromUrl={new Date().getTime()} />)
+    const timeStore = Time.create({
+		  selectedItem: undefined,
+		  isCounting: false,
+		  count: 0
+	});
+    const { queryAllByText, getByLabelText } = render(<Home timeStore={timeStore} store={store} dayFromUrl={new Date().getTime()} />)
 	// The user decides to delete the item they've created in the Remaining section
 	const deleteButtons = queryAllByText("Delete")
 	const deleteButton = deleteButtons[0]
@@ -116,9 +144,54 @@ describe('Home', () => {
     expect(remainingSection).toHaveTextContent("Remaining")
     expect(remainingSection.children.length).toBe(1)
 	// The user decides to delete the item they've created in the Completed Section
+  }),
+   test("change time of an item", () => {
+  	const store = todayItemStore()
+  	 const timeStore = Time.create({
+		  selectedItem: undefined,
+		  isCounting: false,
+		  count: 0
+	});
+    const { getByLabelText, getByPlaceholderText, queryByTestId } = render(<Home timeStore={timeStore} store={store} dayFromUrl={new Date().getTime()} />)
+	// The user decides to change the time of their task in the Remaining section
+	const changeTimeInput = getByPlaceholderText("change time for task")
+	// The user uses the side input to update the time
+	fireEvent.change(changeTimeInput, {target: {value: 20}})
+	const remainingItems = queryByTestId('remaining-items')
+	// The user sees the updated time on the item
+    expect(remainingItems).toHaveTextContent("20")
+  }),
+  test("can click on an item and lower it's time", async () => {
+  	const store = todayItemStore()
+  	const timeStore = Time.create({
+		  selectedItem: undefined,
+		  isCounting: false,
+		  count: 0
+	});
+    const { getByText, getByLabelText, getByPlaceholderText, queryByTestId } = render(
+    	<Home 
+    	store={store} 
+    	timeStore={timeStore}
+    	dayFromUrl={new Date().getTime()} />)
+    // The user clicks the time it has 
+    fireEvent.click(getByText("10s")) 
+    // The timer increments and changes per second
+     await wait(() => {
+
+      expect(queryByTestId("time-tracker")).toHaveTextContent("0:02")
+      
+    })
+     fireEvent.click(queryByTestId("play/pause-button"))
+          console.log(timeStore.count)
+
+    	getByText("8s")
+    // The user presses the pause button to end the time
+    
+    
+
   })
 })
-function todayItemStore(){
+function todayItemStore(defaultText="Something"){
 	const day = moment().format("YYYY/MM/DD")
   	const store = ItemStore.create({items:[{
       created: Date.now(),
@@ -126,7 +199,7 @@ function todayItemStore(){
       completed: false,
       length: 10,
       day: day,
-      text: "Something",
+      text: defaultText,
       tagId: "Home",
       id: "1"
     },], currentDay: new Date().getTime()})

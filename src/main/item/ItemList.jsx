@@ -10,7 +10,7 @@ import shortTimeFormatting from "../../util/shortTimeFormatting.js";
 
 import styles from "./ItemList.module.css";
 
-const ItemList = observer(function ItemList({ store, item, tags }) {
+const ItemList = observer(function ItemList({ store, item, tags, timeStore }) {
   const checkItem = () => {
     if(timeStore.selectedItem == item.id){
       return styles.container + " " + styles.outline
@@ -24,7 +24,7 @@ const ItemList = observer(function ItemList({ store, item, tags }) {
       { item.completed?
         shortTimeFormatting(item.length)
         :
-        <ItemTime id={item.id} time={item.tilCompletion} />
+        <ItemTime timeStore={timeStore} id={item.id} time={item.tilCompletion} />
       }
 
       <Input

@@ -12,6 +12,7 @@ import MonthStats from "./stats/MonthStats.jsx";
 import YearStats from "./stats/YearStats.jsx";
 import WeekStats from "./stats/WeekStats.jsx";
 import { observer } from "mobx-react-lite";
+import { timeStore } from "./stores/store.js";
 
 const App = observer(function App(props) {
   return (
@@ -20,7 +21,7 @@ const App = observer(function App(props) {
         <Navigation />
       </header>
       <Router>
-        <Home store={store} dayFromUrl={new Date().getTime()} path="/" />
+        <Home timeStore={timeStore} store={store} dayFromUrl={new Date().getTime()} path="/" />
         <DateApp store={store} path="/:year/:month/:day" />
 
         <Settings path="settings/" />
@@ -39,6 +40,7 @@ function DateApp({ store, year, month, day }) {
   console.log(new Date(year + "/" + month + "/" + day).getTime());
   return (
     <Home
+    timeStore={timeStore}
       dayFromUrl={new Date(year + "/" + month + "/" + day).getTime()}
       store={store}
     />

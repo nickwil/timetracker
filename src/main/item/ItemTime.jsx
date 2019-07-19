@@ -1,11 +1,10 @@
 import React from "react";
 import styles from "./ItemTime.module.css";
-import { timeStore } from "../../stores/store.js";
 import { observer } from "mobx-react-lite";
 import shortTimeFormatting from "../../util/shortTimeFormatting.js";
 
 // change time to format it always to be 2 numbers
-const ItemTime = observer(function ItemTime({ time, changeIfCounting, id }) {
+const ItemTime = observer(function ItemTime({ time, changeIfCounting, id, timeStore }) {
   return (
     <span>
       <button

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { timeStore } from "../stores/store.js";
 
 import useInterval from "./useInterval.js";
 import styles from "./Timer.module.css";
@@ -24,7 +23,9 @@ function toHour(time) {
 const Timer = observer(function Timer({
   sendTime,
   isCounting,
-  changeIfCounting
+  changeIfCounting,
+  timeStore,
+  store
 }) {
   //const [count, updateCounting] = useState(0)
   useInterval(() => {
@@ -38,7 +39,7 @@ const Timer = observer(function Timer({
     if (timeStore.isCounting) {
       //console.log("send count")
       //sendTime(count)
-      timeStore.setTimeToItem();
+      timeStore.setTimeToItem(store);
     }
     timeStore.reverseCounting();
     //changeIfCounting(!isCounting)
@@ -49,8 +50,8 @@ const Timer = observer(function Timer({
   };
   return (
     <div className={styles.container}>
-      <span className={styles.timer}>{toHour(timeStore.count)}</span>
-      <button className={styles.startButton} onClick={() => handleOnClick()}>
+      <span data-testid="time-tracker" className={styles.timer}>{toHour(timeStore.count)}</span>
+      <button data-testid="play/pause-button" className={styles.startButton} onClick={() => handleOnClick()}>
         {timeStore.count == 0 ? (
           <svg
             width="40%"
@@ -66,6 +67,7 @@ const Timer = observer(function Timer({
           </svg>
         ) : (
           <svg
+
             width="40%"
             height="43%"
             viewBox="0 0 29 30"
