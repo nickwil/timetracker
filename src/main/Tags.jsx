@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 
 const Tags = observer(function Tags({ tags, onChange, defaultTagId }) {
   return (
-    <select onChange={e => onChange(e.target.value)}>
+    <select data-testid="tags-selection" onChange={e => onChange(e.target.value)}>
       {tags.map((tag, index) => (
         <Tag tag={tag} defaultTagId={defaultTagId} />
       ))}
