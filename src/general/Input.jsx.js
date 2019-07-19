@@ -8,6 +8,7 @@ class Input extends React.Component {
   render() {
     return (
       <input
+      {...this.props}
         className={this.props.styles}
         onChange={e => this.onChange(e)}
         value={this.state.text}

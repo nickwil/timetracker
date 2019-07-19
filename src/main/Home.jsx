@@ -25,19 +25,18 @@ const Home = observer(function Home({ store, dayFromUrl }) {
           <Timer />
         </header>
 
-        <section>
-          <h4>Remaining</h4>
-
+        <section aria-labelledby="remaining-header">
+          <h4 id="remaining-header">Remaining</h4>
           {store.unCompletedTodos.map(obj => (
-            <ItemList item={obj} store={store} tags={tagStore.tags} />
-          ))}
+              <ItemList item={obj} store={store} tags={tagStore.tags} />
+            ))}
         </section>
 
-        <section>
-          <h4>Completed </h4>
+        <section aria-labelledby="completed-header">
+          <h4 id="completed-header">Completed</h4>
           {store.completedTodos.map(obj => (
-            <ItemList item={obj} store={store} tags={tagStore.tags} />
-          ))}
+              <ItemList item={obj} store={store} tags={tagStore.tags} />
+            ))}
         </section>
         <AddItemModal addTask={store.addItem} />
       </div>
