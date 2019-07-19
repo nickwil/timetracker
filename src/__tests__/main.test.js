@@ -168,7 +168,7 @@ describe('Home', () => {
 		  isCounting: false,
 		  count: 0
 	});
-    const { getByText, getByLabelText, getByPlaceholderText, queryByTestId } = render(
+    const { getByText, queryByTestId } = render(
     	<Home 
     	store={store} 
     	timeStore={timeStore}
@@ -182,11 +182,11 @@ describe('Home', () => {
       
     })
      fireEvent.click(queryByTestId("play/pause-button"))
-          console.log(timeStore.count)
 
-    	getByText("8s")
     // The user presses the pause button to end the time
-    
+    const remainingItems = queryByTestId('remaining-items')
+	// The user sees the updated time on the item (8 seconds)
+    expect(remainingItems).toHaveTextContent("8s")
     
 
   })
