@@ -189,15 +189,71 @@ describe('Home', () => {
     expect(remainingItems).toHaveTextContent("8s")
     
 
+  }),test("finish an item and bring it to completed", async () => {
+  	const store = todayItemStore("Study", 1)
+  	const timeStore = Time.create({
+		  selectedItem: undefined,
+		  isCounting: false,
+		  count: 0
+	});
+    const { getByText, queryByTestId } = render(
+    	<Home 
+    	store={store} 
+    	timeStore={timeStore}
+    	dayFromUrl={new Date().getTime()} />)
+    // The user clicks the time it has 10 seconds remaining
+    fireEvent.click(getByText("1s")) 
+    // The timer increments and changes per second
+     await wait(() => {
+
+      expect(queryByTestId("time-tracker")).toHaveTextContent("00:01")
+      
+    })
+     // The user presses the pause button to end the time
+     fireEvent.click(queryByTestId("play/pause-button"))
+
+    
+    const remainingItems = queryByTestId('completed-items')
+	// The user sees the completed item on the completed section
+    expect(remainingItems).toHaveTextContent("1s")
+    
+
+  }),
+  test("can start and end an item with the play/pause button", async () => {
+  	const store = ItemStore.create({items:[], currentDay: new Date().getTime()})
+   	const timeStore = Time.create({
+		  selectedItem: undefined,
+		  isCounting: false,
+		  count: 0
+	});
+    const { getByText, queryByTestId } = render(
+    	<Home 
+    	store={store} 
+    	timeStore={timeStore}
+    	dayFromUrl={new Date().getTime()} />)
+    // The user clicks the play/pause button to start the task
+    fireEvent.click(queryByTestId("play/pause-button"))
+     await wait(() => {
+
+      expect(queryByTestId("time-tracker")).toHaveTextContent("00:01")
+      
+    })
+    // The user presses the play/pause button to end the time
+    fireEvent.click(queryByTestId("play/pause-button"))
+
+    const remainingItems = queryByTestId('completed-items')
+	// The user sees the completed item on the completed section
+    expect(remainingItems).toHaveTextContent("1s")
   })
+
 })
-function todayItemStore(defaultText="Something"){
+function todayItemStore(defaultText="Something", time=10){
 	const day = moment().format("YYYY/MM/DD")
   	const store = ItemStore.create({items:[{
       created: Date.now(),
-      tilCompletion: 10,
+      tilCompletion: time,
       completed: false,
-      length: 10,
+      length: time,
       day: day,
       text: defaultText,
       tagId: "Home",
