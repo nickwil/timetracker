@@ -11,10 +11,12 @@ function ItemMenuContainer({ store, id }) {
   return (
     <React.Fragment>
       <span className={styles.container}>
-        <ItemMenu store={store} id={id} />
+        <ItemMenu data_testid_for_input={"normal-item-menu-input:"+id} store={store} id={id} />
       </span>
       <ItemMenuModal
-        children={<ItemMenu store={store} id={id} />}
+        id={id}
+        children={<ItemMenu 
+          data_testid_for_input={"modal-item-menu-input:"+id} store={store} id={id} />}
         className={styles.modalContainer}
         storeItem={storeItem}
       />
@@ -22,7 +24,7 @@ function ItemMenuContainer({ store, id }) {
   );
 }
 
-function ItemMenu({ store, id }) {
+function ItemMenu({ store, id, data_testid_for_input }) {
   const storeItem = store.items[store.index(id)];
   const [time, updateTime] = React.useState("10:00");
 
@@ -30,6 +32,7 @@ function ItemMenu({ store, id }) {
     <span>
       <button onClick={() => store.deleteItem(id)}>Delete</button>
       <input
+      data-testid={data_testid_for_input}
         type="number"
         value={storeItem.tilCompletion}
         onChange={e => storeItem.updateLengthOfTask(Number(e.target.value))}
@@ -91,7 +94,7 @@ class ItemMenuModal extends React.Component {
   render() {
     return (
       <div className={this.props.className}>
-        <button onClick={this.openModal}>⋮</button>
+        <button data-testid={"item-menu:"+this.props.id} onClick={this.openModal}>⋮</button>
         <Modal
           isOpen={this.state.modalIsOpen}
           onAfterOpen={this.afterOpenModal}

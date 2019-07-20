@@ -241,9 +241,31 @@ describe('Home', () => {
     // The user presses the play/pause button to end the time
     fireEvent.click(queryByTestId("play/pause-button"))
 
-    const remainingItems = queryByTestId('completed-items')
+    const completedItems = queryByTestId('completed-items')
 	// The user sees the completed item on the completed section
-    expect(remainingItems).toHaveTextContent("1s")
+    expect(completedItems).toHaveTextContent("1s")
+  }),
+  test("open item modal and do an action", () => {
+  	const store = todayItemStore()
+   	const timeStore = Time.create({
+		  selectedItem: undefined,
+		  isCounting: false,
+		  count: 0
+	});
+    const { getByText, queryByTestId, getByPlaceholderText } = render(
+    	<Home 
+    	store={store} 
+    	timeStore={timeStore}
+    	dayFromUrl={new Date().getTime()} />)
+    // The user clicks the menu of the item
+    const id = store.items[0].id
+    fireEvent.click(queryByTestId("item-menu:" + id))
+    // The user changes the value of the input to 20
+    fireEvent.change(queryByTestId("modal-item-menu-input:"+id), {target: {value: 20}})
+
+    const remainingItems = queryByTestId('remaining-items')
+	// The user sees the completed item on the completed section
+    expect(remainingItems).toHaveTextContent("20s")
   })
 
 })
