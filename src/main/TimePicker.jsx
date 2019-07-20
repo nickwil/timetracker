@@ -1,6 +1,6 @@
 import React from "react";
 
-function TimePicker({ onChange, value }) {
+function TimePicker({ onChange, value, data_test_id}) {
   const [hours, updateHours] = React.useState("");
   const [seconds, updateSeconds] = React.useState("");
   const [timeOfDay, updateTimeOfDay] = React.useState("AM");
@@ -35,6 +35,7 @@ function TimePicker({ onChange, value }) {
           updateHours(e.target.value);
           handleChange(e.target.value, seconds, timeOfDay);
         }}
+        data-testid={data_test_id + "-hours"}
         autocomplete="off"
         max="12"
         min="1"
@@ -52,11 +53,13 @@ function TimePicker({ onChange, value }) {
         autocomplete="off"
         max="59"
         min="0"
+        data-testid={data_test_id + "-minutes"}
         placeholder="--"
         type="number"
         value={seconds}
       />
       <select
+        data-testid={data_test_id + "-time-of-day"}
         onChange={e => {
           updateTimeOfDay(e.target.value);
           handleChange(hours, seconds, e.target.value);

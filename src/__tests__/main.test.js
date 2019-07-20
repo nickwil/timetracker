@@ -266,6 +266,61 @@ describe('Home', () => {
     const remainingItems = queryByTestId('remaining-items')
 	// The user sees the completed item on the completed section
     expect(remainingItems).toHaveTextContent("20s")
+  }),
+  test('use the add item modal', () => {
+
+    const store = ItemStore.create({items:[], currentDay: new Date().getTime()})
+    const timeStore = Time.create({
+		  selectedItem: undefined,
+		  isCounting: false,
+		  count: 0
+	});
+    const props = {
+      store,
+      dayFromUrl: new Date().getTime(),
+      timeStore
+    }
+    const { getByText, getByLabelText, getByPlaceholderText, queryByTestId } = render(<Home {...props} />)
+    // The user arrives to a page that has nothing in the remaining
+    const remainingSection = getByLabelText('Remaining')
+    // NOTE: The only child would be the header 
+    expect(remainingSection).toHaveTextContent("Remaining")
+    expect(remainingSection.children.length).toBe(1)
+    // The user also sees that there is nothing in the completed section
+    const completedSection = getByLabelText('Completed')
+    // NOTE: The only child would be the header 
+    expect(completedSection).toHaveTextContent("Completed")
+    expect(completedSection.children.length).toBe(1)
+    // The user, now determined to complete something, decides to add a task
+    // 1. They click the add button
+    const addButton = getByText("Add task")
+    fireEvent.click(addButton)
+    // 2. They fill out the task input
+    fireEvent.change(getByPlaceholderText("task..."), {target: {value: 'Study'}})
+    // 3. They use the clock time to fill out their time
+    // They enter 10:00 AM as their start time
+    fireEvent.change(queryByTestId("from-hours"), {target: {value: "10"}})
+    fireEvent.change(queryByTestId("from-minutes"), {target: {value: "00"}})
+    // They fill out the end time
+    fireEvent.change(queryByTestId("until-hours"), {target: {value: "10"}})
+    fireEvent.change(queryByTestId("until-minutes"), {target: {value: "00"}})
+    // They change the end time from AM to PM
+    fireEvent.change(queryByTestId("until-time-of-day"), {target: {value: "PM"}})
+    // They change the default task
+    const select = queryByTestId("tags-selection")
+	
+    fireEvent.change(select, {
+    target: {value: 'Other'},
+  });
+    // Finally they submit the form
+    fireEvent.click(getByText(/Submit/i))
+    // They now check that the remaining section has their task
+    const id = store.items[0].id
+
+    const remainingItems = queryByTestId('remaining-items')
+    expect(remainingItems).toHaveTextContent("12h")
+    expect(queryByTestId("item-input-descrip:"+id)).toHaveValue('Study')
+
   })
 
 })

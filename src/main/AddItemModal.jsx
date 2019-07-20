@@ -124,12 +124,12 @@ class AddItemModal extends React.Component {
               onChange={tag => this.setState({ tag: tag })}
             />
             <div>
-              From: <TimePicker onChange={this.onFromTimePickerChange} />
+              From: <TimePicker data_test_id="from" onChange={this.onFromTimePickerChange} />
             </div>
 
             <div>
               Until:
-              <TimePicker onChange={this.onUntilTimePickerChange} />
+              <TimePicker  data_test_id="until" onChange={this.onUntilTimePickerChange} />
             </div>
           </section>
 
