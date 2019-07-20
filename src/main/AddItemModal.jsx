@@ -17,6 +17,7 @@ const customStyles = {
 };
 
 // Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
+/* istanbul ignore next */ 
 if (process.env.NODE_ENV !== 'test') Modal.setAppElement('#root');
 function hmsToSeconds(fromTime, untilTime) {
   var start = getHourAndSeconds(fromTime);
@@ -49,7 +50,6 @@ class AddItemModal extends React.Component {
     };
 
     this.openModal = this.openModal.bind(this);
-    this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -70,10 +70,6 @@ class AddItemModal extends React.Component {
     this.setState({ modalIsOpen: true });
   }
 
-  afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    //this.subtitle.style.color = '#f00';
-  }
 
   closeModal() {
     this.setState({ modalIsOpen: false });

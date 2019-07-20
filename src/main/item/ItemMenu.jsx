@@ -54,6 +54,7 @@ const customStyles = {
 };
 
 // Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
+/* istanbul ignore next */ 
 if (process.env.NODE_ENV !== 'test') Modal.setAppElement('#root');
 
 class ItemMenuModal extends React.Component {
@@ -84,12 +85,6 @@ class ItemMenuModal extends React.Component {
     this.setState({ modalIsOpen: false });
   }
 
-  updateText(text) {
-    this.setState({ val: text });
-  }
-  updateTime(text) {
-    this.setState({ time: text });
-  }
 
   render() {
     return (

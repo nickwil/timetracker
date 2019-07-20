@@ -262,7 +262,8 @@ describe('Home', () => {
     fireEvent.click(queryByTestId("item-menu:" + id))
     // The user changes the value of the input to 20
     fireEvent.change(queryByTestId("modal-item-menu-input:"+id), {target: {value: 20}})
-
+    // The user closes the modal
+    fireEvent.click(getByText("close"))
     const remainingItems = queryByTestId('remaining-items')
 	// The user sees the completed item on the completed section
     expect(remainingItems).toHaveTextContent("20s")
@@ -299,8 +300,16 @@ describe('Home', () => {
     fireEvent.change(getByPlaceholderText("task..."), {target: {value: 'Study'}})
     // 3. They use the clock time to fill out their time
     // They enter 10:00 AM as their start time
+    // They accidentally enter 13 and 61 which are incorrect times
+    // a red styling appears to show they are incorrect
+    fireEvent.change(queryByTestId("from-hours"), {target: {value: "13"}})
+    fireEvent.change(queryByTestId("from-minutes"), {target: {value: "61"}})
+    // Their error is prevented as they cannot submit until the time is not negative
+    fireEvent.click(getByText(/Submit/i))
+    // They then correctly enter the time
     fireEvent.change(queryByTestId("from-hours"), {target: {value: "10"}})
     fireEvent.change(queryByTestId("from-minutes"), {target: {value: "00"}})
+
     // They fill out the end time
     fireEvent.change(queryByTestId("until-hours"), {target: {value: "10"}})
     fireEvent.change(queryByTestId("until-minutes"), {target: {value: "00"}})
