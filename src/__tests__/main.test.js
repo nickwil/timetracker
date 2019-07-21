@@ -330,6 +330,44 @@ describe('Home', () => {
     expect(remainingItems).toHaveTextContent("12h")
     expect(queryByTestId("item-input-descrip:"+id)).toHaveValue('Study')
 
+  }),
+  test("can see only data from a certain date", () => {
+  	const day = moment().format("YYYY/MM/DD")
+  	const previousDate = moment("2019/07/07").format("YYYY/MM/DD")
+  	const store = ItemStore.create({items:[{
+      created: Date.now(),
+      tilCompletion: 10,
+      completed: false,
+      length: 10,
+      day: day,
+      text: "Work",
+      tagId: "Home",
+      id: "1"
+    },{
+      created: Date.now(),
+      tilCompletion: 10,
+      completed: true,
+      length: 10,
+      day: previousDate,
+      text: "Another Item",
+      tagId: "Home",
+      id: "1"
+    },], currentDay: new Date().getTime()})
+    const timeStore = Time.create({
+		  selectedItem: undefined,
+		  isCounting: false,
+		  count: 0
+	});
+    const { queryByTestId, getByLabelText } = render(
+    	<Home
+     	timeStore={timeStore} 
+     	store={store} 
+    	dayFromUrl={new Date(previousDate).getTime()} />)
+	// The user can only see the "Another Item" item
+	// NOTE: Since both have the same id the testid is the same so this test will fail if both appear because more than on element would have the same testid
+    expect(queryByTestId("item-input-descrip:1")).toHaveValue("Another Item")
+    const remainingSection = getByLabelText('Remaining')
+
   })
 
 })
