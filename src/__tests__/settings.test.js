@@ -10,3 +10,4 @@ describe("Source", () => {
 		const node = render(<Settings/>)
 	})
 })
+afterEach(cleanup)
