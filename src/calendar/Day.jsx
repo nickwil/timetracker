@@ -12,11 +12,13 @@ function Day(props) {
   const timeForDay = store.getTimeToSpendForDay(day);
   return (
     <span className={styles.day}>
-      <CustomLink className={styles.dayButton} to={`/${day}`}>
+      
+      {
+      	timeForDay > 0 ? <CustomLink  style={colorsForDays(timeForDay)} className={styles.dayButton} to={`/${day}`}>
+        {props.number}
+      </CustomLink> : <CustomLink className={styles.dayButton} to={`/${day}`}>
         {props.number}
       </CustomLink>
-      {
-      	timeForDay > 0 ? <div className={styles.dot} style={colorsForDays(timeForDay)}>•</div> : null
   	  }
     </span>
   );
@@ -25,9 +27,9 @@ function Day(props) {
 function colorsForDays(time) {
   console.log(time >= 3600 && time < 7000);
   if (time > 3600) {
-    return { color: `red` };
+    return { color: `darkred` };
   } else {
-    return { color: `green` };
+    return { color: `red` };
   }
 }
 export default Day
