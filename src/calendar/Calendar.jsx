@@ -78,9 +78,16 @@ function Calendar({year, monthNo}) {
     dates.push(<Week month={month} days={week} />);
     return dates;
   };
+  const checkDateOverride = () => {
+    if(year == undefined && monthNo == undefined){
+      return true
+    } else {
+      return false
+    }
+  }
 
   return (
-    <CheckDateOops date={`${year}-${monthNo}`}>
+    <CheckDateOops override={checkDateOverride()}date={`${year}-${monthNo}`}>
     <div className={styles.container}>
       <CustomLink to={"/calendar/" + moment(month).subtract(1, "month").format("YYYY/MM")}>Go back a month</CustomLink>
       <CustomLink to={"/calendar/" + moment(month).add(1, "month").format("YYYY/MM")}>Go to next month</CustomLink>
