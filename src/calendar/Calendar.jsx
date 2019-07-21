@@ -91,17 +91,19 @@ function Calendar({year, monthNo}) {
     <div className={styles.container}>
       <CustomLink to={"/calendar/" + moment(month).subtract(1, "month").format("YYYY/MM")}>Go back a month</CustomLink>
       <CustomLink to={"/calendar/" + moment(month).add(1, "month").format("YYYY/MM")}>Go to next month</CustomLink>
-      <h4>Month: {moment(month).format("MMMM YYYY")}</h4>
-      <div className={styles.week}>
-        <span className={styles.dayOfWeek}>Sun</span>
-        <span className={styles.dayOfWeek}>Mon</span>
-        <span className={styles.dayOfWeek}>Tues</span>
-        <span className={styles.dayOfWeek}>Wed</span>
-        <span className={styles.dayOfWeek}>Thurs</span>
-        <span className={styles.dayOfWeek}>Fri</span>
-        <span className={styles.dayOfWeek}>Sat</span>
+      <div className={styles.mainCal}>
+        <h4>Month: {moment(month).format("MMMM YYYY")}</h4>
+        <div className={styles.week}>
+          <span className={styles.dayOfWeek}>Sun</span>
+          <span className={styles.dayOfWeek}>Mon</span>
+          <span className={styles.dayOfWeek}>Tue</span>
+          <span className={styles.dayOfWeek}>Wed</span>
+          <span className={styles.dayOfWeek}>Thu</span>
+          <span className={styles.dayOfWeek}>Fri</span>
+          <span className={styles.dayOfWeek}>Sat</span>
+        </div>
+        {createCalendar()}
       </div>
-      {createCalendar()}
     </div>
     </CheckDateOops>
   );

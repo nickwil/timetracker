@@ -16,7 +16,7 @@ function Day(props) {
         {props.number}
       </CustomLink>
       {
-      	timeForDay > 0 ? <span style={colorsForDays(timeForDay)}>•</span> : null
+      	timeForDay > 0 ? <div className={styles.dot} style={colorsForDays(timeForDay)}>•</div> : null
   	  }
     </span>
   );
