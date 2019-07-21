@@ -1,6 +1,7 @@
 import React from "react";
 import { Router } from "@reach/router";
 import Home from "./main/Home.jsx";
+import DateHome from "./main/DateHome.jsx"
 import Calendar from "./calendar/Calendar.jsx";
 import Stats from "./stats/Stats.jsx";
 import store from "./stores/store.js";
@@ -22,7 +23,7 @@ const App = observer(function App(props) {
       </header>
       <Router>
         <Home timeStore={timeStore} store={store} dayFromUrl={new Date().getTime()} path="/" />
-        <DateApp store={store} path="/:year/:month/:day" />
+        <DateHome store={store} path="/:year/:month/:day" />
 
         <Settings path="settings/" />
         <Stats data={store.getTimeFromEachTag(tagStore.tags)} path="stats/" />
@@ -36,14 +37,5 @@ const App = observer(function App(props) {
   );
 });
 
-function DateApp({ store, year, month, day }) {
-  console.log(new Date(year + "/" + month + "/" + day).getTime());
-  return (
-    <Home
-    timeStore={timeStore}
-      dayFromUrl={new Date(year + "/" + month + "/" + day).getTime()}
-      store={store}
-    />
-  );
-}
+
 export default App;
