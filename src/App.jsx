@@ -23,7 +23,7 @@ const App = observer(function App(props) {
       </header>
       <Router>
         <Home timeStore={timeStore} store={store} dayFromUrl={new Date().getTime()} path="/" />
-        <DateHome store={store} path="/:year/:month/:day" />
+        <DateHome timeStore={timeStore} store={store} path="/:year/:month/:day" />
 
         <Settings path="settings/" />
         <Stats data={store.getTimeFromEachTag(tagStore.tags)} path="stats/" />

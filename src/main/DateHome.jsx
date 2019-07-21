@@ -1,6 +1,6 @@
 import React from "react";
-
-function DateHome({ store, year, month, day }) {
+import Home from "./Home.jsx"
+function DateHome({ store,timeStore, year, month, day }) {
   console.log(new Date(year + "/" + month + "/" + day).getTime());
   return (
     <Home
