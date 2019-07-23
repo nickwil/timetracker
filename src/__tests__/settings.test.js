@@ -75,32 +75,58 @@ describe("Source", () => {
 	}),
 	test("can delete tag", () => {
 		const store = ItemStore.create({items:[], currentDay: new Date().getTime()})
-    const tagStore = TagStore.create({
-	  tags: [
-	    {
-	      name: "Other",
-	      id: "Other",
-	      canDelete: false,
-	      color: "#e66465"
-	    },
-	    {
-	      name: "Home",
-	      id: "Home",
-	      canDelete: true,
-	      color: "#e66465"
-	    }
-	  ]
-	});
-    const { getByText, getByLabelText } = render(<Settings store={store} tagStore={tagStore} />)
-    // The user wants to delete the Home tag
-    // They click the delete button
-    fireEvent.click(getByText("X"))
-    // They click the confirmation
-    fireEvent.click(getByText("Delete tag"))
-    // The Home text should not be anywhere on the page as the user deleted it
-    const currentTags = getByLabelText("Current Tags")
-    expect(currentTags).not.toHaveTextContent(/Home/)
-   
+	    const tagStore = TagStore.create({
+		  tags: [
+		    {
+		      name: "Other",
+		      id: "Other",
+		      canDelete: false,
+		      color: "#e66465"
+		    },
+		    {
+		      name: "Home",
+		      id: "Home",
+		      canDelete: true,
+		      color: "#e66465"
+		    }
+		  ]
+		});
+	    const { getByText, getByLabelText } = render(<Settings store={store} tagStore={tagStore} />)
+	    // The user wants to delete the Home tag
+	    // They click the delete button
+	    fireEvent.click(getByText("X"))
+	    // They click the confirmation
+	    fireEvent.click(getByText("Delete tag"))
+	    // The Home text should not be anywhere on the page as the user deleted it
+	    const currentTags = getByLabelText("Current Tags")
+	    expect(currentTags).not.toHaveTextContent(/Home/)
+	   
+	}),
+	test("update color of an element", () => {
+		const store = ItemStore.create({items:[], currentDay: new Date().getTime()})
+	    const tagStore = TagStore.create({
+		  tags: [
+		    {
+		      name: "Other",
+		      id: "Other",
+		      canDelete: false,
+		      color: "#e66465"
+		    },
+		    {
+		      name: "Home",
+		      id: "Home",
+		      canDelete: true,
+		      color: "#e66465"
+		    }
+		  ]
+		});
+	    const { getByText, queryAllByLabelText } = render(<Settings store={store} tagStore={tagStore} />)
+	    // The user changes the color to #000
+	    const node = queryAllByLabelText("Color:")[0]
+	    fireEvent.change(node, {target: {value: "#000"}})
+	    // The user now sees the color as #000000
+	    expect(node).toHaveValue("#000000")
+
 	})
 })
 afterEach(cleanup)

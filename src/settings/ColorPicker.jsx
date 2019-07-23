@@ -8,11 +8,14 @@ function ColorPicker({ setColor, color }) {
     setColor(color);
   };
   return (
+    <label>
+    Color:
     <input
       onChange={e => onChange(e.target.value)}
       type="color"
       value={colorVal}
     />
+    </label>
   );
 }
 
