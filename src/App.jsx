@@ -25,7 +25,7 @@ const App = observer(function App(props) {
         <Home timeStore={timeStore} store={store} dayFromUrl={new Date().getTime()} path="/" />
         <DateHome timeStore={timeStore} store={store} path="/:year/:month/:day" />
 
-        <Settings path="settings/" />
+        <Settings store={store} tagStore={tagStore} path="settings/" />
         <Stats data={store.getTimeFromEachTag(tagStore.tags)} path="stats/" />
         <WeekStats path="stats/:year/:month/:week" />
         <MonthStats path="stats/:year/:month" />
