@@ -6,7 +6,6 @@ function CustomLink({ to, children, className = "", style={} }) {
     <Link
     style={style}
       className={className}
-      onClick={() => console.log("clickedd link")}
       to={to}
     >
       {children}
