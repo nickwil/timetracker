@@ -30,8 +30,8 @@ const App = observer(function App(props) {
         <WeekStats path="stats/:year/:month/:week" />
         <MonthStats path="stats/:year/:month" />
         <YearStats path="stats/:year" />
-        <Calendar path="calendar/" />
-        <Calendar path="calendar/:year/:monthNo"/>
+        <Calendar store={store} path="calendar/" />
+        <Calendar store={store} path="calendar/:year/:monthNo"/>
       </Router>
     </section>
   );

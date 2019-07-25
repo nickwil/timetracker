@@ -3,7 +3,7 @@ import styles from "./Calendar.module.css";
 import Day from "./Day.jsx"
 const moment = require("moment");
 
-function Week({weekNumber, days, month}) {
+function Week({weekNumber, days, month, store}) {
   // if week isn't full add empty days
   var extraDays = [];
   if (days.length < 7) {
@@ -26,7 +26,7 @@ function Week({weekNumber, days, month}) {
     }
     while (days.length + extraDays.length < 7) {
       console.log(newMonth.day())
-      extraDays.push(<Day month={newMonth.format("YYYY-MM")} number={newMonth.date()} />);
+      extraDays.push(<Day store={store} month={newMonth.format("YYYY-MM")} number={newMonth.date()} />);
       newMonth.add(1, "day")
     }
   }

@@ -3,10 +3,9 @@ import CustomLink from "../general/CustomLink.jsx"
 import styles from "./Calendar.module.css";
 import Week from "./Week.jsx"
 import Day from "./Day.jsx"
-import store from "../stores/store.js";
 import CheckDateOops from "../general/CheckDateOops.jsx"
 const moment = require("moment");
-function Calendar({year, monthNo}) {
+function Calendar({year, monthNo, store}) {
   var momentObject = moment()
       .startOf("month")
       .format("YYYY-MM");
@@ -60,12 +59,13 @@ function Calendar({year, monthNo}) {
     var weekNumber = 1;
     for (var i = 0; i < numberOfDaysInMonth; i++) {
       if (calDay.format("dddd") == "Sunday") {
-        dates.push(<Week month={month} weekNumber={weekNumber} days={week} />);
+        dates.push(<Week store={store} month={month} weekNumber={weekNumber} days={week} />);
         week = [];
         weekNumber += 1;
       }
       week.push(
         <Day
+          store={store}
           year={calDay.format("YYYY")}
           month={month}
           dayOfWeek={calDay.format("dddd")}
@@ -75,7 +75,7 @@ function Calendar({year, monthNo}) {
       calDay.add(1, "days").calendar();
     }
     // last week if doesn't end in a sunday
-    dates.push(<Week month={month} days={week} />);
+    dates.push(<Week store={store} month={month} days={week} />);
     return dates;
   };
   const checkDateOverride = () => {

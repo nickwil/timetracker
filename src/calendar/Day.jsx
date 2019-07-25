@@ -1,23 +1,23 @@
 import React from "react"
 import CustomLink from "../general/CustomLink.jsx";
 import styles from "./Calendar.module.css";
-import store from "../stores/store.js";
 
 const moment = require("moment");
 
-function Day(props) {
-  var day = moment(`${props.month}-${props.number}`, "YYYY-MM-DD").format(
+function Day({store, month, number}) {
+  var day = moment(`${month}-${number}`, "YYYY-MM-DD").format(
     "YYYY/MM/DD"
   );
+  console.log(store)
   const timeForDay = store.getTimeToSpendForDay(day);
   return (
     <span className={styles.day}>
       
       {
       	timeForDay > 0 ? <CustomLink  style={colorsForDays(timeForDay)} className={styles.dayButton} to={`/${day}`}>
-        {props.number}
+        {number}
       </CustomLink> : <CustomLink className={styles.dayButton} to={`/${day}`}>
-        {props.number}
+        {number}
       </CustomLink>
   	  }
     </span>
