@@ -1,13 +1,13 @@
 import React from "react";
 import PieChart from "react-minimal-pie-chart";
-import store from "../stores/store.js";
 import shortTimeFormatting from "../util/shortTimeFormatting.js";
 import { observer } from "mobx-react-lite";
 import CustomLink from "../general/CustomLink.jsx";
 const moment = require("moment");
 
 const colors = ["#E38627", "#C13C37", "#6A2135"];
-const Stats = observer(function Stats({ data }) {
+const Stats = observer(function Stats({ data, years, months, weeks }) {
+
   const [isData, update] = React.useState(false)
   
   React.useEffect(() => {
@@ -56,7 +56,7 @@ const Stats = observer(function Stats({ data }) {
         <h3>See stats throughout your history</h3>
         <div>
           <h4>Years</h4>
-          {store.years.map(year => (
+          {years.map(year => (
             <div>
               <CustomLink to={"/stats/" + year}>{year}</CustomLink>
             </div>
@@ -64,7 +64,7 @@ const Stats = observer(function Stats({ data }) {
         </div>
         <div>
           <h4>Months</h4>
-          {store.months.map(month => (
+          {months.map(month => (
             <div>
               <CustomLink to={"/stats/" + month}>
                 {moment(month, "YYYY/MM").format("MMMM, YYYY")}
@@ -75,7 +75,7 @@ const Stats = observer(function Stats({ data }) {
 
         <div>
           <h4>Weeks</h4>
-          {store.weeks.map(week => (
+          {weeks.map(week => (
             <div>
               <CustomLink to={"/stats/" + week}>
                 {moment(week, "YYYY/MM").format("MMMM, YYYY") +

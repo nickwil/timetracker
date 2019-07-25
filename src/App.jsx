@@ -9,9 +9,7 @@ import { date } from "./util/quick.js";
 import Settings from "./settings/Settings.jsx";
 import Navigation from "./Navigation.jsx";
 import tagStore from "./stores/tagStore.js";
-import MonthStats from "./stats/MonthStats.jsx";
-import YearStats from "./stats/YearStats.jsx";
-import WeekStats from "./stats/WeekStats.jsx";
+import DateStats from "./stats/DateStats.jsx";
 import { observer } from "mobx-react-lite";
 import { timeStore } from "./stores/store.js";
 
@@ -26,10 +24,10 @@ const App = observer(function App(props) {
         <DateHome timeStore={timeStore} store={store} path="/:year/:month/:day" />
 
         <Settings store={store} tagStore={tagStore} path="settings/" />
-        <Stats data={store.getTimeFromEachTag(tagStore.tags)} path="stats/" />
-        <WeekStats path="stats/:year/:month/:week" />
-        <MonthStats path="stats/:year/:month" />
-        <YearStats path="stats/:year" />
+        <DateStats store={store} tagStore={tagStore}  path="stats/" />
+        <DateStats store={store} tagStore={tagStore} path="stats/:year/:month/:week" />
+        <DateStats store={store} tagStore={tagStore} path="stats/:year/:month" />
+        <DateStats store={store} tagStore={tagStore} path="stats/:year" />
         <Calendar store={store} path="calendar/" />
         <Calendar store={store} path="calendar/:year/:monthNo"/>
       </Router>
