@@ -127,6 +127,87 @@ describe("Source", () => {
 	    // The user now sees the color as #000000
 	    expect(node).toHaveValue("#000000")
 
+	}),
+	test("can get export text", () => {
+		const store = ItemStore.create({items:[{
+	      created: new Date("2016/04/02").getTime(),
+	      tilCompletion: 20,
+	      completed: true,
+	      length: 20,
+	      day: "2016/04/02",
+	      text: "Draw",
+	      tagId: "Home",
+	      id: "1"
+		}], currentDay: new Date().getTime()})
+	    const tagStore = TagStore.create({
+		  tags: [
+		    {
+		      name: "Other",
+		      id: "Other",
+		      canDelete: false,
+		      color: "#e66465"
+		    },
+		    {
+		      name: "Home",
+		      id: "Home",
+		      canDelete: true,
+		      color: "#e66465"
+		    }
+		  ]
+		});
+	    const { getByText, getByLabelText } = render(<Settings store={store} tagStore={tagStore} />)
+	    expect(getByLabelText("Data:")).toHaveValue(`#1 
+• text: Draw 
+• created: 1459569600000 
+• tilCompletion: 20 
+• day: 2016/04/02 
+• completed: true 
+• length: 20 
+• tagId: Home 
+• id: 1
+`)
+	}),
+	test("can import the export text", () => {
+		const store = ItemStore.create({items:[{
+	      created: new Date("2016/04/02").getTime(),
+	      tilCompletion: 20,
+	      completed: true,
+	      length: 20,
+	      day: "2016/04/02",
+	      text: "Draw",
+	      tagId: "Home",
+	      id: "1"
+		}], currentDay: new Date().getTime()})
+	    const tagStore = TagStore.create({
+		  tags: [
+		    {
+		      name: "Other",
+		      id: "Other",
+		      canDelete: false,
+		      color: "#e66465"
+		    },
+		    {
+		      name: "Home",
+		      id: "Home",
+		      canDelete: true,
+		      color: "#e66465"
+		    }
+		  ]
+		});
+	    const { getByText, getByLabelText } = render(<Settings store={store} tagStore={tagStore} />)
+	    const importText = getByLabelText("Data:").value
+	    fireEvent.change(getByLabelText("Import:"), {target: {value: importText}})
+	    fireEvent.click(getByText("Import"))
+	    expect(getByLabelText("Data:")).toHaveValue(`#1 
+• text: Draw 
+• created: 1459569600000 
+• tilCompletion: 20 
+• day: 2016/04/02 
+• completed: true 
+• length: 20 
+• tagId: Home 
+• id: 1
+`)
 	})
 })
 afterEach(cleanup)
