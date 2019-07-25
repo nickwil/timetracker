@@ -25,7 +25,6 @@ function Day({store, month, number}) {
 }
 
 function colorsForDays(time) {
-  console.log(time >= 3600 && time < 7000);
   if (time > 3600) {
     return { color: `darkred` };
   } else {
