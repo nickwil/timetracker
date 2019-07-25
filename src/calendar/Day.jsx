@@ -8,8 +8,8 @@ function Day({store, month, number}) {
   var day = moment(`${month}-${number}`, "YYYY-MM-DD").format(
     "YYYY/MM/DD"
   );
-  console.log(store)
   const timeForDay = store.getTimeToSpendForDay(day);
+  console.log(timeForDay)
   return (
     <span className={styles.day}>
       

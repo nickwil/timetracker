@@ -25,7 +25,6 @@ function Week({weekNumber, days, month, store}) {
       // if it's not the first week then this can only run in the last week
     }
     while (days.length + extraDays.length < 7) {
-      console.log(newMonth.day())
       extraDays.push(<Day store={store} month={newMonth.format("YYYY-MM")} number={newMonth.date()} />);
       newMonth.add(1, "day")
     }
@@ -45,9 +44,6 @@ function Week({weekNumber, days, month, store}) {
       </div>
     );
   }
-}
-function EmptyDay({dayOfWeek}) {
-  return <span className={styles.day}>{dayOfWeek}</span>;
 }
 
 export default Week

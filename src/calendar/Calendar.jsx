@@ -32,26 +32,6 @@ function Calendar({year, monthNo, store}) {
   var calDay = moment(month).startOf("month");
   var numberOfDaysInMonth = moment(month).daysInMonth();
 
-  const previousMonth = () => {
-    const newMonth = moment(month)
-      .subtract(1, "month")
-      .format("YYYY-MM");
-    changeMonth(newMonth);
-
-    calDay = moment(newMonth).startOf("month");
-    numberOfDaysInMonth = calDay.daysInMonth();
-  };
-
-  const nextMonth = () => {
-    const newMonth = moment(month)
-      .add(1, "month")
-      .format("YYYY-MM");
-    changeMonth(newMonth);
-
-    calDay = moment(newMonth).startOf("month");
-    numberOfDaysInMonth = calDay.daysInMonth();
-  };
-
   const createCalendar = () => {
     var dates = [];
     var week = [];
