@@ -11,16 +11,16 @@ const TagsInput = observer(function TagsInput({tagStore}) {
           <h3 id="current-tags-header">Current Tags</h3>
           {tagStore.tags.map(tag => (
             <div>
-              <ColorPicker
-                setColor={color => tagStore.updateColor(tag.id, color)}
-                color={tag.color}
-              />
               <Tag
                 tagStore={tagStore}
                 name={tag.name}
                 updateTag={text => tagStore.updateTag(tag.id, text)}
                 canDelete={tag.canDelete}
                 deleteTag={() => tagStore.deleteTag(tag.id)}
+              />
+              <ColorPicker
+                setColor={color => tagStore.updateColor(tag.id, color)}
+                color={tag.color}
               />
             </div>
           ))}

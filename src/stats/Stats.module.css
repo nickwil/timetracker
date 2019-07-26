@@ -1,0 +1,22 @@
+.container {
+	padding: 1em;
+}
+.statsOverTime{
+	display: flex;
+	justify-content: space-around;
+}
+.chartAndLegend {
+	display: flex;
+		justify-content: space-around;
+align-items: center;
+
+}
+ @media all and (max-width: 600px) {
+    .chartAndLegend {
+        flex-flow:column wrap;  
+    }    
+    .third {
+        flex-grow:0;
+        flex-basis:50%;
+    }
+}
