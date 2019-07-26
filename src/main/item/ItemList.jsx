@@ -28,6 +28,7 @@ const ItemList = observer(function ItemList({ store, item, tags, timeStore }) {
       }
 
       <Input
+        placeholder="Add description..."
         data-testid={"item-input-descrip:" + item.id}
         styles={styles.input}
         text={item.text}

@@ -10,6 +10,7 @@ class Input extends React.Component {
       <input
       {...this.props}
         className={this.props.styles}
+        style={this.props.style}
         onChange={e => this.onChange(e)}
         value={this.state.text}
       />
