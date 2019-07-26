@@ -7,22 +7,14 @@ const moment = require("moment");
 
 const colors = ["#E38627", "#C13C37", "#6A2135"];
 const Stats = observer(function Stats({ data, years, months, weeks }) {
-
-  const [isData, update] = React.useState(false)
-  
-  React.useEffect(() => {
-    if((data.filter(obj => obj.value >= 1).length) >= 1 ){
-      update(true) 
-    }
-  }, [data]);
   
 
   return (
   
-    <div>
-      <h4>Time Spent Working</h4>
-      {
-        isData ? 
+    <div aria-labelledby="stats-page-header">
+      <h4 id="stats-page-header">Time Spent Working</h4>
+      {/*
+        data.filter(obj => obj.value >= 1).length >= 1 ? */
         <React.Fragment>
           <PieChart
           style={{ height: "400px" }}
@@ -48,8 +40,8 @@ const Stats = observer(function Stats({ data, years, months, weeks }) {
           ))}
         </section>
       </React.Fragment>
-      :
-      <h4>There is no data for this time period</h4>
+      /*:
+      <h4>There is no data for this time period</h4>*/
     }
 
       <section>
