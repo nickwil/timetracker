@@ -217,6 +217,33 @@ describe('Home', () => {
     const remainingItems = queryByTestId('completed-items')
 	// The user sees the completed item on the completed section
     expect(remainingItems).toHaveTextContent("1s")
+
+
+    
+
+  }),
+  test("finish an item by using the mark as completed button", async () => {
+    const store = todayItemStore("Study", 1)
+    const timeStore = Time.create({
+      selectedItem: undefined,
+      isCounting: false,
+      count: 0
+  });
+    const { getByText, queryByTestId } = render(
+      <Home 
+      store={store} 
+      timeStore={timeStore}
+      dayFromUrl={new Date().getTime()} />)
+    // The user clicks the mark as completed button 
+      fireEvent.click(getByText("Mark as completed"))
+    
+
+    
+    const completedItems = queryByTestId('completed-items')
+  // The user sees the completed item on the completed section
+    expect(completedItems).toHaveTextContent("1s")
+
+    
     
 
   }),

@@ -38,6 +38,7 @@ function ItemMenu({ store, id, data_testid_for_input }) {
         onChange={e => storeItem.updateLengthOfTask(Number(e.target.value))}
         placeholder="change time for task"
       />
+      <button onClick={() => storeItem.updateTimeTilCompletion(storeItem.tilCompletion)}>Mark as completed</button>
     </span>
   );
 }
