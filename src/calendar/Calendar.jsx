@@ -72,7 +72,7 @@ function Calendar({year, monthNo, store}) {
       <CustomLink to={"/calendar/" + moment(month).subtract(1, "month").format("YYYY/MM")}>Go back a month</CustomLink>
       <CustomLink to={"/calendar/" + moment(month).add(1, "month").format("YYYY/MM")}>Go to next month</CustomLink>
       <div className={styles.mainCal}>
-        <h4>Month: {moment(month).format("MMMM YYYY")}</h4>
+        <h1>Month: {moment(month).format("MMMM YYYY")}</h1>
         <div className={styles.week}>
           <span className={styles.dayOfWeek}>Sun</span>
           <span className={styles.dayOfWeek}>Mon</span>
