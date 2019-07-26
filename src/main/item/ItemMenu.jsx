@@ -31,13 +31,13 @@ function ItemMenu({ store, id, data_testid_for_input }) {
   return (
     <span>
       <button onClick={() => store.deleteItem(id)}>Delete</button>
-      <input
+      <label>Task Time:<input
       data-testid={data_testid_for_input}
         type="number"
         value={storeItem.tilCompletion}
         onChange={e => storeItem.updateLengthOfTask(Number(e.target.value))}
         placeholder="change time for task"
-      />
+      /></label>
       <button onClick={() => storeItem.updateTimeTilCompletion(storeItem.tilCompletion)}>Mark as completed</button>
     </span>
   );
