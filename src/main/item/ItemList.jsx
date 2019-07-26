@@ -34,7 +34,7 @@ const ItemList = observer(function ItemList({ store, item, tags, timeStore }) {
         id={item.id}
         onTaskChange={text => storeItem.updateText(text)}
       />
-      <span>
+      <span className={styles.tagsAndDot}>
         <span
           style={{ color: tagStore.tags[tagStore.index(item.tagId)].color }}
         >
