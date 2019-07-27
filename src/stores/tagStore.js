@@ -59,7 +59,7 @@ const TagStore = types
         name: "Home",
         id: "Home",
         canDelete: true,
-        color: "#e66465"
+        color: "#fff"
       }]
     }
   }));
@@ -79,7 +79,7 @@ function getTagsFromLocalStorage(){
         name: "Home",
         id: "Home",
         canDelete: true,
-        color: "#e66465"
+        color: "#fff"
       }
     ]
   });
