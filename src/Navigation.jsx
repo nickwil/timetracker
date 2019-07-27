@@ -3,8 +3,9 @@ import CustomLink from "./general/CustomLink.jsx";
 import styles from "./Navigation.module.css";
 import store from "./stores/store.js";
 import shortTimeFormatting from "./util/shortTimeFormatting.js";
+import { observer } from "mobx-react-lite";
 
-function Navigation(props) {
+const Navigation = observer(function Navigation(props) {
   return (
     <nav className={styles.container}>
       <CustomLink to="/">
@@ -15,6 +16,6 @@ function Navigation(props) {
       <CustomLink to="/stats/">Stats</CustomLink>
     </nav>
   );
-}
+})
 
 export default Navigation;

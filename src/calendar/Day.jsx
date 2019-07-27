@@ -1,10 +1,11 @@
 import React from "react"
 import CustomLink from "../general/CustomLink.jsx";
 import styles from "./Calendar.module.css";
+import { observer } from "mobx-react-lite";
 
 const moment = require("moment");
 
-function Day({store, month, number}) {
+const Day = observer(function Day({store, month, number}) {
   var day = moment(`${month}-${number}`, "YYYY-MM-DD").format(
     "YYYY/MM/DD"
   );
@@ -22,7 +23,7 @@ function Day({store, month, number}) {
   	  }
     </span>
   );
-}
+})
 
 function colorsForDays(time) {
   if (time > 3600) {

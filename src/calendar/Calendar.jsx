@@ -4,8 +4,10 @@ import styles from "./Calendar.module.css";
 import Week from "./Week.jsx"
 import Day from "./Day.jsx"
 import CheckDateOops from "../general/CheckDateOops.jsx"
+import { observer } from "mobx-react-lite";
+
 const moment = require("moment");
-function Calendar({year, monthNo, store}) {
+const Calendar = observer(function Calendar({year, monthNo, store}) {
   var momentObject = moment()
       .startOf("month")
       .format("YYYY-MM");
@@ -89,7 +91,7 @@ function Calendar({year, monthNo, store}) {
     </div>
     </CheckDateOops>
   );
-}
+})
 
 
 

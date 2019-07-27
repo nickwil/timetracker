@@ -1,9 +1,11 @@
 import React from "react"
 import styles from "./Calendar.module.css";
 import Day from "./Day.jsx"
+import { observer } from "mobx-react-lite";
+
 const moment = require("moment");
 
-function Week({weekNumber, days, month, store}) {
+const Week = observer(function Week({weekNumber, days, month, store}) {
   // if week isn't full add empty days
   var extraDays = [];
   if (days.length < 7) {
@@ -44,6 +46,6 @@ function Week({weekNumber, days, month, store}) {
       </div>
     );
   }
-}
+})
 
 export default Week
