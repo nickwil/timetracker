@@ -9,7 +9,7 @@ import tagStore from "../../stores/tagStore.js";
 import shortTimeFormatting from "../../util/shortTimeFormatting.js";
 
 import styles from "./ItemList.module.css";
-
+import {styles as sharedStyles} from "./ItemMenu.module.css"
 const ItemList = observer(function ItemList({ store, item, tags, timeStore }) {
   const checkItem = () => {
     if(timeStore.selectedItem == item.id){
@@ -30,7 +30,7 @@ const ItemList = observer(function ItemList({ store, item, tags, timeStore }) {
       <Input
         placeholder="Add description..."
         data-testid={"item-input-descrip:" + item.id}
-        styles={styles.input}
+        styles={styles.input + ' ' + styles.shouldBeHidden}
         text={item.text}
         id={item.id}
         onTaskChange={text => storeItem.updateText(text)}

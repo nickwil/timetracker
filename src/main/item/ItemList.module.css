@@ -23,3 +23,11 @@
 	justify-content: center;
 	 align-items: center;
 }
+.shouldBeHidden {
+	display: block;
+}
+@media (max-device-width: 370px) {
+	.shouldBeHidden{
+		display: none;
+	}
+}

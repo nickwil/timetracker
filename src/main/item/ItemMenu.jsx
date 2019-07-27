@@ -1,5 +1,6 @@
 import React from "react";
 import Modal from "react-modal";
+import Input from "../../general/Input.jsx";
 import styles from "./ItemMenu.module.css";
 function ItemMenuContainer({ store, id }) {
   // if small view then have 3 dots and use modal if not then just display it there
@@ -38,6 +39,14 @@ function ItemMenu({ store, id, data_testid_for_input }) {
         onChange={e => storeItem.updateLengthOfTask(Number(e.target.value))}
         placeholder="change time for task"
       /></label>
+        <Input
+        placeholder="Add description for task..."
+        data-testid={"item-input-modal-descrip:" + storeItem.id}
+        styles={styles.shouldBeHidden}
+        text={storeItem.text}
+        id={storeItem.id}
+        onTaskChange={text => storeItem.updateText(text)}
+      />
       <button onClick={() => storeItem.updateTimeTilCompletion(storeItem.tilCompletion)}>Mark as completed</button>
     </span>
   );

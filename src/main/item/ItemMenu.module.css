@@ -4,11 +4,20 @@
 .modalContainer {
 	display: inline-block;
 }
+
 @media (min-device-width: 650px) {
 	.modalContainer {
 		display: none;
 	}
 	.container {
 		display: inline-block;
+	}
+}
+.shouldBeHidden {
+	display: none;
+}
+@media (max-device-width: 370px) {
+	.shouldBeHidden{
+		display: block;
 	}
 }
