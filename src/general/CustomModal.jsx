@@ -38,8 +38,8 @@ class CustomModal extends React.Component {
 
   render() {
     return (
-      <span>
-        <button onClick={this.openModal}>{this.props.modalText}</button>
+      <span className={this.props.className}>
+        <button data-testid={this.props.data_button_test_id} onClick={this.openModal}>{this.props.modalText}</button>
         <Modal
           isOpen={this.state.modalIsOpen}
           onAfterOpen={this.afterOpenModal}
