@@ -21,3 +21,6 @@
 .startButton:focus {
 border: 1px solid black;
 }
+.timer {
+	font-family: Courier;
+}
