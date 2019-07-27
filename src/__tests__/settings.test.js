@@ -208,6 +208,55 @@ describe("Source", () => {
 • tagId: Home 
 • id: 1
 `)
+	}),
+	test("can import the export text", () => {
+		const store = ItemStore.create({items:[{
+	      created: new Date("2016/04/02").getTime(),
+	      tilCompletion: 20,
+	      completed: true,
+	      length: 20,
+	      day: "2016/04/02",
+	      text: "Draw",
+	      tagId: "Home",
+	      id: "1"
+		}], currentDay: new Date().getTime()})
+	    const tagStore = TagStore.create({
+		  tags: [
+		    {
+		      name: "Other",
+		      id: "Other",
+		      canDelete: false,
+		      color: "#e66465"
+		    },
+		    {
+		      name: "Home",
+		      id: "Home",
+		      canDelete: true,
+		      color: "#e66465"
+		    },
+		    {
+		    	name: "Work",
+		      id: "Work",
+		      canDelete: true,
+		      color: "#e66465"
+		    },
+		    {
+		    	name: "Uni",
+		      id: "Uni",
+		      canDelete: true,
+		      color: "#e66465"
+		    },
+		  ]
+		});
+	    const { getByText, getByLabelText } = render(<Settings store={store} tagStore={tagStore} />)
+	    fireEvent.click(getByText("Reset data"))
+	    const currentTags = getByLabelText("Current Tags")
+    	expect(currentTags).toHaveTextContent("Other")
+    	expect(currentTags).toHaveTextContent("Home")
+    	expect(currentTags).not.toHaveTextContent("Work")
+    	expect(currentTags).not.toHaveTextContent("Uni")
+
+
 	})
 })
 afterEach(cleanup)
