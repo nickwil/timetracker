@@ -19,7 +19,6 @@ const Week = observer(function Week({weekNumber, days, month, store}) {
       newMonth
       .endOf("month")
       .subtract(6 -  days.length, "day")
-      console.log(newMonth)
     } else {
       newMonth
       .add(2, "month")

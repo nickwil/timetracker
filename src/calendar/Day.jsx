@@ -10,7 +10,6 @@ const Day = observer(function Day({store, month, number}) {
     "YYYY/MM/DD"
   );
   const timeForDay = store.getTimeToSpendForDay(day);
-  console.log(timeForDay)
   return (
     <span className={styles.day}>
       
