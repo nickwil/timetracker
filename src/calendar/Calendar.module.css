@@ -17,7 +17,7 @@
 }
 .day {
   /*max-width: 5em;*/
-	    padding: 1.5vh;
+	    padding: 1.5vw;
   max-height: 2em;
     border-radius: 0.2em;
 
@@ -26,7 +26,7 @@
 }
 .dayOfWeek {
   /*max-width: 5em;*/
-      padding: 1.5vh;
+      padding: 1.5vw;
   max-height: 2em;
     border-radius: 0.2em;
 
@@ -53,7 +53,7 @@
 
 .linksToMove {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 
 }
 
