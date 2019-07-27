@@ -3,6 +3,7 @@ import TagsInput from "./TagsInput.jsx";
 import ColorPicker from "./ColorPicker.jsx";
 import PortingData from "./PortingData.jsx";
 import store from "../stores/store.js";
+import {removeDataFromLocalStorage} from "../stores/store.js"
 import styles from "./Settings.module.css"
 function Settings({tagStore, store}) {
   return (
@@ -14,10 +15,7 @@ function Settings({tagStore, store}) {
         <button onClick={()=> {
         	store.setItems([])
         	tagStore.setToDefault()
-        	localStorage.removeItem("tasks")
-        	localStorage.removeItem("currentDay")
-        	localStorage.removeItem("tags")
-
+          removeDataFromLocalStorage()
         }}>Reset data</button>
       
     </div>

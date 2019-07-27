@@ -1,4 +1,4 @@
-import { ItemStore, Time, Item, setTimeBasedOnLocalStorage } from "./store.js"
+import { ItemStore, Time, Item, setTimeBasedOnLocalStorage, setStoreBasedOnLocalStorage, removeDataFromLocalStorage } from "./store.js"
 const moment = require("moment")
 describe("Item", () => {
   it("toggle completion", () => {
@@ -719,6 +719,59 @@ describe("ItemStore", () => {
     }])
     expect(store.items.length).toBe(1)
 
+  }),
+  it("items can be saved with localStorage", () => {
+    class LocalStorageMock {
+      constructor() {
+        this.store = {};
+      }
+
+      clear() {
+        this.store = {};
+      }
+
+      getItem(key) {
+        return this.store[key] || null;
+      }
+
+      setItem(key, value) {
+        this.store[key] = value.toString();
+      }
+
+      removeItem(key) {
+        delete this.store[key];
+      }
+    };
+
+    global.localStorage = new LocalStorageMock;
+     const day = moment().format("YYYY/MM/DD")
+     const time = new Date().getTime()
+        const store = ItemStore.create({items:[{
+      created: Date.now(),
+      tilCompletion: 20,
+      completed: true,
+      length: 20,
+      day: day,
+      text: "Work",
+      tagId: "Cafe",
+      id: "apple"
+    },
+    {
+      created: Date.now(),
+      tilCompletion: 10,
+      completed: false,
+      length: 10,
+      day: day,
+      text: "Clean",
+      tagId: "Home",
+      id: "pear"
+    }], currentDay: time})
+    localStorage.setItem("tasks",JSON.stringify(store.items.toJSON()))
+    localStorage.setItem("currentDay", JSON.stringify(time))
+    const newStore = setStoreBasedOnLocalStorage()
+    expect(JSON.stringify(store.items)).toBe(JSON.stringify(newStore.items))
+    removeDataFromLocalStorage()
+    expect(localStorage.getItem("tasks")).toBe(null)
   })
 })
   

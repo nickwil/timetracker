@@ -368,6 +368,11 @@ autorun(() => {
         localStorage.setItem("currentDay", JSON.stringify(store.currentDay))
       
 })
+function removeDataFromLocalStorage(){
+  localStorage.removeItem("tasks")
+  localStorage.removeItem("currentDay")
+  localStorage.removeItem("tags")
+}
 
-export { timeStore, ItemStore, Time, Item, setTimeBasedOnLocalStorage };
+export { timeStore, ItemStore, Time, Item, setTimeBasedOnLocalStorage, setStoreBasedOnLocalStorage, removeDataFromLocalStorage };
 export default store;
