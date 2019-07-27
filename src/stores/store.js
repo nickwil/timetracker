@@ -248,52 +248,62 @@ const ItemStore = types
     }
   }));
 
-// create an instance from a snapshot
-const store = ItemStore.create({
-  items: [
-    {
-      created: Date.now(),
-      tilCompletion: 10,
-      completed: true,
-      length: 10,
-      day: "2019/07/06",
-      text: "Study for accounting",
-      tagId: "Home",
-      id: uuidv1()
-    },
-    {
-      created: Date.now(),
-      tilCompletion: 5,
-      completed: false,
-      length: 5,
-      day: date(),
-      text: "Study for accounting",
-      tagId: "Home",
-      id: "1"
-    },
-    {
-      created: Date.now(),
-      tilCompletion: 13,
-      completed: true,
-      length: 13,
-      day: date(),
-      text: "Study",
-      tagId: "Home",
-      id: uuidv1()
-    },
-    {
-      created: Date.now(),
-      tilCompletion: 10,
-      completed: true,
-      length: 10,
-      day: date(),
-      text: "Work",
-      tagId: "Other",
-      id: uuidv1()
-    }
-  ],
-  currentDay: new Date().getTime()
-});
+
+
+function setStoreBasedOnLocalStorage(){
+  if(localStorage.getItem("tasks") == null){
+    return ItemStore.create({
+    items: [
+      {
+        created: Date.now(),
+        tilCompletion: 10,
+        completed: true,
+        length: 10,
+        day: "2019/07/06",
+        text: "Study for accounting",
+        tagId: "Home",
+        id: uuidv1()
+      },
+      {
+        created: Date.now(),
+        tilCompletion: 5,
+        completed: false,
+        length: 5,
+        day: date(),
+        text: "Study for accounting",
+        tagId: "Home",
+        id: "1"
+      },
+      {
+        created: Date.now(),
+        tilCompletion: 13,
+        completed: true,
+        length: 13,
+        day: date(),
+        text: "Study",
+        tagId: "Home",
+        id: uuidv1()
+      },
+      {
+        created: Date.now(),
+        tilCompletion: 10,
+        completed: true,
+        length: 10,
+        day: date(),
+        text: "Work",
+        tagId: "Other",
+        id: uuidv1()
+      }
+    ],
+    currentDay: new Date().getTime()
+  });
+  } else {
+    const tasks = JSON.parse(localStorage.getItem("tasks"))
+    const currentDay = JSON.parse(localStorage.getItem("currentDay"))
+    return ItemStore.create({items: tasks, currentDay: currentDay})
+  }
+}
+const store = setStoreBasedOnLocalStorage()
 
 const Time = types
   .model("Time", {
@@ -353,8 +363,10 @@ else {
 }
 var timeStore = setTimeBasedOnLocalStorage()
 autorun(() => {
-    console.log(store.items.toJSON())
-    localStorage.setItem("tasks", JSON.stringify(store.items.toJSON()))
+        console.log(store.currentDay)
+        localStorage.setItem("tasks", JSON.stringify(store.items.toJSON()))
+        localStorage.setItem("currentDay", JSON.stringify(store.currentDay))
+      
 })
 
 export { timeStore, ItemStore, Time, Item, setTimeBasedOnLocalStorage };
