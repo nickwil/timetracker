@@ -201,6 +201,14 @@ const ItemStore = types
         tag.value += item.length;
       }
       return tagsTime;
+    },
+    getTimeToSpendForDay(day = moment(self.currentDay).format("YYYY/MM/DD")) {
+      const dailyItems = self.items.filter(item => {
+        return item.day == day;
+      });
+      var time = 0;
+      dailyItems.map(item => (time += item.tilCompletion));
+      return time;
     }
   }))
   .actions(self => ({
@@ -233,16 +241,7 @@ const ItemStore = types
           item.tagId = "Other";
         }
       }
-    },
-    // need to move to views
-    getTimeToSpendForDay(day = moment(self.currentDay).format("YYYY/MM/DD")) {
-      const dailyItems = self.items.filter(item => {
-        return item.day == day;
-      });
-      var time = 0;
-      dailyItems.map(item => (time += item.tilCompletion));
-      return time;
-    },
+    },    
     setItems(items) {
       self.items = items;
     }

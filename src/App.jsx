@@ -17,7 +17,7 @@ const App = observer(function App(props) {
   return (
     <section>
       <header>
-        <Navigation />
+        <Navigation store={store}/>
       </header>
       <Router>
         <Home timeStore={timeStore} store={store} dayFromUrl={new Date().getTime()} path="/" />
