@@ -28,7 +28,7 @@ const Home = observer(function Home({ store, dayFromUrl, timeStore }) {
           {store.unCompletedTodos.length > 0 ?
           <span data-testid="remaining-items">
           {store.unCompletedTodos.map(obj => (
-              <ItemList timeStore={timeStore} item={obj} store={store} tags={tagStore.tags} />
+              <ItemList key={"uncompleted-item-list-"+obj.id} timeStore={timeStore} item={obj} store={store} tags={tagStore.tags} />
             ))
         }
           </span>
@@ -42,7 +42,7 @@ const Home = observer(function Home({ store, dayFromUrl, timeStore }) {
           { store.completedTodos.length > 0 ?
           <span data-testid="completed-items">
           {store.completedTodos.map(obj => (
-              <ItemList timeStore={timeStore} item={obj} store={store} tags={tagStore.tags} />
+              <ItemList key={"completed-item-list-"+obj.id} timeStore={timeStore} item={obj} store={store} tags={tagStore.tags} />
             ))}
           </span>
           :
