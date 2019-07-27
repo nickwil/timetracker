@@ -16,7 +16,9 @@ function hmsToSeconds(fromTime, untilTime) {
   console.log(end.minutes, start.minutes);
   var hoursInSeconds = (end.hours - start.hours) * 60 * 60;
   var minutesInSeconds = (end.minutes - start.minutes) * 60;
-
+  if(hoursInSeconds + minutesInSeconds < 0){
+    return 0
+  }
   return hoursInSeconds + minutesInSeconds;
 }
 
