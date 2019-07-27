@@ -123,6 +123,40 @@ describe("TagStore", () => {
 		});
 		const index = tagStore.index("Pear")
 		expect(tagStore.tags[index].name).toBe("Pear")
+	}),
+	it("tag store can be set to its default", () => {
+		const tagStore = TagStore.create({
+		  tags: [
+		    
+		    {
+		      name: "Home",
+		      id: "Home",
+		      canDelete: true,
+		      color: "#e66465"
+		    },
+		    {
+		      name: "Pear",
+		      id: "Pear",
+		      canDelete: true,
+		      color: "#e66465"
+		    },
+		    
+		  ]
+		});
+		tagStore.setToDefault()
+		console.log(JSON.stringify(tagStore.tags.toJSON()))
+		expect(JSON.stringify(tagStore.tags.toJSON())).toBe(JSON.stringify([{
+        name: "Other",
+        id: "Other",
+        canDelete: false,
+        color: "#e66465"
+      },
+      {
+        name: "Home",
+        id: "Home",
+        canDelete: true,
+        color: "#fff"
+      }]))
 	})
 })
 
