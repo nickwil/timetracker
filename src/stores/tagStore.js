@@ -47,6 +47,20 @@ const TagStore = types
     },
     updateColor(id, color) {
       self.tags[self.index(id)].updateColor(color);
+    },
+    setToDefault(){
+      self.tags = [{
+        name: "Other",
+        id: "Other",
+        canDelete: false,
+        color: "#e66465"
+      },
+      {
+        name: "Home",
+        id: "Home",
+        canDelete: true,
+        color: "#e66465"
+      }]
     }
   }));
 

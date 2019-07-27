@@ -11,7 +11,14 @@ function Settings({tagStore, store}) {
       
         <TagsInput tagStore={tagStore}/>
         <PortingData data={store.exportItemsData} />
-        <button>Reset data</button>
+        <button onClick={()=> {
+        	store.setItems([])
+        	tagStore.setToDefault()
+        	localStorage.removeItem("tasks")
+        	localStorage.removeItem("currentDay")
+        	localStorage.removeItem("tags")
+
+        }}>Reset data</button>
       
     </div>
   );
