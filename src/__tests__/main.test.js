@@ -76,10 +76,11 @@ describe('Home', () => {
     	getByText, 
     	getByLabelText, 
     	getByPlaceholderText, 
-    	queryByTestId } = render(<Home timeStore={timeStore} store={store} dayFromUrl={new Date().getTime()} />)
+    	queryByTestId,
+      getAllByDisplayValue } = render(<Home timeStore={timeStore} store={store} dayFromUrl={new Date().getTime()} />)
 	// The user already has an item and they want to edit it. To do so they go to the description and write something
 	// new in the input 
-	const description = getByDisplayValue("Something")
+	const description = getAllByDisplayValue("Something")[0]
 	fireEvent.change(description, {target: {value: 'Study something'}})
 	// The user now sees their changed description as the new description
 	expect(description).toHaveValue("Study something")
