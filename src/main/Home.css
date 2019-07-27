@@ -7,8 +7,6 @@ html,body{
 body {
 	  margin: 0;
 
-  background-color: #282c34;
-  background-image: url("http://localhost:3000/camping.png");
 }
 
 .App-header {
