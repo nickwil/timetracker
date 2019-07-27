@@ -91,5 +91,5 @@ const tagStore = getTagsFromLocalStorage()
 autorun(() => {
   localStorage.setItem("tags", JSON.stringify(tagStore.tags))
 })
-export {TagStore}
+export {TagStore, getTagsFromLocalStorage}
 export default tagStore;

@@ -1,4 +1,4 @@
-import {TagStore} from "./tagStore.js"
+import {TagStore, getTagsFromLocalStorage} from "./tagStore.js"
 import {ItemStore} from "./store.js"
 describe("TagStore", () => {
 	it("add tag", () => {
@@ -157,6 +157,52 @@ describe("TagStore", () => {
         canDelete: true,
         color: "#fff"
       }]))
+	}),
+	it("tags can be stored in localStorage", () => {
+		class LocalStorageMock {
+      constructor() {
+        this.store = {};
+      }
+
+      clear() {
+        this.store = {};
+      }
+
+      getItem(key) {
+        return this.store[key] || null;
+      }
+
+      setItem(key, value) {
+        this.store[key] = value.toString();
+      }
+
+      removeItem(key) {
+        delete this.store[key];
+      }
+    };
+
+    global.localStorage = new LocalStorageMock;
+     const tagStore = TagStore.create({
+		  tags: [
+		    
+		    {
+		      name: "Home",
+		      id: "Home",
+		      canDelete: true,
+		      color: "#e66465"
+		    },
+		    {
+		      name: "Pear",
+		      id: "Pear",
+		      canDelete: true,
+		      color: "#e66465"
+		    },
+		    
+		  ]
+		});
+    localStorage.setItem("tags",JSON.stringify(tagStore.tags.toJSON()))
+     const newTags =getTagsFromLocalStorage()
+     expect(JSON.stringify(tagStore.tags.toJSON())).toBe(JSON.stringify(newTags.tags.toJSON()))
 	})
 })
 
