@@ -281,7 +281,7 @@ describe('Home', () => {
 		  isCounting: false,
 		  count: 0
 	});
-    const { getByText, queryByTestId, getByPlaceholderText } = render(
+    const { getByText, queryByTestId, getByPlaceholderText, getAllByTestId } = render(
     	<Home 
     	store={store} 
     	timeStore={timeStore}
@@ -291,11 +291,16 @@ describe('Home', () => {
     fireEvent.click(queryByTestId("item-menu:" + id))
     // The user changes the value of the input to 20
     fireEvent.change(queryByTestId("modal-item-menu-input:"+id), {target: {value: 20}})
+    // The user changes the value of the description
+    fireEvent.change(getAllByTestId("item-input-modal-descrip:"+id)[1], {target: {value: "New value"}})
     // The user closes the modal
     fireEvent.click(getByText("Close"))
     const remainingItems = queryByTestId('remaining-items')
-	// The user sees the completed item on the completed section
+    const descriptionInput = queryByTestId("item-input-descrip:" + id)
+
+	// The user sees the completed item on the completed section and the new value for their description
     expect(remainingItems).toHaveTextContent("20s")
+    expect(descriptionInput).toHaveValue("New value")
   }),
   test('use the add item modal', () => {
 
