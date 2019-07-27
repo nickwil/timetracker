@@ -1,5 +1,7 @@
 import { types } from "mobx-state-tree";
 import store from "./store.js";
+import { autorun } from "mobx"
+
 const uuidv1 = require("uuid/v1");
 
 const Tag = types
@@ -48,21 +50,32 @@ const TagStore = types
     }
   }));
 
-const tagStore = TagStore.create({
-  tags: [
-    {
-      name: "Other",
-      id: "Other",
-      canDelete: false,
-      color: "#e66465"
-    },
-    {
-      name: "Home",
-      id: "Home",
-      canDelete: true,
-      color: "#e66465"
-    }
-  ]
-});
+
+function getTagsFromLocalStorage(){
+  if(localStorage.getItem("tags") == null){
+    return TagStore.create({
+    tags: [
+      {
+        name: "Other",
+        id: "Other",
+        canDelete: false,
+        color: "#e66465"
+      },
+      {
+        name: "Home",
+        id: "Home",
+        canDelete: true,
+        color: "#e66465"
+      }
+    ]
+  });
+  } else {
+    return TagStore.create({tags: JSON.parse(localStorage.getItem("tags"))})
+  }
+}
+const tagStore = getTagsFromLocalStorage()
+autorun(() => {
+  localStorage.setItem("tags", JSON.stringify(tagStore.tags))
+})
 export {TagStore}
 export default tagStore;
