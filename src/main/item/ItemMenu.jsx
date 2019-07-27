@@ -31,7 +31,7 @@ function ItemMenu({ store, id, data_testid_for_input }) {
   return (
     <span>
       <button onClick={() => store.deleteItem(id)}>Delete</button>
-      <label>Task Time:<input
+      <label style={{fontWeight: 300}}>Task Time:<input
       data-testid={data_testid_for_input}
         type="number"
         value={storeItem.tilCompletion}
