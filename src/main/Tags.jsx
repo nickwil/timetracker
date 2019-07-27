@@ -5,7 +5,7 @@ const Tags = observer(function Tags({ tags, onChange, defaultTagId }) {
   return (
     <select data-testid="tags-selection" onChange={e => onChange(e.target.value)}>
       {tags.map((tag, index) => (
-        <Tag tag={tag} defaultTagId={defaultTagId} />
+        <Tag key={"tag-key-id"+tag.id} tag={tag} defaultTagId={defaultTagId} />
       ))}
     </select>
   );
