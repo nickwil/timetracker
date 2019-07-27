@@ -106,7 +106,7 @@ const ItemStore = types
     },
     get exportItemsData() {
       var data = "";
-      self.items.map((obj, index) => {
+      self.items.forEach((obj, index) => {
         data += `#${index + 1} 
 • text: ${obj.text} 
 • created: ${obj.created.getTime()} 
