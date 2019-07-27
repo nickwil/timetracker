@@ -25,7 +25,7 @@ const TagStore = types
   })
   .views(self => ({
     index(id) {
-      return self.tags.findIndex(tag => tag.id == id);
+      return self.tags.findIndex(tag => tag.id === id);
     }
   }))
   .actions(self => ({
@@ -39,10 +39,10 @@ const TagStore = types
     },
     deleteTag(id, itemStore = store) {
       itemStore.setEmptyTagIdToDefault(id);
-      self.tags = self.tags.filter(obj => obj.id != id);
+      self.tags = self.tags.filter(obj => obj.id !== id);
     },
     updateTag(id, text) {
-      const index = self.tags.findIndex(obj => obj.id == id);
+      const index = self.tags.findIndex(obj => obj.id === id);
       self.tags[index].updateTag(text);
     },
     updateColor(id, color) {

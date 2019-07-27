@@ -12,7 +12,7 @@ const Tags = observer(function Tags({ tags, onChange, defaultTagId }) {
 });
 
 const Tag = observer(function Tag({ tag, defaultTagId }) {
-  if (defaultTagId == tag.id) {
+  if (defaultTagId === tag.id) {
     return (
       <option selected="selected" value={tag.id}>
         {tag.name}

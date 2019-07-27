@@ -1,5 +1,4 @@
 import React from "react";
-import Modal from "react-modal";
 import Input from "../../general/Input.jsx";
 import styles from "./ItemMenu.module.css";
 import CustomModal from "../../general/CustomModal.jsx"
@@ -30,7 +29,6 @@ function ItemMenuContainer({ store, id }) {
 
 function ItemMenu({ store, id, data_testid_for_input }) {
   const storeItem = store.items[store.index(id)];
-  const [time, updateTime] = React.useState("10:00");
 
   return (
     <span>

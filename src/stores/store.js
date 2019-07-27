@@ -1,4 +1,4 @@
-import { types, onSnapshot } from "mobx-state-tree";
+import { types } from "mobx-state-tree";
 import { autorun } from "mobx"
 import { date } from "../util/quick.js";
 const moment = require("moment");
@@ -54,11 +54,11 @@ const ItemStore = types
     get completedTodos() {
       return self.items.filter(
         obj =>
-          obj.day == date(new Date(self.currentDay)) && obj.completed == true
+          obj.day === date(new Date(self.currentDay)) && obj.completed === true
       );
     },
     get allCompletedTodos() {
-      return self.items.filter(obj => obj.completed == true);
+      return self.items.filter(obj => obj.completed === true);
     },
     get years() {
       var years = [];
@@ -101,7 +101,7 @@ const ItemStore = types
     get unCompletedTodos() {
       return self.items.filter(
         obj =>
-          obj.day == date(new Date(self.currentDay)) && obj.completed == false
+          obj.day === date(new Date(self.currentDay)) && obj.completed === false
       );
     },
     get exportItemsData() {
@@ -154,7 +154,7 @@ const ItemStore = types
           item.created = new Date(Number(item.created));
           item.length = Number(item.length);
           item.tilCompletion = Number(item.tilCompletion);
-          item.completed = item.completed == "true" ? true : false;
+          item.completed = item.completed === "true" ? true : false;
           finalItems.push(item);
         }
       }
@@ -162,25 +162,25 @@ const ItemStore = types
     },
     completedTodosFromWeek(year, month, weekNo) {
       const completedTodos = self.items.filter(
-        obj => obj.day.includes(`${year}/${month}`) && obj.completed == true
+        obj => obj.day.includes(`${year}/${month}`) && obj.completed === true
       );
       // check if day is in a week
       return completedTodos.filter(
-        obj => Math.ceil(moment(obj.day, "YYYY/MM/DD").date() / 7) == weekNo
+        obj => Math.ceil(moment(obj.day, "YYYY/MM/DD").date() / 7) === Number(weekNo)
       );
     },
     completedTodosFromMonth(year, month) {
       return self.items.filter(
-        obj => obj.day.includes(`${year}/${month}`) && obj.completed == true
+        obj => obj.day.includes(`${year}/${month}`) && obj.completed === true
       );
     },
     completedTodosFromYear(year) {
       return self.items.filter(
-        obj => obj.day.includes(`${year}`) && obj.completed == true
+        obj => obj.day.includes(`${year}`) && obj.completed === true
       );
     },
     index(id) {
-      return self.items.findIndex(obj => obj.id == id);
+      return self.items.findIndex(obj => obj.id === id);
     },
 
     getTimeFromEachTag(tags, completedTodos = self.allCompletedTodos) {
@@ -197,7 +197,7 @@ const ItemStore = types
 
       for (var itemNo = 0; itemNo < items.length; itemNo++) {
         const item = items[itemNo];
-        const tagIndex = tagsTime.findIndex(obj => obj.id == item.tagId);
+        const tagIndex = tagsTime.findIndex(obj => obj.id === item.tagId);
         var tag = tagsTime[tagIndex];
         tag.value += item.length;
       }
@@ -205,7 +205,7 @@ const ItemStore = types
     },
     getTimeToSpendForDay(day = moment(self.currentDay).format("YYYY/MM/DD")) {
       const dailyItems = self.items.filter(item => {
-        return item.day == day;
+        return item.day === day;
       });
       var time = 0;
       dailyItems.map(item => (time += item.tilCompletion));
@@ -227,7 +227,7 @@ const ItemStore = types
       });
     },
     deleteItem(id) {
-      self.items = self.items.filter(item => item.id != id);
+      self.items = self.items.filter(item => item.id !== id);
     },
     updateDate(date) {
       if(!isNaN(new Date(date).getTime())){
@@ -238,7 +238,7 @@ const ItemStore = types
     setEmptyTagIdToDefault(id) {
       for (var itemNumber = 0; itemNumber < self.items.length; itemNumber++) {
         const item = self.items[itemNumber];
-        if (item.tagId == id) {
+        if (item.tagId === id) {
           item.tagId = "Other";
         }
       }

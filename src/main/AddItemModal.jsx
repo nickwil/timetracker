@@ -1,22 +1,11 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import Modal from "react-modal";
 import CustomModal from "../general/CustomModal.jsx"
 import TimePicker from "./TimePicker.jsx";
 import Tags from "./Tags.jsx";
 import tagStore from "../stores/tagStore.js";
 import styles from "./AddItemModal.module.css"
-const moment = require("moment");
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)"
-  }
-};
+
 
 // Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
 /* istanbul ignore next */ 

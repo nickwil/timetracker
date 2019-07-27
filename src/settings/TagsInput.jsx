@@ -1,7 +1,6 @@
 import React from "react";
 import CustomModal from "../general/CustomModal.jsx";
 import { observer } from "mobx-react-lite";
-import ContentEditable from "react-contenteditable";
 import ColorPicker from "./ColorPicker.jsx";
 const TagsInput = observer(function TagsInput({tagStore}) {
   return (
@@ -61,7 +60,7 @@ function TagForm({ updateTags, tagStore }) {
   const onSubmit = e => {
     e.preventDefault()
 
-    if(value != ""){
+    if(value !== ""){
       tagStore.addTag(value);
         onInputChange("");
     }

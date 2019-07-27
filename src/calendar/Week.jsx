@@ -13,7 +13,7 @@ const Week = observer(function Week({weekNumber, days, month, store}) {
       .subtract(1, "month")
 
       
-    if(weekNumber == 1){
+    if(weekNumber === 1){
       // if it's the first week
 
       newMonth
@@ -31,7 +31,7 @@ const Week = observer(function Week({weekNumber, days, month, store}) {
       newMonth.add(1, "day")
     }
   }
-  if (weekNumber != 1) {
+  if (weekNumber !== 1) {
     return (
       <div className={styles.week}>
         {days}

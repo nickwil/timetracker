@@ -4,15 +4,13 @@ import Input from "../../general/Input.jsx";
 import ItemTime from "./ItemTime.jsx";
 import ItemMenuContainer from "./ItemMenu.jsx";
 import { observer } from "mobx-react-lite";
-import {timeStore} from "../../stores/store.js"
 import tagStore from "../../stores/tagStore.js";
 import shortTimeFormatting from "../../util/shortTimeFormatting.js";
 
 import styles from "./ItemList.module.css";
-import {styles as sharedStyles} from "./ItemMenu.module.css"
 const ItemList = observer(function ItemList({ store, item, tags, timeStore }) {
   const checkItem = () => {
-    if(timeStore.selectedItem == item.id){
+    if(timeStore.selectedItem === item.id){
       return styles.container + " " + styles.outline
     } else {
       return styles.container

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import CustomLink from "../general/CustomLink.jsx"
 import styles from "./Calendar.module.css";
 import Week from "./Week.jsx"
@@ -40,7 +40,7 @@ const Calendar = observer(function Calendar({year, monthNo, store}) {
 
     var weekNumber = 1;
     for (var i = 0; i < numberOfDaysInMonth; i++) {
-      if (calDay.format("dddd") == "Sunday") {
+      if (calDay.format("dddd") === "Sunday") {
         dates.push(<Week store={store} month={month} weekNumber={weekNumber} days={week} />);
         week = [];
         weekNumber += 1;
@@ -61,7 +61,7 @@ const Calendar = observer(function Calendar({year, monthNo, store}) {
     return dates;
   };
   const checkDateOverride = () => {
-    if(year == undefined && monthNo == undefined){
+    if(year === undefined && monthNo === undefined){
       return true
     } else {
       return false

@@ -7,20 +7,20 @@ function TimePicker({ onChange, value, data_test_id}) {
   // if more than two make red
 
   var hoursStyle = null;
-  if (hours != undefined) {
+  if (hours !== undefined) {
     if (hours.length > 2 || hours > 12) {
       hoursStyle = { backgroundColor: `red` };
     }
   }
 
   var secondStyle = null;
-  if (seconds != undefined) {
+  if (seconds !== undefined) {
     if (seconds.length > 2 || seconds > 59) {
       secondStyle = { backgroundColor: `red` };
     }
   }
   const handleChange = (hours, seconds, timeOfDay) => {
-    if (timeOfDay == "AM") {
+    if (timeOfDay === "AM") {
       onChange(hours + ":" + seconds);
     } else {
       onChange(Number(hours) + 12 + ":" + seconds);

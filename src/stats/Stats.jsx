@@ -6,7 +6,6 @@ import CustomLink from "../general/CustomLink.jsx";
 import styles from "./Stats.module.css"
 const moment = require("moment");
 
-const colors = ["#E38627", "#C13C37", "#6A2135"];
 const Stats = observer(function Stats({ data, years, months, weeks }) {
   
 

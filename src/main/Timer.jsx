@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import useInterval from "./useInterval.js";
 import styles from "./Timer.module.css";
@@ -37,7 +37,7 @@ const Timer = observer(function Timer({
     <div className={styles.container}>
       <span data-testid="time-tracker" className={styles.timer}>{toHour(timeStore.count)}</span>
       <button data-testid="play/pause-button" className={styles.startButton} onClick={() => handleOnClick()}>
-        {timeStore.count == 0 ? (
+        {timeStore.count === 0 ? (
           <svg
             width="40%"
             height="43%"

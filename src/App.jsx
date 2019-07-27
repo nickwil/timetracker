@@ -3,9 +3,7 @@ import { Router } from "@reach/router";
 import Home from "./main/Home.jsx";
 import DateHome from "./main/DateHome.jsx"
 import Calendar from "./calendar/Calendar.jsx";
-import Stats from "./stats/Stats.jsx";
 import store from "./stores/store.js";
-import { date } from "./util/quick.js";
 import Settings from "./settings/Settings.jsx";
 import Navigation from "./Navigation.jsx";
 import tagStore from "./stores/tagStore.js";

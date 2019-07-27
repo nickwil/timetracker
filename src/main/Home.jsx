@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Home.css";
 import Timer from "./Timer.jsx";
-import Calendar from "../calendar/Calendar.jsx";
 import AddItemModal from "./AddItemModal.jsx";
 import CheckDateOops from "../general/CheckDateOops.jsx"
 import { observer } from "mobx-react-lite";
 import CustomLink from "../general/CustomLink.jsx";
 
 import { date } from "../util/quick.js";
-import { timeStore } from "../stores/store.js";
 import tagStore from "../stores/tagStore.js";
 import ItemList from "./item/ItemList.jsx";
 
