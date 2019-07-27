@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Modal from "react-modal";
+import CustomModal from "../general/CustomModal.jsx"
 import TimePicker from "./TimePicker.jsx";
 import Tags from "./Tags.jsx";
 import tagStore from "../stores/tagStore.js";
@@ -42,7 +43,6 @@ class AddItemModal extends React.Component {
     super();
 
     this.state = {
-      modalIsOpen: false,
       val: "",
       time: "",
       fromTime: "",
@@ -50,8 +50,6 @@ class AddItemModal extends React.Component {
       tag: "Other"
     };
 
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleSubmit(){
@@ -61,20 +59,12 @@ class AddItemModal extends React.Component {
                   Number(this.state.time),
                   this.state.tag
       )
-      this.closeModal()
     }
 
 
   }
 
-  openModal() {
-    this.setState({ modalIsOpen: true });
-  }
 
-
-  closeModal() {
-    this.setState({ modalIsOpen: false });
-  }
 
   updateText(text) {
     this.setState({ val: text });
@@ -96,13 +86,9 @@ class AddItemModal extends React.Component {
   render() {
     return (
       <div>
-        <div style={{textAlign: `right`}}><button className={styles.addButton} onClick={this.openModal}>+</button></div>
-        <Modal
-          isOpen={this.state.modalIsOpen}
-          onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.closeModal}
-          style={customStyles}
-          contentLabel="Example Modal"
+        <CustomModal
+        modalText="+"
+        modalTextButtonClassName={styles.addButton}
         >
           <input
             placeholder="task..."
@@ -135,9 +121,7 @@ class AddItemModal extends React.Component {
           >
             Submit
           </button>
-
-          <button onClick={this.closeModal}>close</button>
-        </Modal>
+        </CustomModal>
       </div>
     );
   }
