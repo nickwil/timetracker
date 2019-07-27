@@ -1,4 +1,5 @@
 import { types, onSnapshot } from "mobx-state-tree";
+import { autorun } from "mobx"
 import { date } from "../util/quick.js";
 const moment = require("moment");
 
@@ -351,7 +352,10 @@ else {
 }
 }
 var timeStore = setTimeBasedOnLocalStorage()
-
+autorun(() => {
+    console.log(store.items.toJSON())
+    localStorage.setItem("tasks", JSON.stringify(store.items.toJSON()))
+})
 
 export { timeStore, ItemStore, Time, Item, setTimeBasedOnLocalStorage };
 export default store;
