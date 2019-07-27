@@ -30,7 +30,7 @@ describe('Calendar', () => {
     },
     {
       created: Date.now(),
-      tilCompletion: 10,
+      tilCompletion: 3601,
       completed: true,
       length: 3601,
       day: yesterday,
