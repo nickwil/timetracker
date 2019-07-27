@@ -51,7 +51,7 @@ describe('Home', () => {
     expect(completedSection.children.length).toBe(1)
     // The user, now determined to complete something, decides to add a task
     // 1. They click the add button
-    const addButton = getByText("Add task")
+    const addButton = getByText("+")
     fireEvent.click(addButton)
     // 2. They fill out the task input
     fireEvent.change(getByPlaceholderText("task..."), {target: {value: 'Study'}})
@@ -322,7 +322,7 @@ describe('Home', () => {
     expect(completedSection.children.length).toBe(1)
     // The user, now determined to complete something, decides to add a task
     // 1. They click the add button
-    const addButton = getByText("Add task")
+    const addButton = getByText("+")
     fireEvent.click(addButton)
     // 2. They fill out the task input
     fireEvent.change(getByPlaceholderText("task..."), {target: {value: 'Study'}})

@@ -1,0 +1,15 @@
+.addButton {
+	margin-top: 1em;
+	background-color: blue;
+	border: none;
+	border-radius: 100%;
+	color: white;
+	outline: none;
+	font-size: 1.5em;
+	width: 2em;
+	height: 2em;
+	text-align: center;
+}
+.addButton:focus{
+	border: 1px solid black;
+}

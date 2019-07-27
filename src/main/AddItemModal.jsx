@@ -4,6 +4,7 @@ import Modal from "react-modal";
 import TimePicker from "./TimePicker.jsx";
 import Tags from "./Tags.jsx";
 import tagStore from "../stores/tagStore.js";
+import styles from "./AddItemModal.module.css"
 const moment = require("moment");
 const customStyles = {
   content: {
@@ -95,7 +96,7 @@ class AddItemModal extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={this.openModal}>Add task</button>
+        <div style={{textAlign: `right`}}><button className={styles.addButton} onClick={this.openModal}>+</button></div>
         <Modal
           isOpen={this.state.modalIsOpen}
           onAfterOpen={this.afterOpenModal}
