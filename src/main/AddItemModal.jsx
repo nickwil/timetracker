@@ -48,6 +48,11 @@ class AddItemModal extends React.Component {
                   Number(this.state.time),
                   this.state.tag
       )
+      this.setState({val: "",
+      time: "",
+      fromTime: "",
+      untilTime: "",
+      tag: "Other"})
     }
 
 
