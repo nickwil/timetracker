@@ -20,13 +20,13 @@ const Calendar = observer(function Calendar({year, monthNo, store}) {
      var momentObject = moment()
       .startOf("month")
       .format("YYYY-MM");
-  if(year && monthNo){
-    momentObject = moment(`${year}-${monthNo}`, "YYYY-MM")
-      .startOf("month")
-      .format("YYYY-MM")
-  }
-  changeMonth(momentObject)
-  })
+    if(year && monthNo){
+      momentObject = moment(`${year}-${monthNo}`, "YYYY-MM")
+        .startOf("month")
+        .format("YYYY-MM")
+    }
+    changeMonth(momentObject)
+  }, [year, monthNo])
   const [month, changeMonth] = React.useState(
     momentObject
   );
