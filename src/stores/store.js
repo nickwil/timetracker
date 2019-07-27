@@ -62,7 +62,7 @@ const ItemStore = types
     },
     get years() {
       var years = [];
-      self.items.map(function(item) {
+      self.items.forEach(function(item) {
         const year = item.day.split("/")[0];
         if (!years.includes(year)) {
           years.push(year);
@@ -72,7 +72,7 @@ const ItemStore = types
     },
     get months() {
       var months = [];
-      self.items.map(function(item) {
+      self.items.forEach(function(item) {
         const day = item.day.split("/");
         const month = day[0] + "/" + day[1];
         if (!months.includes(month)) {
@@ -83,7 +83,7 @@ const ItemStore = types
     },
     get weeks() {
       var weeks = [];
-      self.items.map(function(item) {
+      self.items.forEach(function(item) {
         const day = item.day.split("/");
         const week =
           day[0] +
