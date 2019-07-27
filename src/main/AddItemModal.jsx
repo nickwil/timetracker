@@ -90,6 +90,7 @@ class AddItemModal extends React.Component {
             onChange={e => this.updateText(e.target.value)}
           />
           <input
+            type="number"
             placeholder="time.."
             value={this.state.time}
             onChange={e => this.updateTime(e.target.value)}
