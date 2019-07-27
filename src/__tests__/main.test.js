@@ -292,7 +292,7 @@ describe('Home', () => {
     // The user changes the value of the input to 20
     fireEvent.change(queryByTestId("modal-item-menu-input:"+id), {target: {value: 20}})
     // The user closes the modal
-    fireEvent.click(getByText("close"))
+    fireEvent.click(getByText("Close"))
     const remainingItems = queryByTestId('remaining-items')
 	// The user sees the completed item on the completed section
     expect(remainingItems).toHaveTextContent("20s")
