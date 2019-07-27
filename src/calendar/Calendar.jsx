@@ -69,10 +69,12 @@ function Calendar({year, monthNo, store}) {
   return (
     <CheckDateOops override={checkDateOverride()}date={`${year}-${monthNo}`}>
     <div className={styles.container}>
-      <CustomLink to={"/calendar/" + moment(month).subtract(1, "month").format("YYYY/MM")}>Go back a month</CustomLink>
-      <CustomLink to={"/calendar/" + moment(month).add(1, "month").format("YYYY/MM")}>Go to next month</CustomLink>
+      <h1>Month: {moment(month).format("MMMM YYYY")}</h1>
       <div className={styles.mainCal}>
-        <h1>Month: {moment(month).format("MMMM YYYY")}</h1>
+        <div className={styles.linksToMove}>
+          <CustomLink className={styles.roundedButton} to={"/calendar/" + moment(month).subtract(1, "month").format("YYYY/MM")}>Go back a month</CustomLink>
+          <CustomLink className={styles.roundedButton} to={"/calendar/" + moment(month).add(1, "month").format("YYYY/MM")}>Go to next month</CustomLink>
+        </div>
         <div className={styles.week}>
           <span className={styles.dayOfWeek}>Sun</span>
           <span className={styles.dayOfWeek}>Mon</span>

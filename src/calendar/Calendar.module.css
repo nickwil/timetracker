@@ -50,3 +50,16 @@
     }    
     
 }
+
+.linksToMove {
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.roundedButton {
+  background-color: white;
+  border-radius: 5%;
+  display: block;
+  padding: 1em;
+}
