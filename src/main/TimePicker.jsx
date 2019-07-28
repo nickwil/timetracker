@@ -36,7 +36,7 @@ function TimePicker({ onChange, value, data_test_id}) {
           handleChange(e.target.value, seconds, timeOfDay);
         }}
         data-testid={data_test_id + "-hours"}
-        autocomplete="off"
+        autoComplete="off"
         max="12"
         min="1"
         placeholder="--"
@@ -50,7 +50,7 @@ function TimePicker({ onChange, value, data_test_id}) {
           updateSeconds(e.target.value);
           handleChange(hours, e.target.value, timeOfDay);
         }}
-        autocomplete="off"
+        autoComplete="off"
         max="59"
         min="0"
         data-testid={data_test_id + "-minutes"}
