@@ -363,7 +363,6 @@ else {
 }
 var timeStore = setTimeBasedOnLocalStorage()
 autorun(() => {
-        console.log(store.currentDay)
         localStorage.setItem("tasks", JSON.stringify(store.items.toJSON()))
         localStorage.setItem("currentDay", JSON.stringify(store.currentDay))
       

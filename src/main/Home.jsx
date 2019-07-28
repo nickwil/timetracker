@@ -49,7 +49,7 @@ const Home = observer(function Home({ store, dayFromUrl, timeStore }) {
           null
         }
         </section>
-        <AddItemModal addTask={store.addItem} />
+        <AddItemModal tags={tagStore.tags} addTask={store.addItem} />
       </div>
     </CheckDateOops>
   );

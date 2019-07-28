@@ -2,7 +2,6 @@ import React from "react";
 import Modal from "react-modal";
 import TimePicker from "./TimePicker.jsx";
 import Tags from "./Tags.jsx";
-import tagStore from "../stores/tagStore.js";
 import styles from "./AddItemModal.module.css"
 const customStyles = {
   content: {
@@ -117,7 +116,8 @@ class AddItemModal extends React.Component {
           <section>
             <h6> Optional: </h6>
             <Tags
-              tags={tagStore.tags}
+              defaultTagId="Other"
+              tags={this.props.tags}
               onChange={tag => this.setState({ tag: tag })}
             />
             <div>
