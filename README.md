@@ -14,7 +14,9 @@ You want an open source time tracking solution to ensure you can keep your data 
 
 ## How
 Written with love in ReactJS with Mobx State Tree for state mangement.
-Reach Router is used to provide an accessible routing experience
+
+Reach Router is used to provide an accessible routing experience.
+
 MomentJS is used to work with time, because it can get annoying sometimes.
 
 ## Using the web app
