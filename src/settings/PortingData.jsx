@@ -6,13 +6,13 @@ function PortingData(props) {
     <section>
       <h2>Import/Export Data</h2>
       <label htmlFor="export-data-area" >Data:</label> 
-      <textarea id="export-data-area">{props.data}</textarea>
+      <textarea value={props.data} readOnly id="export-data-area"/>
       <form onSubmit={(e) => {
         e.preventDefault()
         store.setItems(store.importItemsData(value))
       }}>
         <label htmlFor="import-data-area" >Import:</label>
-        <textarea id="import-data-area" onChange={e => update(e.target.value)}>{value}</textarea>
+        <textarea value={value} id="import-data-area" onChange={e => update(e.target.value)}/>
         <input value="Import" type="submit"/>
       </form>
     </section>
