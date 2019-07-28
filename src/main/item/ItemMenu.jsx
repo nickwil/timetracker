@@ -1,5 +1,4 @@
 import React from "react";
-import Input from "../../general/Input.jsx";
 import styles from "./ItemMenu.module.css";
 import CustomModal from "../../general/CustomModal.jsx"
 function ItemMenuContainer({ store, id }) {
@@ -40,13 +39,13 @@ function ItemMenu({ store, id, data_testid_for_input }) {
         onChange={e => storeItem.updateLengthOfTask(Number(e.target.value))}
         placeholder="change time for task"
       /></label>
-        <Input
+        <input
         placeholder="Add description for task..."
         data-testid={"item-input-modal-descrip:" + storeItem.id}
-        styles={styles.shouldBeHidden}
-        text={storeItem.text}
+        className={styles.shouldBeHidden}
+        value={storeItem.text}
         id={storeItem.id}
-        onTaskChange={text => storeItem.updateText(text)}
+        onChange={e => storeItem.updateText(e.target.value)}
       />
       <button onClick={() => storeItem.updateTimeTilCompletion(storeItem.tilCompletion)}>Mark as completed</button>
     </span>
