@@ -1,6 +1,5 @@
 import React from "react";
 import Tags from "../Tags.jsx";
-import Input from "../../general/Input.jsx";
 import ItemTime from "./ItemTime.jsx";
 import ItemMenuContainer from "./ItemMenu.jsx";
 import { observer } from "mobx-react-lite";
@@ -25,13 +24,12 @@ const ItemList = observer(function ItemList({ store, item, tags, timeStore }) {
         <ItemTime timeStore={timeStore} id={item.id} time={item.tilCompletion} />
       }
 
-      <Input
+      <input
         placeholder="Add description..."
         data-testid={"item-input-descrip:" + item.id}
-        styles={styles.input + ' ' + styles.shouldBeHidden}
-        text={item.text}
-        id={item.id}
-        onTaskChange={text => storeItem.updateText(text)}
+        className={styles.input + ' ' + styles.shouldBeHidden}
+        value={item.text}
+        onChange={e => storeItem.updateText(e.target.value)}
       />
       <span className={styles.tagsAndDot}>
         <span
