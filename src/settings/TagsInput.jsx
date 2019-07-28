@@ -9,7 +9,7 @@ const TagsInput = observer(function TagsInput({tagStore}) {
         <section aria-labelledby="current-tags-header">
           <h3 id="current-tags-header">Current Tags</h3>
           {tagStore.tags.map(tag => (
-            <div>
+            <div key={"tags-input-editor-"+tag.id}>
               <Tag
                 tagStore={tagStore}
                 name={tag.name}

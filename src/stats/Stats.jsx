@@ -33,7 +33,7 @@ const Stats = observer(function Stats({ data, years, months, weeks }) {
         <section>
           <h4>Legend Tags</h4>
           {data.map(obj => (
-            <div>
+            <div key={"legend-tags-"+obj.id}>
               {obj.title} - <span style={{ color: obj.color }}>•</span>
             </div>
           ))}
