@@ -41,7 +41,7 @@ const Calendar = observer(function Calendar({year, monthNo, store}) {
     var weekNumber = 1;
     for (var i = 0; i < numberOfDaysInMonth; i++) {
       if (calDay.format("dddd") === "Sunday") {
-        dates.push(<Week store={store} month={month} weekNumber={weekNumber} days={week} />);
+        dates.push(<Week key={"week-in-year:"+weekNumber+"-"+calDay.format("YYYY")} store={store} month={month} weekNumber={weekNumber} days={week} />);
         week = [];
         weekNumber += 1;
       }
