@@ -444,6 +444,32 @@ describe('Home', () => {
     expect(queryByTestId("item-input-descrip:1")).toHaveValue("Another Item")
     const remainingSection = getByLabelText('Remaining')
 
+  }),
+  test("timer can show times greater than 59:59", async () => {
+        const store = todayItemStore()
+    const timeStore = Time.create({
+      selectedItem: undefined,
+      isCounting: true,
+      count: 3599
+  });
+    const { getByText, queryByTestId } = render(
+      <Home 
+      store={store} 
+      timeStore={timeStore}
+      dayFromUrl={new Date().getTime()} />)
+    // The user sees their time that was running earlier
+    // The timer increments and changes per second
+     await wait(() => {
+
+      expect(queryByTestId("time-tracker")).toHaveTextContent("1:00:01")
+      
+    })
+     fireEvent.click(queryByTestId("play/pause-button"))
+
+    // The user presses the pause button to end the time
+    const completedItems = queryByTestId('completed-items')
+  // The user sees the updated time on the item (8 seconds)
+    expect(completedItems).toHaveTextContent("1h")
   })
 
 
