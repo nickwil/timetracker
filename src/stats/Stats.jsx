@@ -49,7 +49,7 @@ const Stats = observer(function Stats({ data, years, months, weeks }) {
           <div>
             <h4>Years</h4>
             {years.map(year => (
-              <div>
+              <div key={"history-years:"+year}>
                 <CustomLink to={"/stats/" + year}>{year}</CustomLink>
               </div>
             ))}
@@ -57,7 +57,7 @@ const Stats = observer(function Stats({ data, years, months, weeks }) {
           <div>
             <h4>Months</h4>
             {months.map(month => (
-              <div>
+              <div key={"history-months:"+month}>
                 <CustomLink to={"/stats/" + month}>
                   {moment(month, "YYYY/MM").format("MMMM, YYYY")}
                 </CustomLink>
@@ -68,7 +68,7 @@ const Stats = observer(function Stats({ data, years, months, weeks }) {
           <div>
             <h4>Weeks</h4>
             {weeks.map(week => (
-              <div>
+              <div key={"history-weeks:"+week}>
                 <CustomLink to={"/stats/" + week}>
                   {moment(week, "YYYY/MM").format("MMMM, YYYY") +
                     "; Week #:" +

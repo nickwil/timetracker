@@ -18,9 +18,8 @@ Reach Router is used to provide an accessible routing experience
 MomentJS is used to work with time, because it can get annoying sometimes.
 
 ## Using the web app
-### Running
 
-### Running the web app
+### Running
 1. Run `npm start` in your terminal. This will start a local server running on your localhost:3000 port.
 2. Use the files in the build folder to deploy to your own site.
 Click here to see a demo.

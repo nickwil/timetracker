@@ -26,7 +26,7 @@ const Week = observer(function Week({weekNumber, days, month, store}) {
       // if it's not the first week then this can only run in the last week
     }
     while (days.length + extraDays.length < 7) {
-      extraDays.push(<Day store={store} month={newMonth.format("YYYY-MM")} number={newMonth.date()} />);
+      extraDays.push(<Day key={"key-for-day:"+newMonth.format("YYYY-MM-DD")} store={store} month={newMonth.format("YYYY-MM")} number={newMonth.date()} />);
       newMonth.add(1, "day")
     }
   }

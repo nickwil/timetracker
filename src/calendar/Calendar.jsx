@@ -47,6 +47,7 @@ const Calendar = observer(function Calendar({year, monthNo, store}) {
       }
       week.push(
         <Day
+          key={"key-for-day:"+calDay.format("YYYY-MM-DD")}
           store={store}
           year={calDay.format("YYYY")}
           month={month}
@@ -57,7 +58,7 @@ const Calendar = observer(function Calendar({year, monthNo, store}) {
       calDay.add(1, "days").calendar();
     }
     // last week if doesn't end in a sunday
-    dates.push(<Week store={store} month={month} days={week} />);
+    dates.push(<Week key={"week-in-year:"+(weekNumber+1)+"-"+calDay.format("YYYY")} store={store} month={month} days={week} />);
     return dates;
   };
   const checkDateOverride = () => {
