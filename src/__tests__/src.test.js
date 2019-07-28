@@ -1,10 +1,10 @@
 import React from 'react'
-import {render} from '@testing-library/react'
+import { render } from '@testing-library/react'
 
 import App from '../App.jsx'
-const moment = require("moment")
-describe("Source", () => {
-	test("App renders without crashing", () => {
-		render(<App/>)
-	})
+const moment = require('moment')
+describe('Source', () => {
+  test('App renders without crashing', () => {
+    render(<App />)
+  })
 })
