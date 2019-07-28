@@ -1,5 +1,5 @@
 import React from "react";
-import "./Home.css";
+import styles from "./Home.module.css";
 import Timer from "./Timer.jsx";
 import AddItemModal from "./AddItemModal.jsx";
 import CheckDateOops from "../general/CheckDateOops.jsx"
@@ -12,12 +12,13 @@ import ItemList from "./item/ItemList.jsx";
 
 const Home = observer(function Home({ store, dayFromUrl, timeStore }) {
   // always have value in store to day from url
+  console.log(styles)
   store.updateDate(dayFromUrl);
   return (
     <CheckDateOops date={dayFromUrl}>
-      <div className="App">
-        <header className="App-header">
-          <p id="currentDate">
+      <div className={styles.app}>
+        <header className={styles.header}>
+          <p className={styles.currentDate} id="currentDate">
             <CustomLink to="/calendar"> {date(new Date(dayFromUrl))}</CustomLink>
           </p>
           <Timer store={store} timeStore={timeStore} />

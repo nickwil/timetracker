@@ -1,15 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:300,400&display=swap');
-
-html,body{
-	height: 100%;
-  width: 100%;
-}
-body {
-	  margin: 0;
-
-}
-
-.App-header {
+.header {
   
   text-align: center;
   
@@ -17,7 +6,7 @@ body {
   color: black;
 }
 
-.App {
+.app {
 	font-family: 'Roboto Slab', serif;
 
 	border-radius: 10px;
@@ -25,7 +14,8 @@ body {
 	background-color: white;
 	margin: 1.5em;
 }
-#currentDate {
+
+.currentDate {
 	font-weight: bold;
 	text-decoration: underline;
 }
