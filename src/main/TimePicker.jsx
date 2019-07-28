@@ -1,15 +1,8 @@
 import React from "react";
 
 function TimePicker({ onChange, value, data_test_id}) {
-  console.log(value)
-  var hours = value.split(":")[0] ? value.split(":")[0] : ""
-  const seconds = value.split(":")[1] ?  value.split(":")[1] : ""
-  if(hours > 12){
-    hours -= 12
-  }
-
-  //const [hours, updateHours] = React.useState("");
-  //const [seconds, updateSeconds] = React.useState("");
+  const [hours, updateHours] = React.useState("");
+  const [seconds, updateSeconds] = React.useState("");
   const [timeOfDay, updateTimeOfDay] = React.useState("AM");
   // if more than two make red
 
@@ -39,14 +32,14 @@ function TimePicker({ onChange, value, data_test_id}) {
       <input
         style={hoursStyle}
         onChange={e => {
-          //updateHours(e.target.value);
+          updateHours(e.target.value);
           handleChange(e.target.value, seconds, timeOfDay);
         }}
         data-testid={data_test_id + "-hours"}
         autocomplete="off"
         max="12"
         min="1"
-        placeholder="00"
+        placeholder="--"
         type="number"
         value={hours}
       />
@@ -54,14 +47,14 @@ function TimePicker({ onChange, value, data_test_id}) {
       <input
         style={secondStyle}
         onChange={e => {
-          //updateSeconds(e.target.value);
+          updateSeconds(e.target.value);
           handleChange(hours, e.target.value, timeOfDay);
         }}
         autocomplete="off"
         max="59"
         min="0"
         data-testid={data_test_id + "-minutes"}
-        placeholder="00"
+        placeholder="--"
         type="number"
         value={seconds}
       />

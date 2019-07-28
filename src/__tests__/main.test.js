@@ -1,6 +1,5 @@
 import React from 'react'
 import {ItemStore, Time} from "../stores/store.js"
-import {hmsToSeconds} from "../main/AddItemModal.jsx"
 import {render, fireEvent, cleanup, wait} from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import { observer } from "mobx-react-lite";
@@ -59,9 +58,11 @@ describe('Home', () => {
     fireEvent.change(getByPlaceholderText("time.."), {target: {value: 10}})
     // 3. They submit the form
     fireEvent.click(getByText(/Submit/i))
+
     // They now check that the remaining section has their task
     const id = store.items[0].id
     expect(getByLabelText('Remaining').children.length).toBe(2)
+    
     expect(queryByTestId("item-input-descrip:"+id)).toHaveValue('Study')
 
   }),
@@ -443,10 +444,6 @@ describe('Home', () => {
     expect(queryByTestId("item-input-descrip:1")).toHaveValue("Another Item")
     const remainingSection = getByLabelText('Remaining')
 
-  }),
-  test("check a return of 0 when hmsToSeconds gets invalid input", () => {
-    expect(hmsToSeconds("10:00", "10:01")).toBe(60)
-    expect(hmsToSeconds("Word:00", "10:01")).toBe(60)
   })
 
 
