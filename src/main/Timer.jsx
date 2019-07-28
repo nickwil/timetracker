@@ -1,42 +1,48 @@
-import React from "react";
+import React from 'react'
 
-import useInterval from "./useInterval.js";
-import styles from "./Timer.module.css";
-import { observer } from "mobx-react-lite";
-import toHour from "../util/toHour.js"
+import useInterval from './useInterval.js'
+import styles from './Timer.module.css'
+import { observer } from 'mobx-react-lite'
+import toHour from '../util/toHour.js'
 
 const Timer = observer(function Timer({
   sendTime,
   isCounting,
   changeIfCounting,
   timeStore,
-  store
+  store,
 }) {
   //const [count, updateCounting] = useState(0)
   useInterval(() => {
     // Your custom logic here
     if (timeStore.isCounting) {
       //updateCounting(count + 1);
-      timeStore.incrementCount();
+      timeStore.incrementCount()
     }
-  }, 1000);
+  }, 1000)
   const handleOnClick = () => {
     if (timeStore.isCounting) {
       //console.log("send count")
       //sendTime(count)
-      timeStore.setTimeToItem(store);
+      timeStore.setTimeToItem(store)
     }
-    timeStore.reverseCounting();
+    timeStore.reverseCounting()
     //changeIfCounting(!isCounting)
     // if just finished counting then you'll send the count
 
     //updateCounting(0)
-    timeStore.resetCount();
-  };
+    timeStore.resetCount()
+  }
   return (
     <div className={styles.container}>
-      <span data-testid="time-tracker" className={styles.timer}>{toHour(timeStore.count)}</span>
-      <button data-testid="play/pause-button" className={styles.startButton} onClick={() => handleOnClick()}>
+      <span data-testid="time-tracker" className={styles.timer}>
+        {toHour(timeStore.count)}
+      </span>
+      <button
+        data-testid="play/pause-button"
+        className={styles.startButton}
+        onClick={() => handleOnClick()}
+      >
         {timeStore.count === 0 ? (
           <svg
             width="40%"
@@ -52,7 +58,6 @@ const Timer = observer(function Timer({
           </svg>
         ) : (
           <svg
-
             width="40%"
             height="43%"
             viewBox="0 0 29 30"
@@ -65,7 +70,7 @@ const Timer = observer(function Timer({
         )}
       </button>
     </div>
-  );
-});
+  )
+})
 
-export default Timer;
+export default Timer
