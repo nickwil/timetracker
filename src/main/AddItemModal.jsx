@@ -97,6 +97,7 @@ class AddItemModal extends React.Component {
       <div>
         <div style={{textAlign: `right`}}><button className={styles.addButton} onClick={this.openModal}>+</button></div>
         <Modal
+          ariaHideApp={process.env.NODE_ENV !== 'test'}
           isOpen={this.state.modalIsOpen}
           onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal}

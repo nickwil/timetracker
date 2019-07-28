@@ -41,6 +41,7 @@ class CustomModal extends React.Component {
       <span className={this.props.className}>
         <button className={this.props.modalTextButtonClassName} data-testid={this.props.data_button_test_id} onClick={this.openModal}>{this.props.modalText}</button>
         <Modal
+          ariaHideApp={process.env.NODE_ENV !== 'test'}
           isOpen={this.state.modalIsOpen}
           onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal}
