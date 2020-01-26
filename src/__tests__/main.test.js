@@ -7,19 +7,21 @@ import { observer } from 'mobx-react-lite'
 import Home from '../main/Home.jsx'
 import DateHome from '../main/DateHome.jsx'
 const moment = require('moment')
+var defaultTime = {
+  selectedItem: undefined,
+  isCounting: false,
+  count: 0,
+}
 
+var defaultStore = {
+      items: [],
+      currentDay: new Date().getTime(),
+    }
 describe('Home', () => {
   test('it renders without crashing', () => {
     // Arrange
-    const store = ItemStore.create({
-      items: [],
-      currentDay: new Date().getTime(),
-    })
-    const timeStore = Time.create({
-      selectedItem: undefined,
-      isCounting: false,
-      count: 0,
-    })
+    const store = ItemStore.create(defaultStore)
+    const timeStore = Time.create(defaultTime)
     const props = {
       store,
       dayFromUrl: new Date().getTime(),
@@ -29,15 +31,8 @@ describe('Home', () => {
     const node = render(<Home {...props} />)
   }),
     test('adding a item', () => {
-      const store = ItemStore.create({
-        items: [],
-        currentDay: new Date().getTime(),
-      })
-      const timeStore = Time.create({
-        selectedItem: undefined,
-        isCounting: false,
-        count: 0,
-      })
+      const store = ItemStore.create(defaultStore)
+      const timeStore = Time.create(defaultTime)
       const props = {
         store,
         dayFromUrl: new Date().getTime(),
@@ -81,11 +76,7 @@ describe('Home', () => {
     }),
     test('edit an item description', () => {
       const store = todayItemStore()
-      const timeStore = Time.create({
-        selectedItem: undefined,
-        isCounting: false,
-        count: 0,
-      })
+      const timeStore = Time.create(defaultTime)
       const {
         getByDisplayValue,
         getByText,
@@ -109,11 +100,7 @@ describe('Home', () => {
     }),
     test('change tag', () => {
       const store = todayItemStore()
-      const timeStore = Time.create({
-        selectedItem: undefined,
-        isCounting: false,
-        count: 0,
-      })
+      const timeStore = Time.create(defaultTime)
       const {
         getByDisplayValue,
         getByText,
@@ -164,11 +151,7 @@ describe('Home', () => {
         ],
         currentDay: new Date().getTime(),
       })
-      const timeStore = Time.create({
-        selectedItem: undefined,
-        isCounting: false,
-        count: 0,
-      })
+      const timeStore = Time.create(defaultTime)
       const { queryAllByText, getByLabelText } = render(
         <Home
           timeStore={timeStore}
@@ -188,11 +171,7 @@ describe('Home', () => {
     }),
     test('change time of an item', () => {
       const store = todayItemStore()
-      const timeStore = Time.create({
-        selectedItem: undefined,
-        isCounting: false,
-        count: 0,
-      })
+      const timeStore = Time.create(defaultTime)
       const { getByLabelText, getByPlaceholderText, queryByTestId } = render(
         <Home
           timeStore={timeStore}
@@ -210,11 +189,7 @@ describe('Home', () => {
     }),
     test("can click on an item and lower it's time", async () => {
       const store = todayItemStore()
-      const timeStore = Time.create({
-        selectedItem: undefined,
-        isCounting: false,
-        count: 0,
-      })
+      const timeStore = Time.create(defaultTime)
       const { getByText, queryByTestId } = render(
         <Home
           store={store}
@@ -237,11 +212,7 @@ describe('Home', () => {
     }),
     test('finish an item and bring it to completed', async () => {
       const store = todayItemStore('Study', 1)
-      const timeStore = Time.create({
-        selectedItem: undefined,
-        isCounting: false,
-        count: 0,
-      })
+      const timeStore = Time.create(defaultTime)
       const { getByText, queryByTestId } = render(
         <Home
           store={store}
@@ -264,11 +235,7 @@ describe('Home', () => {
     }),
     test('finish an item by using the mark as completed button', async () => {
       const store = todayItemStore('Study', 1)
-      const timeStore = Time.create({
-        selectedItem: undefined,
-        isCounting: false,
-        count: 0,
-      })
+      const timeStore = Time.create(defaultTime)
       const { getByText, queryByTestId } = render(
         <Home
           store={store}
@@ -284,15 +251,8 @@ describe('Home', () => {
       expect(completedItems).toHaveTextContent('1s')
     }),
     test('can start and end an item with the play/pause button', async () => {
-      const store = ItemStore.create({
-        items: [],
-        currentDay: new Date().getTime(),
-      })
-      const timeStore = Time.create({
-        selectedItem: undefined,
-        isCounting: false,
-        count: 0,
-      })
+      const store = ItemStore.create(defaultStore)
+      const timeStore = Time.create(defaultTime)
       const { getByText, queryByTestId } = render(
         <Home
           store={store}
@@ -314,11 +274,7 @@ describe('Home', () => {
     }),
     test('open item modal and do an action', () => {
       const store = todayItemStore()
-      const timeStore = Time.create({
-        selectedItem: undefined,
-        isCounting: false,
-        count: 0,
-      })
+      const timeStore = Time.create(defaultTime)
       const {
         getByText,
         queryByTestId,
@@ -352,15 +308,8 @@ describe('Home', () => {
       expect(descriptionInput).toHaveValue('New value')
     }),
     test('use the add item modal', () => {
-      const store = ItemStore.create({
-        items: [],
-        currentDay: new Date().getTime(),
-      })
-      const timeStore = Time.create({
-        selectedItem: undefined,
-        isCounting: false,
-        count: 0,
-      })
+      const store = ItemStore.create(defaultStore)
+      const timeStore = Time.create(defaultTime)
       const props = {
         store,
         dayFromUrl: new Date().getTime(),
@@ -460,11 +409,7 @@ describe('Home', () => {
         ],
         currentDay: new Date().getTime(),
       })
-      const timeStore = Time.create({
-        selectedItem: undefined,
-        isCounting: false,
-        count: 0,
-      })
+      const timeStore = Time.create(defaultTime)
       const { queryByTestId, getByLabelText } = render(
         <Home
           timeStore={timeStore}
@@ -505,11 +450,7 @@ describe('Home', () => {
         ],
         currentDay: new Date().getTime(),
       })
-      const timeStore = Time.create({
-        selectedItem: undefined,
-        isCounting: false,
-        count: 0,
-      })
+      const timeStore = Time.create(defaultTime)
       const { queryByTestId, getByLabelText } = render(
         <DateHome
           timeStore={timeStore}
