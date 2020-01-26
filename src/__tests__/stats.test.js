@@ -6,9 +6,7 @@ import DateStats from '../stats/DateStats.jsx'
 import '@testing-library/jest-dom/extend-expect'
 
 const moment = require('moment')
-describe('Stats Page', () => {
-  test('Stats renders without crashing', async () => {
-    const store = ItemStore.create({
+var defaultItemStore = {
       items: [
         {
           created: Date.now(),
@@ -42,8 +40,8 @@ describe('Stats Page', () => {
         },
       ],
       currentDay: new Date().getTime(),
-    })
-    const tagStore = TagStore.create({
+    }
+var defaultTagStore = {
       tags: [
         {
           name: 'Other',
@@ -64,7 +62,11 @@ describe('Stats Page', () => {
           color: '#e66465',
         },
       ],
-    })
+    }
+describe('Stats Page', () => {
+  test('Stats renders without crashing', async () => {
+    const store = ItemStore.create(defaultItemStore)
+    const tagStore = TagStore.create(defaultTagStore)
     const { getByLabelText } = render(
       <DateStats store={store} tagStore={tagStore} />
     )
@@ -78,63 +80,8 @@ describe('Stats Page', () => {
     )
   }),
     test('can render just elements from a certain year', async () => {
-      const store = ItemStore.create({
-        items: [
-          {
-            created: Date.now(),
-            tilCompletion: 10,
-            completed: false,
-            length: 10,
-            day: '2018/01/01',
-            text: 'Another Item',
-            tagId: 'Home',
-            id: '3',
-          },
-          {
-            created: Date.now(),
-            tilCompletion: 10,
-            completed: false,
-            length: 10,
-            day: '2019/02/01',
-            text: 'This one',
-            tagId: 'Other',
-            id: '2',
-          },
-          {
-            created: Date.now(),
-            tilCompletion: 10,
-            completed: false,
-            length: 10,
-            day: '2019/03/01',
-            text: 'This one',
-            tagId: 'Work',
-            id: '1',
-          },
-        ],
-        currentDay: new Date().getTime(),
-      })
-      const tagStore = TagStore.create({
-        tags: [
-          {
-            name: 'Other',
-            id: 'Other',
-            canDelete: false,
-            color: '#e66465',
-          },
-          {
-            name: 'Home',
-            id: 'Home',
-            canDelete: true,
-            color: '#e66465',
-          },
-          {
-            name: 'Work',
-            id: 'Work',
-            canDelete: true,
-            color: '#e66465',
-          },
-        ],
-      })
+      const store = ItemStore.create(defaultItemStore)
+      const tagStore = TagStore.create(defaultTagStore)
       const { getByLabelText } = render(
         <DateStats year="2019" store={store} tagStore={tagStore} />
       )
@@ -147,63 +94,8 @@ describe('Stats Page', () => {
       )
     }),
     test('can render with elements from a year and month', async () => {
-      const store = ItemStore.create({
-        items: [
-          {
-            created: Date.now(),
-            tilCompletion: 10,
-            completed: false,
-            length: 10,
-            day: '2018/01/01',
-            text: 'Another Item',
-            tagId: 'Home',
-            id: '3',
-          },
-          {
-            created: Date.now(),
-            tilCompletion: 10,
-            completed: false,
-            length: 10,
-            day: '2019/02/01',
-            text: 'This one',
-            tagId: 'Other',
-            id: '2',
-          },
-          {
-            created: Date.now(),
-            tilCompletion: 10,
-            completed: false,
-            length: 10,
-            day: '2019/03/01',
-            text: 'This one',
-            tagId: 'Work',
-            id: '1',
-          },
-        ],
-        currentDay: new Date().getTime(),
-      })
-      const tagStore = TagStore.create({
-        tags: [
-          {
-            name: 'Other',
-            id: 'Other',
-            canDelete: false,
-            color: '#e66465',
-          },
-          {
-            name: 'Home',
-            id: 'Home',
-            canDelete: true,
-            color: '#e66465',
-          },
-          {
-            name: 'Work',
-            id: 'Work',
-            canDelete: true,
-            color: '#e66465',
-          },
-        ],
-      })
+      const store = ItemStore.create(defaultItemStore)
+      const tagStore = TagStore.create(defaultTagStore)
       const { getByLabelText } = render(
         <DateStats year="2019" month="02" store={store} tagStore={tagStore} />
       )
@@ -213,63 +105,8 @@ describe('Stats Page', () => {
       )
     }),
     test('can render with elements from a year, month, and week number', async () => {
-      const store = ItemStore.create({
-        items: [
-          {
-            created: Date.now(),
-            tilCompletion: 10,
-            completed: false,
-            length: 10,
-            day: '2018/01/01',
-            text: 'Another Item',
-            tagId: 'Home',
-            id: '3',
-          },
-          {
-            created: Date.now(),
-            tilCompletion: 10,
-            completed: false,
-            length: 10,
-            day: '2019/02/01',
-            text: 'This one',
-            tagId: 'Other',
-            id: '2',
-          },
-          {
-            created: Date.now(),
-            tilCompletion: 10,
-            completed: false,
-            length: 10,
-            day: '2019/03/01',
-            text: 'This one',
-            tagId: 'Work',
-            id: '1',
-          },
-        ],
-        currentDay: new Date().getTime(),
-      })
-      const tagStore = TagStore.create({
-        tags: [
-          {
-            name: 'Other',
-            id: 'Other',
-            canDelete: false,
-            color: '#e66465',
-          },
-          {
-            name: 'Home',
-            id: 'Home',
-            canDelete: true,
-            color: '#e66465',
-          },
-          {
-            name: 'Work',
-            id: 'Work',
-            canDelete: true,
-            color: '#e66465',
-          },
-        ],
-      })
+      const store = ItemStore.create(defaultItemStore)
+      const tagStore = TagStore.create(defaultTagStore)
       const { getByLabelText } = render(
         <DateStats
           year="2019"
