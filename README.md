@@ -42,4 +42,7 @@ Use the `npm test` command to see the the app tests.
 Jest is used as the testing framework and react-testing-library for integration tests
 Each page is tested in a different file and the state stores are united tested.
 
+### Note
+* This web app was only tested in Chrome
+
 ## License
