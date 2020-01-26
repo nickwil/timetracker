@@ -6,23 +6,7 @@ import '@testing-library/jest-dom/extend-expect'
 
 import Settings from '../settings/Settings.jsx'
 const moment = require('moment')
-describe('Source', () => {
-  test('Settings renders without crashing', () => {
-    const store = ItemStore.create({
-      items: [],
-      currentDay: new Date().getTime(),
-    })
-    const tagStore = TagStore.create({
-      tags: [],
-    })
-    const node = render(<Settings store={store} tagStore={tagStore} />)
-  }),
-    test('can add new tags', () => {
-      const store = ItemStore.create({
-        items: [],
-        currentDay: new Date().getTime(),
-      })
-      const tagStore = TagStore.create({
+var defaultTags = {
         tags: [
           {
             name: 'Other',
@@ -37,7 +21,22 @@ describe('Source', () => {
             color: '#e66465',
           },
         ],
-      })
+      }
+var defaultStore = {
+      items: [],
+      currentDay: new Date().getTime(),
+}
+describe('Source', () => {
+  test('Settings renders without crashing', () => {
+    const store = ItemStore.create(defaultStore)
+    const tagStore = TagStore.create({
+      tags: [],
+    })
+    const node = render(<Settings store={store} tagStore={tagStore} />)
+  }),
+    test('can add new tags', () => {
+      const store = ItemStore.create(defaultStore)
+      const tagStore = TagStore.create(defaultTags)
       const {
         getByText,
         getByLabelText,
@@ -53,26 +52,8 @@ describe('Source', () => {
       expect(currentTags).toHaveTextContent('Wow')
     }),
     test('can update tag name', () => {
-      const store = ItemStore.create({
-        items: [],
-        currentDay: new Date().getTime(),
-      })
-      const tagStore = TagStore.create({
-        tags: [
-          {
-            name: 'Other',
-            id: 'Other',
-            canDelete: false,
-            color: '#e66465',
-          },
-          {
-            name: 'Home',
-            id: 'Home',
-            canDelete: true,
-            color: '#e66465',
-          },
-        ],
-      })
+      const store = ItemStore.create(defaultStore)
+      const tagStore = TagStore.create(defaultTags)
       const {
         getByText,
         getByLabelText,
@@ -95,26 +76,8 @@ describe('Source', () => {
       expect(currentTags).not.toHaveTextContent('Other')
     }),
     test('can delete tag', () => {
-      const store = ItemStore.create({
-        items: [],
-        currentDay: new Date().getTime(),
-      })
-      const tagStore = TagStore.create({
-        tags: [
-          {
-            name: 'Other',
-            id: 'Other',
-            canDelete: false,
-            color: '#e66465',
-          },
-          {
-            name: 'Home',
-            id: 'Home',
-            canDelete: true,
-            color: '#e66465',
-          },
-        ],
-      })
+      const store = ItemStore.create(defaultStore)
+      const tagStore = TagStore.create(defaultTags)
       const { getByText, getByLabelText } = render(
         <Settings store={store} tagStore={tagStore} />
       )
@@ -128,26 +91,8 @@ describe('Source', () => {
       expect(currentTags).not.toHaveTextContent(/Home/)
     }),
     test('update color of an element', () => {
-      const store = ItemStore.create({
-        items: [],
-        currentDay: new Date().getTime(),
-      })
-      const tagStore = TagStore.create({
-        tags: [
-          {
-            name: 'Other',
-            id: 'Other',
-            canDelete: false,
-            color: '#e66465',
-          },
-          {
-            name: 'Home',
-            id: 'Home',
-            canDelete: true,
-            color: '#e66465',
-          },
-        ],
-      })
+      const store = ItemStore.create(defaultStore)
+      const tagStore = TagStore.create(defaultTags)
       const { getByText, queryAllByLabelText } = render(
         <Settings store={store} tagStore={tagStore} />
       )
@@ -173,22 +118,7 @@ describe('Source', () => {
         ],
         currentDay: new Date().getTime(),
       })
-      const tagStore = TagStore.create({
-        tags: [
-          {
-            name: 'Other',
-            id: 'Other',
-            canDelete: false,
-            color: '#e66465',
-          },
-          {
-            name: 'Home',
-            id: 'Home',
-            canDelete: true,
-            color: '#e66465',
-          },
-        ],
-      })
+      const tagStore = TagStore.create(defaultTags)
       const { getByText, getByLabelText } = render(
         <Settings store={store} tagStore={tagStore} />
       )
@@ -219,22 +149,7 @@ describe('Source', () => {
         ],
         currentDay: new Date().getTime(),
       })
-      const tagStore = TagStore.create({
-        tags: [
-          {
-            name: 'Other',
-            id: 'Other',
-            canDelete: false,
-            color: '#e66465',
-          },
-          {
-            name: 'Home',
-            id: 'Home',
-            canDelete: true,
-            color: '#e66465',
-          },
-        ],
-      })
+      const tagStore = TagStore.create(defaultTags)
       const { getByText, getByLabelText } = render(
         <Settings store={store} tagStore={tagStore} />
       )
