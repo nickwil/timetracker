@@ -17,8 +17,8 @@ function ItemMenuContainer({ store, id }) {
       modalText=":"
       data_button_test_id={"item-menu:"+id}
         id={id}
-        children={<ItemMenu 
-          data_testid_for_input={"modal-item-menu-input:"+id} store={store} id={id} />}
+        children={<div><ItemMenu 
+          data_testid_for_input={"modal-item-menu-input:"+id} store={store} id={id} /></div>}
         className={styles.modalContainer}
         storeItem={storeItem}
       />
@@ -30,8 +30,8 @@ function ItemMenu({ store, id, data_testid_for_input }) {
   const storeItem = store.items[store.index(id)];
 
   return (
-    <span>
-      <button onClick={() => store.deleteItem(id)}>Delete</button>
+    <span className={styles.grouping}>
+      <button className={styles.leftMost} onClick={() => store.deleteItem(id)}>Delete</button>
       <label style={{fontWeight: 300}}>Task Time:<input
       data-testid={data_testid_for_input}
         type="number"
@@ -47,7 +47,7 @@ function ItemMenu({ store, id, data_testid_for_input }) {
         id={storeItem.id}
         onChange={e => storeItem.updateText(e.target.value)}
       />
-      <button onClick={() => storeItem.updateTimeTilCompletion(storeItem.tilCompletion)}>Mark as completed</button>
+      <button className={styles.rightMost} onClick={() => storeItem.updateTimeTilCompletion(storeItem.tilCompletion)}>Mark as completed</button>
     </span>
   );
 }
