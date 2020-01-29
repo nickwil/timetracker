@@ -7,9 +7,9 @@ import {
   removeDataFromLocalStorage,
 } from './store.js'
 const moment = require('moment')
-describe('Item', () => {
-  it('toggle completion', () => {
-    const item = Item.create({
+const day = moment().format('YYYY/MM/DD')
+
+const defaultItem = {
       created: Date.now(),
       tilCompletion: 20,
       completed: false,
@@ -18,67 +18,64 @@ describe('Item', () => {
       text: 'Study',
       tagId: 'School',
       id: '2',
-    })
+    }
+const defaultTime = {
+      selectedItem: undefined,
+      isCounting: false,
+      count: 10,
+    }
+const defaultItemStore = {
+      items: [
+        {
+          created: Date.now(),
+          tilCompletion: 20,
+          completed: true,
+          length: 20,
+          day: day,
+          text: 'Study',
+          tagId: 'School',
+          id: '2',
+        },
+        {
+          created: Date.now(),
+          tilCompletion: 10,
+          completed: false,
+          length: 10,
+          day: day,
+          text: 'Clean',
+          tagId: 'Home',
+          id: '1',
+        },
+      ],
+      currentDay: new Date().getTime(),
+    }
+describe('Item', () => {
+  it('toggle completion', () => {
+    const item = Item.create(defaultItem)
     expect(item.completed).toBe(false)
     item.toggle()
     expect(item.completed).toBe(true)
   }),
     it('update text', () => {
-      const item = Item.create({
-        created: Date.now(),
-        tilCompletion: 20,
-        completed: false,
-        length: 20,
-        day: '2018/04/01',
-        text: 'Study',
-        tagId: 'School',
-        id: '2',
-      })
+      const item = Item.create(defaultItem)
       expect(item.text).toBe('Study')
       item.updateText('Work')
       expect(item.text).toBe('Work')
     }),
     it('update time until completion', () => {
-      const item = Item.create({
-        created: Date.now(),
-        tilCompletion: 20,
-        completed: false,
-        length: 20,
-        day: '2018/04/01',
-        text: 'Study',
-        tagId: 'School',
-        id: '2',
-      })
+      const item = Item.create(defaultItem)
       item.updateTimeTilCompletion(5)
       expect(item.tilCompletion).toBe(15)
       item.updateTimeTilCompletion(20)
       expect(item.tilCompletion).toBe(25)
     }),
     it('update tag id', () => {
-      const item = Item.create({
-        created: Date.now(),
-        tilCompletion: 20,
-        completed: false,
-        length: 20,
-        day: '2018/04/01',
-        text: 'Study',
-        tagId: 'School',
-        id: '2',
-      })
+      const item = Item.create(defaultItem)
       item.updateTag('Home')
       expect(item.tagId).toBe('Home')
     }),
     it('update length of item', () => {
-      const item = Item.create({
-        created: Date.now(),
-        tilCompletion: 20,
-        completed: false,
-        length: 20,
-        day: '2018/04/01',
-        text: 'Study',
-        tagId: 'School',
-        id: '2',
-      })
+      const item = Item.create(defaultItem)
       item.updateLengthOfTask(30)
       expect(item.length).toBe(30)
       expect(item.tilCompletion).toBe(30)
@@ -86,21 +83,13 @@ describe('Item', () => {
 })
 describe('TimeStore', () => {
   it('reset count', () => {
-    const timeStore = Time.create({
-      selectedItem: undefined,
-      isCounting: false,
-      count: 10,
-    })
+    const timeStore = Time.create(defaultTime)
 
     timeStore.resetCount()
     expect(timeStore.count).toBe(0)
   }),
     it('increment count', () => {
-      const timeStore = Time.create({
-        selectedItem: undefined,
-        isCounting: false,
-        count: 10,
-      })
+      const timeStore = Time.create(defaultTime)
       timeStore.incrementCount()
       expect(timeStore.count).toBe(11)
     }),
@@ -185,31 +174,7 @@ describe('ItemStore', () => {
   it('gets completed items from today', () => {
     const day = moment().format('YYYY/MM/DD')
 
-    const store = ItemStore.create({
-      items: [
-        {
-          created: Date.now(),
-          tilCompletion: 20,
-          completed: true,
-          length: 20,
-          day: day,
-          text: 'Study',
-          tagId: 'School',
-          id: '2',
-        },
-        {
-          created: Date.now(),
-          tilCompletion: 10,
-          completed: false,
-          length: 10,
-          day: day,
-          text: 'Clean',
-          tagId: 'Home',
-          id: '1',
-        },
-      ],
-      currentDay: new Date().getTime(),
-    })
+    const store = ItemStore.create(defaultItemStore)
 
     expect(store.completedTodos.length).toBe(1)
     expect(store.completedTodos[0].day).toBe(day)
@@ -217,31 +182,7 @@ describe('ItemStore', () => {
     it('gets uncompleted items from today', () => {
       const day = moment().format('YYYY/MM/DD')
 
-      const store = ItemStore.create({
-        items: [
-          {
-            created: Date.now(),
-            tilCompletion: 20,
-            completed: true,
-            length: 20,
-            day: day,
-            text: 'Study',
-            tagId: 'School',
-            id: '2',
-          },
-          {
-            created: Date.now(),
-            tilCompletion: 10,
-            completed: false,
-            length: 10,
-            day: day,
-            text: 'Clean',
-            tagId: 'Home',
-            id: '1',
-          },
-        ],
-        currentDay: new Date().getTime(),
-      })
+      const store = ItemStore.create(defaultItemStore)
 
       expect(store.unCompletedTodos.length).toBe(1)
       expect(store.unCompletedTodos[0].day).toBe(day)
