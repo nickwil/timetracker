@@ -250,7 +250,8 @@ const ItemStore = types
 
 function setStoreBasedOnLocalStorage() {
   if (localStorage.getItem('tasks') == null) {
-    return ItemStore.create({
+    if (process.env.NODE_ENV !== 'production') {
+      return ItemStore.create({
       items: [
         {
           created: Date.now(),
@@ -295,6 +296,14 @@ function setStoreBasedOnLocalStorage() {
       ],
       currentDay: new Date().getTime(),
     })
+    } else {
+      return ItemStore.create({
+      items: [
+      ],
+      currentDay: new Date().getTime(),
+    })
+    }
+    
   } else {
     const tasks = JSON.parse(localStorage.getItem('tasks'))
     const currentDay = JSON.parse(localStorage.getItem('currentDay'))
