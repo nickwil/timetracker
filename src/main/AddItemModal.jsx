@@ -109,23 +109,35 @@ class AddItemModal extends React.Component {
           style={customStyles}
           contentLabel="Example Modal"
         >
+        <h2 className={styles.title}>Add a task!</h2>
+        <section className={styles.grouping}>
+        <label className={styles.dataInput}>
+          Task Description:
           <input
-            placeholder="task..."
+            placeholder="Enter task description..."
             value={this.state.val}
             onChange={e => this.updateText(e.target.value)}
           />
+          </label>
+          <label className={styles.dataInput}>
+          Length of task (in seconds):
           <input
-            placeholder="time.."
+            placeholder="Enter time..."
             value={this.state.time}
             onChange={e => this.updateTime(e.target.value)}
           />
+          </label>
+        </section>
           <section>
-            <h6> Optional: </h6>
+            <h6 className={styles.title}> Optional: </h6>
+            <label>
+            Tag:
             <Tags
               defaultTagId="Other"
               tags={this.props.tags}
               onChange={tag => this.setState({ tag: tag })}
             />
+            </label>
             <div>
               From:{' '}
               <TimePicker
@@ -142,10 +154,11 @@ class AddItemModal extends React.Component {
               />
             </div>
           </section>
-
+          <div className={styles.grouping}>
           <button onClick={this.handleSubmit}>Submit</button>
 
-          <button onClick={this.closeModal}>close</button>
+          <button onClick={this.closeModal}>Close</button>
+          </div>
         </Modal>
       </div>
     )

@@ -59,10 +59,10 @@ describe('Home', () => {
       const addButton = getByText('+')
       fireEvent.click(addButton)
       // 2. They fill out the task input
-      fireEvent.change(getByPlaceholderText('task...'), {
+      fireEvent.change(getByPlaceholderText('Enter task description...'), {
         target: { value: 'Study' },
       })
-      fireEvent.change(getByPlaceholderText('time..'), {
+      fireEvent.change(getByPlaceholderText('Enter time...'), {
         target: { value: 10 },
       })
       // 3. They submit the form
@@ -336,7 +336,7 @@ describe('Home', () => {
       const addButton = getByText('+')
       fireEvent.click(addButton)
       // 2. They fill out the task input
-      fireEvent.change(getByPlaceholderText('task...'), {
+      fireEvent.change(getByPlaceholderText('Enter task description...'), {
         target: { value: 'Study' },
       })
       // 3. They use the clock time to fill out their time

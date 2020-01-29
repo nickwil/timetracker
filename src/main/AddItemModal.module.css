@@ -13,3 +13,20 @@
 .addButton:focus{
 	border: 1px solid black;
 }
+.title {
+	text-align: center;
+	font-family: 'Roboto Slab', serif;
+	line-height: 0em;
+}
+.dataInput {
+	display: inline-block;
+	padding: 1em;
+}
+.dataInput input {
+	display: block;
+}
+.grouping {
+	display: flex;
+	 justify-content: space-between;
+	 padding: 1em;
+}
