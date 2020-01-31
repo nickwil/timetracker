@@ -1,5 +1,6 @@
 import React from 'react'
 import Modal from 'react-modal'
+import Button from "../general/Button.jsx"
 
 const customStyles = {
   content: {
@@ -56,7 +57,7 @@ class CustomModal extends React.Component {
         >
           <div>
             {this.props.children}
-            <button onClick={this.closeModal}>Close</button>
+            <Button onClick={this.closeModal}>Close</Button>
           </div>
         </Modal>
       </span>

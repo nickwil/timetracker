@@ -1,0 +1,16 @@
+.button {
+	padding: 0.5em;
+    background-color: white;
+    color: black;
+    border: none;
+    border: 0.5px #bfbfbf solid;
+    border-radius: 0.2em;
+}
+
+.button:focus {
+	box-shadow: 0 0 0 1px rgba(122, 122, 122, .5);
+	outline: none;
+}
+.button::-moz-focus-inner {
+  border: 0;
+}

@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./ItemMenu.module.css";
 import CustomModal from "../../general/CustomModal.jsx"
+import Button from "../../general/Button.jsx"
 function ItemMenuContainer({ store, id }) {
   // if small view then have 3 dots and use modal if not then just display it there
   // if small view then show 3 dots, and use modal
@@ -31,7 +32,7 @@ function ItemMenu({ store, id, data_testid_for_input }) {
 
   return (
     <span className={styles.grouping}>
-      <button className={styles.leftMost} onClick={() => store.deleteItem(id)}>Delete</button>
+      <Button className={styles.leftMost} onClick={() => store.deleteItem(id)}>Delete</Button>
       <label style={{fontWeight: 300}}>Task Time:<input
       data-testid={data_testid_for_input}
         type="number"
@@ -47,7 +48,7 @@ function ItemMenu({ store, id, data_testid_for_input }) {
         id={storeItem.id}
         onChange={e => storeItem.updateText(e.target.value)}
       />
-      <button className={styles.rightMost} onClick={() => storeItem.updateTimeTilCompletion(storeItem.tilCompletion)}>Mark as completed</button>
+      <Button className={styles.rightMost} onClick={() => storeItem.updateTimeTilCompletion(storeItem.tilCompletion)}>Mark as completed</Button>
     </span>
   );
 }

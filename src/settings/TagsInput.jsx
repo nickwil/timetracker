@@ -2,6 +2,8 @@ import React from 'react'
 import CustomModal from '../general/CustomModal.jsx'
 import { observer } from 'mobx-react-lite'
 import ColorPicker from './ColorPicker.jsx'
+import Button from "../general/Button.jsx"
+
 const TagsInput = observer(function TagsInput({ tagStore }) {
   return (
     <section>
@@ -48,16 +50,16 @@ const Tag = observer(function Tag({
         <span>{name}</span>
       )}
 
-      <button onClick={() => updateEditing(!editing)}>
+      <Button onClick={() => updateEditing(!editing)}>
         {editing ? 'Save' : 'Edit'}
-      </button>
+      </Button>
 
       {canDelete ? (
         <CustomModal modalText="X" contentLabel="Delete tag">
           <span>
             Are you sure you want to delete the tag? Everything related to it
             will be set to Other.
-            <button onClick={() => deleteTag()}>Delete tag</button>
+            <Button onClick={() => deleteTag()}>Delete tag</Button>
           </span>
         </CustomModal>
       ) : null}
@@ -83,7 +85,7 @@ function TagForm({ updateTags, tagStore }) {
           New tag:
           <input onChange={e => onInputChange(e.target.value)} value={value} />
         </label>
-        <input type="submit" value="Add" />
+        <Button type="submit"> Add </Button>
       </form>
     </div>
   )
