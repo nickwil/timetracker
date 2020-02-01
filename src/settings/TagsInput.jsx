@@ -3,6 +3,7 @@ import CustomModal from '../general/CustomModal.jsx'
 import { observer } from 'mobx-react-lite'
 import ColorPicker from './ColorPicker.jsx'
 import Button from "../general/Button.jsx"
+import styles from "./TagsInput.module.css"
 
 const TagsInput = observer(function TagsInput({ tagStore }) {
   return (
@@ -50,7 +51,7 @@ const Tag = observer(function Tag({
         <span>{name}</span>
       )}
 
-      <Button onClick={() => updateEditing(!editing)}>
+      <Button className={styles.big} onClick={() => updateEditing(!editing)}>
         {editing ? 'Save' : 'Edit'}
       </Button>
 
@@ -85,7 +86,7 @@ function TagForm({ updateTags, tagStore }) {
           New tag:
           <input onChange={e => onInputChange(e.target.value)} value={value} />
         </label>
-        <Button type="submit"> Add </Button>
+        <Button className={styles.big} type="submit"> Add </Button>
       </form>
     </div>
   )

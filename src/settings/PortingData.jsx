@@ -1,6 +1,7 @@
 import React from 'react'
 import store from '../stores/store.js'
 import Button from "../general/Button.jsx"
+import styles from "./PortingData.module.css"
 
 function PortingData(props) {
   const [value, update] = React.useState('')
@@ -21,7 +22,7 @@ function PortingData(props) {
           id="import-data-area"
           onChange={e => update(e.target.value)}
         />
-        <Button type="submit">Import</Button>
+        <Button className={styles.spacing} type="submit">Import</Button>
       </form>
     </section>
   )
