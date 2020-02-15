@@ -46,3 +46,4 @@ Each page is tested in a different file and the state stores are united tested.
 * This web app was only tested in Chrome
 
 ## License
+MIT License
